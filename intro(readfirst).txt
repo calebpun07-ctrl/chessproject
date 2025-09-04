@@ -1,0 +1,142 @@
+This project was started on a roadtrip across washinton state with no serice in the back of a RV. It is bad
+the rest of this TXT file is lots of rambling and yapping so this is an attempt to be more proffesional.
+TXT FILES:
+  -intro(readfirst).txt
+    you are reading it
+  -plan.txt
+    short history of my progress and goals of the project over past 2 years
+  -simulation.txt
+    holds different code for similations for testing
+  -ERROR_to_fix.txt 
+    differnet errors that need fixing
+  -oldNightandKing.txt
+    old code, outdated
+  -archive.txt
+    archive of old, outdated code, that is ineffecint or bad
+
+PY FILES
+ -main.py
+  runner file, all commands run from here
+ -functions.py
+  MOST basic functions exist in this file, eg, building blocks are here
+ -simplestuff.py
+  begins to combine functions from teh functions.py file into runable code
+ -chessAI.py
+  basic bot. its not ai its random
+ -chessBetterAI.py
+  slightly better bot.
+ -checkmate.py
+  holds checkmate code.
+ -textfilebeasueimdumb.py
+  file that i used to test bits of code (liek when you forget what len() does)
+
+the coconut file is there because those who know
+
+commenting on this file is spotty, its few adn far between often
+
+proffesionalism ending now
+
+ok
+so
+you wanted to learn how this works
+well it sucks so get ready
+
+The board is composed of a 2d array. long story short, its a cordinate system
+Whenever a cordinate is mentioned in the text editor, it SHOULD be the one based on the visual system
+excamle: the X would be located at 4,4
+1 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
+2 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
+3 ▞ ▞ ▞   ▞ ▞ ▞ ▞
+4 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
+5 ▞ ▞ X ▞ ▞ ▞ ▞ ▞         #ok so it no longer looks like this, i orginally
+6 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         had it like this with ▞ as teh tiles, but now it is alternating 
+7 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         black and white spaces
+8 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
+  1 2 3 4 5 6 7 8
+
+however, in teh code, teh X would be located at 3,3 because the genius who made coding was like
+"we should make all list start with 0"
+so be wary of that
+some functions (I think most of them) take the Real set of cords, like 0,0 to 7,7
+however some dont
+fillSpotNS takes fake cords, as well as fillSpot
+
+realcords:
+    clearSpot
+    checkSpaceClear
+    checkPieceBlackSymbol
+    checkPieceWhiteSymbol
+    checkPieceSymbol
+    checkPiece
+
+uuhhhh
+what else
+
+oh i used the theme "Tommorow Night Blue" in vscode so
+like
+use that beacuse tommorwo niht blue is the best
+
+▞ < this represents a empty space. if you find a better represntive of a blank space that would be great.
+
+or that or think that I should spent time coding it so that it alternates (i wont) please tell me
+
+checkmate folder notes
+  showmoveking will make a list of the possible places that the king could move
+
+the txt file for oldNIghtand King saved so much time because i optmized some stuff but then it brokee so it
+is smart to save stuff if you wanna change it so that you dont lose ton of stuff
+
+ok well you can see that night is the same because i used a list to index each move and what notes
+and i thought that i could od that for the kign as wel becaus elike you know its pretty simialr
+that didnt work but if you can make it work that you go ahead and do it ( i think you could its just hard to do with the rook and castleing, see the kings moves in pickmoveKing)
+
+another place for optmatzin gis the bishop and rook you could (update 10/7/24, they were optmized, saved over 300+ lines of code)
+
+uh in the pickmoveking function there are a bunch of wanrings becaus ei acdeintly did a bunch fo work in it 
+for pickmove and that was bad so that why teh wanrings ar ethere to warn anyone taht does that
+
+ok this is important:
+
+playlist for this (these are the only songs that youc an listen too if you work on this)
+(the code will break fi you dont)
+
+- dreamers ball by queen (classic coding song also its banger)
+- funky galeio by sure sure (chill banger check it out)
+- computer talkk by austenyo (its song bout computer adn ur using a comuter to comute to work or somth idk)
+- mr blue sky ,elo (cuz when code no work the blue skies will come adn you have to use tommoronw night blue becuase its the best so it makes sense)
+- the tide by INOHA  [idk why] [you gotta wait till half way trust me]
+- rises the moon by liana flor i think
+- basicly the whole apricot princess album
+
+ok more stuff for AI!
+
+the value brick is returning is in the format of :[7, 1, '♞', 6, 1]
+- 7 and 1 are the real cords of teh starting point of the peice 
+- then the peice 
+- then 6 adn 1 are the spots it moves to on the board you see, so teh fakce cords 
+
+ok since the AI's are sentient, theuy must have names:
+
+  AImakemoveWhite birth name is: T-Rex Orange Justice
+  AImakemoveBlack given name is: George W. Bush, identifes as jennifer sanchez
+  AdvancedAImakemoveBlack first name: Zane, last name: From Ninjago
+  AdvancedAImakemoveWhite1 birth name is: Useless
+  AdvancedAImakemoveWhite offical name is: Anakin Smartypants
+
+ok im too lazy to figure out how things work. I dont really know how check really works anyore
+so
+wait i dont even think the chekcmate file is ever even used?
+
+whoa this lokos cool
+▞▞▞▞▞▞▞▞▞▞
+▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞
+
+oh yeah the archive.txt folder. That has a bunch of old code I wanted to save. 
+Its liek a better vreison that the oldknight and king folder. 
+use that one and see teh rules for staonge at the bottom of the -
+
+checkmate takes one of the "ai" programs and just runs though all of that and gets all teh moves
+chekcs each one to see if it gets you out of check and then WILL return a list of the possible moves 
+and wait until the user makes that move
+
+dude i dont remeber ANYTHING - 08/29/25

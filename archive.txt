@@ -1,0 +1,357 @@
+from chessBetterAI, old rook code-----------------------------------------------------------------------------------------------------10724
+
+#varbles
+        n=1
+        toDaDown = level[0]-n #silly ol caleb mixed up x and y
+        scc = False
+        while toDaDown !=-1 and scc == False:
+            # y cords to the left take it back now yall
+            if checkSpaceClear(toDaDown,level[1]): 
+                allowedMoves.append([toDaDown,level[1]])
+            elif checkSpaceClear(toDaDown,level[1]) == False:
+                if checkPieceBlackSymbol(toDaDown,level[1]):
+                    
+                    scc = True
+                else:
+                    scc = True
+
+            toDaDown = level[0]-n
+            n+= 1
+        
+        #y cords to the right
+        scc = False
+        n=1
+        toDaUp = level[0]+n
+        while toDaUp != 8 and scc == False: #toda up is the boandarys of the thing, scc make ssure that tehre is a piece.
+            if checkSpaceClear(toDaUp,level[1]):
+                allowedMoves.append([toDaUp,level[1]])
+            elif checkSpaceClear(toDaUp,level[1]) == False: #making sure rooks dont hit walls
+                if checkPieceBlackSymbol(toDaUp,level[1]):
+                    
+                    scc = True
+                else: #final check on making sur eteh rooks cant teleport
+                    scc = True
+            toDaUp = level[0]+n
+            n+= 1
+            
+        
+        scc = False
+        n=1
+        takeItLeft = level[1]-n
+        while takeItLeft != -1 and scc == False:
+            #y cords to the down and up
+            if checkSpaceClear(level[0],takeItLeft): # to be fixed
+                allowedMoves.append([level[0],takeItLeft])
+            
+            elif checkSpaceClear(level[0],takeItLeft) == False:
+                if checkPieceBlackSymbol(level[0],takeItLeft):
+                    
+                    scc = True
+                else:
+                    scc = True
+            takeItLeft = level[1]-n
+            n+= 1
+            
+        scc = False
+        n = 1
+        takeItRight = level[1]+n
+        while takeItRight != 8 and not scc:
+            if checkSpaceClear(level[0],takeItRight):
+                allowedMoves.append([level[0],takeItRight])
+            elif not checkSpaceClear(level[0],takeItRight): #checking for captures
+                if checkPieceBlackSymbol(level[0],takeItRight):
+                    
+                    scc = True
+                else: #final check on making sur eteh rooks cant teleport cant have teleporting rooks in my town
+                    scc = True
+            takeItRight = level[1]+n
+            n+= 1
+            
+        if allowedMoves == []:
+            return False
+
+        return allowedMoves
+
+from functions, old rook code--------------------------------------------------------------------------------------------------
+
+print("possible moves")
+        
+            #varbles
+            n=1
+            toDaDown = level[0]-n #silly ol caleb mixed up x and y
+            scc = False
+            while toDaDown !=-1 and scc == False:
+                # y cords to the left take it back now yall
+                if checkSpaceClear(toDaDown,level[1]): 
+                    # print(toDaDown+1,level[1]+1, "D")
+                    allowedMoves.append([toDaDown,level[1]])
+                elif checkSpaceClear(toDaDown,level[1]) == False:
+                    if checkPieceBlackSymbol(toDaDown,level[1]):
+                        allowedCaptures.append([toDaDown,level[1]])
+                        scc = True
+                    else:
+                        scc = True
+
+                toDaDown = level[0]-n
+                n+= 1
+            
+            #y cords to the right
+            scc = False
+            n=1
+            toDaUp = level[0]+n
+            while toDaUp != 8 and scc == False: #toda up is the boandarys of the thing, scc make ssure that tehre is a piece.
+                if checkSpaceClear(toDaUp,level[1]):
+                    #print(level[0]+j,level[1]+1, "R") #testing
+                    allowedMoves.append([toDaUp,level[1]])
+                    #i think this works below but futher testing is required.
+                elif checkSpaceClear(toDaUp,level[1]) == False: #making sure rooks dont hit walls
+                    if checkPieceBlackSymbol(toDaUp,level[1]):
+                        allowedCaptures.append([toDaUp,level[1]])
+                        scc = True
+                    else: #final check on making sur eteh rooks cant teleport
+                        scc = True
+                toDaUp = level[0]+n
+                n+= 1
+                
+            scc = False
+            n=1
+            takeItLeft = level[1]-n
+            while takeItLeft != -1 and scc == False:
+                #y cords to the down and up
+                if checkSpaceClear(level[0],takeItLeft): # to be fixed
+                    # print(level[0]+1,level[1]-j, "D")
+                    allowedMoves.append([level[0],takeItLeft])
+             
+                elif checkSpaceClear(level[0],takeItLeft) == False:
+                    if checkPieceBlackSymbol(level[0],takeItLeft):
+                        allowedCaptures.append([level[0],takeItLeft])
+                        scc = True
+                    else:
+                        scc = True
+                takeItLeft = level[1]-n
+                n+= 1
+                
+            scc = False
+            n = 1
+            takeItRight = level[1]+n
+            while takeItRight != 8 and not scc:
+                if checkSpaceClear(level[0],takeItRight):
+                    allowedMoves.append([level[0],takeItRight])
+                elif not checkSpaceClear(level[0],takeItRight): #checking for captures
+                    if checkPieceBlackSymbol(level[0],takeItRight):
+                        allowedCaptures.append([level[0],takeItRight])
+                        scc = True
+                    else: #final check on making sur eteh rooks cant teleport cant have teleporting rooks in my town
+                        scc = True
+                takeItRight = level[1]+n
+                n+= 1
+                
+
+            showOpenMoves(allowedMoves)
+            for x in allowedCaptures:
+                allowedMoves.append(x)
+
+            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
+
+            for rock in placholderlist:
+                vanillawafer.append(rock)
+
+            if chekchek(vanillawafer,1):    
+                return False
+
+            return vanillawafer
+
+from functions, possibly old bishop code ------------------------------------------------------------------------------------
+
+print("possible moves")
+            moveUp = level[0]-1
+            moveDown = level[0]+1
+            moveLeft = level[1]-1
+            moveRight = level[1]+1
+
+            #top corner left
+            orca = False
+            while moveUp != -1 and moveLeft != -1 and orca == False:
+                if checkSpaceClear(moveUp, moveLeft):
+                    allowedMoves.append([moveUp,moveLeft])
+                else:
+                    if checkPieceBlackSymbol(moveUp,moveLeft):
+                        allowedCaptures.append([moveUp,moveLeft])
+                    orca = True
+
+                moveUp -= 1
+                moveLeft -= 1
+
+            moveUp = level[0]-1
+            moveLeft = level[1]-1
+
+            #top corner right
+            orca = False
+            while moveUp != -1 and moveRight != 8 and orca == False:
+                if checkSpaceClear(moveUp, moveRight):
+                    allowedMoves.append([moveUp,moveRight])
+                else:
+                    if checkPieceBlackSymbol(moveUp,moveRight):
+                        allowedCaptures.append([moveUp,moveRight])
+                    orca = True
+
+                moveUp -= 1
+                moveRight += 1
+
+            moveUp = level[0]-1
+            moveRight = level[1]+1
+
+            #bottom corner left
+            orca = False
+            while moveDown != 8 and moveLeft != -1 and orca == False:
+                if checkSpaceClear(moveDown, moveLeft):
+                    allowedMoves.append([moveDown,moveLeft])
+                else:
+                    if checkPieceBlackSymbol(moveDown,moveLeft):
+                        allowedCaptures.append([moveDown,moveLeft])
+                    orca = True
+
+                moveDown += 1
+                moveLeft -= 1
+            
+            moveDown = level[0]+1
+
+            #top corner NF
+            orca = False
+            while moveDown != 8 and moveRight != 8 and orca == False:
+                if checkSpaceClear(moveDown, moveRight):
+                    allowedMoves.append([moveDown,moveRight])
+                else:
+                    if checkPieceBlackSymbol(moveDown,moveRight):
+                        allowedCaptures.append([moveDown,moveRight])
+                    orca = True
+
+                moveDown += 1
+                moveRight += 1
+
+            showOpenMoves(allowedMoves)
+            for shower in allowedCaptures:
+                allowedMoves.append(shower)
+            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
+
+            for back in placholderlist: #dont questiono my cvabler names
+                vanillawafer.append(back)
+
+            if chekchek(vanillawafer,1):    
+                return False
+
+            return vanillawafer
+
+from main.py, old check system---------------------------------------------------------------------------------------------------------------
+
+turnNumber = 20
+for n in range(2,turnNumber):
+    if check4chek((n%2)+1) == False:
+        print("you are in check please get out of check or no")
+    spot = movemove2(n)
+    movemove(spot)
+    turnNumber +=1
+
+new old king---------------------------------------------------------------------------------------------------------------
+
+elif piece == '':
+print("possible moves")
+if level[0]-1 != -1:
+    
+    if checkSpaceClear(level[0]-1, level[1]):
+        allowedMoves.append([level[0]-1, level[1]])
+    else:
+        if checkPieceWhiteSymbol(level[0]-1, level[1]):
+            allowedCaptures.append([level[0]-1, level[1]])
+
+    if level[1]-1 != -1:
+        if checkSpaceClear(level[0]-1, level[1]-1):
+            allowedMoves.append([level[0]-1, level[1]-1])
+        else:
+            if checkPieceWhiteSymbol(level[0]-1, level[1]-1):
+                allowedCaptures.append([level[0]-1, level[1]-1])
+
+    if level[1]+1 != 8:
+        if checkSpaceClear(level[0]-1, level[1]+1):
+            allowedMoves.append([level[0]-1, level[1]+1])
+        else:
+            if checkPieceWhiteSymbol(level[0]-1, level[1]+1):
+                allowedCaptures.append([level[0]-1, level[1]+1])
+
+if level[0]+1 != 8:
+    
+    if checkSpaceClear(level[0]+1, level[1]):
+        allowedMoves.append([level[0]+1, level[1]])
+    else:
+        if checkPieceWhiteSymbol(level[0]+1, level[1]):
+            allowedCaptures.append([level[0]+1, level[1]])
+
+    if level[1]-1 != -1:
+        if checkSpaceClear(level[0]+1, level[1]-1):
+            allowedMoves.append([level[0]+1, level[1]-1])
+        else:
+            if checkPieceWhiteSymbol(level[0]+1, level[1]-1):
+                allowedCaptures.append([level[0]+1, level[1]-1])
+
+    if level[1]+1 != 8:
+        if checkSpaceClear(level[0]+1, level[1]+1):
+            allowedMoves.append([level[0]+1, level[1]+1])
+        else:
+            if checkPieceWhiteSymbol(level[0]+1, level[1]+1):
+                allowedCaptures.append([level[0]+1, level[1]+1])
+
+if level[1]-1 != -1:
+    if checkSpaceClear(level[0], level[1]-1):
+        allowedMoves.append([level[0], level[1]-1])
+        if level[1]-2 != -1 and checkSpaceClear(level[0], level[1]-3) and checkSpaceClear(level[0], level[1]-2) and checkPieceSymbol(0,0) == "♜":
+            allowedMoves.append([level[0], level[1]-2])
+    else:
+        if checkPieceWhiteSymbol(level[0], level[1]-1):
+            allowedCaptures.append([level[0], level[1]-1])
+
+if level[1]+1 != 8:
+    if checkSpaceClear(level[0], level[1]+1):
+        allowedMoves.append([level[0], level[1]+1])
+        if level[1]+2 != 8 and checkSpaceClear(level[0], level[1]+2) and checkPieceSymbol(7,7) == "♖":
+            allowedMoves.append([level[0], level[1]+2])
+    else:
+        if checkPieceWhiteSymbol(level[0], level[1]+1):
+            allowedCaptures.append([level[0], level[1]+1])
+showOpenMoves(allowedMoves)
+
+moveToCordsY = int(input('What y level for yours: '))
+moveToCordsX = int(input('What x level for yours: '))
+
+userMove.append([moveToCordsY-1,moveToCordsX-1])
+clearOpenMoves(allowedMoves)
+
+for x in allowedCaptures: #add in those captures
+    allowedMoves.append(x)
+
+moveToll = checkUserMoveAllowed(allowedMoves,userMove)
+while moveToll == False:
+    print('either code is broken or that wasnt a vaild move bro. either way, not cool')
+    moveToCordsY = int(input('What y level for yours: '))
+    moveToCordsX = int(input('What x level for yours: '))
+    userMove[0]=[moveToCordsY,moveToCordsX]
+    moveToll = checkUserMoveAllowed(allowedMoves,userMove)
+
+if userMove[0] == [level[0], level[1]-2]:
+    fillSpot(8,4, '♜')
+    clearSpot(7,0)
+
+if userMove[0] == [level[0], level[1]+2]:
+    fillSpot(8,6, '♜')
+    clearSpot(7,7)
+
+vanillawafer.append(moveToCordsY)
+vanillawafer.append(moveToCordsX)
+
+if chekchek(vanillawafer,1):
+    
+    return False
+return vanillawafer
+
+
+achive rules:
+please acivhce them, ttitle and provide dashes until off screen

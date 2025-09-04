@@ -1,0 +1,19 @@
+        1 █ █ █ █ █ █ █ █
+        2 █ █ █ ♔ █ █ █ █
+        3 █ █ █ █ ♟ █ ♟ █
+        4 █ █ █ █ █ █ █ █
+        5 █ █ █ █ █ █ █ █
+        6 █ █ █ █ █ █ ♚ █
+        7 ♝ ♟ █ █ █ █ █ ♜
+        8 █ █ ♝ █ █ ♞ █ █
+          1 2 3 4 5 6 7 8
+
+pause:
+73
+It is blacks turn rn. We would like to make this move:[1, 3, '♔', 3, 5]
+black wanted to make this move but it resulted in check
+[1, 3, '♔', 3, 5]
+
+black king is in check from that pawn, but it can take said pawn, however for some reson that results in check.
+
+ok so im a dumabs the bishop is there teh problem we ned to fick is just in the pickmoveblackai function and just ad a thing for getting teh kind out of sitiations. its already don in the white one.

@@ -1,0 +1,187 @@
+from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek2
+from chessAI import AImakemoveBlack, AImakemoveWhite
+from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
+from checkmate import thefinalfunction
+
+valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '♜', '♙', '♟'}
+
+def playTheGame():
+    # fillboard()
+    showBoard()
+    n = 0
+    while True:
+        if check4chek((n%2)+1) == False: # this one is a function that for now gets you automaticly out of check
+            
+            finland = thefinalfunction()
+            if finland == False:
+                print("game over.")
+                break
+            elif finland == True:
+                vaildmoveinputed = False
+                while vaildmoveinputed != True:
+                    input("go")
+                    #make loop to go theough and get user input until there input is one of the ways to get out of check.
+            movemove(finland)#remove once user input mad eor mad euse rinput finladn
+            print("you are in check please get out of check or no")
+            n +=1
+            continue
+
+        spot = movemove2(n)
+        movemove(spot)
+        n +=1
+
+def playTheGameButEASY():
+    fillboard()
+    showBoard()
+    turnNumber = 20
+    for n in range(2,turnNumber):
+        spot = movemove2(n)
+        movemove(spot)
+        turnNumber +=1
+
+def playTheGameButAI():
+    fillboard()
+    showBoard()
+    turnNumber = 4
+    for n in range(2,turnNumber):
+        spot = movemove3(n)
+        movemove(spot)
+        turnNumber +=1
+
+def playTheGameBut2AI():
+    fillboard()
+    salt = 2
+    termitate = "n"
+    while termitate != "y":
+        print(salt)
+        spot = movemove2AI(salt)
+        movemove(spot)
+        termitate = input("pause:")
+        salt +=1
+    print('get terminateored')
+
+def clearBoardStart():
+    showBoard()
+    turnNumber = 20
+    for n in range(2,turnNumber):
+        if check4chek((n%2)+1) == False:
+            print("you are in check please get out of check or no")
+        spot = movemove2(n)
+        movemove(spot)
+        turnNumber +=1
+
+def movemove(spot):
+    clearSpot(spot[0], spot[1])
+    fillSpot(spot[3],spot[4],spot[2])
+
+def movemove2(n):
+    spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
+    while spot == False:
+        spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
+    
+    return spot
+
+def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgeint AI
+    if (n%2)+1 == 1:
+        spot = AdvancedAImakemoveWhite()
+        
+        return spot
+    elif (n%2)+1 == 2:
+        spot = pickmove(pickpiece(2),(n%2)+1)
+        while spot == False:
+            spot = pickmove(pickpiece(2),(n%2)+1)
+        print(spot)
+        return spot
+
+def movemove2AI(n): #this is for the AI one
+    if (n%2)+1 == 1:
+        spot = AImakemoveWhite()
+        while chekchek2(spot, 1):
+            # print('white wanted to make this move but it resulted in check')
+            # print(spot)
+            spot = AImakemoveWhite()
+        print("WHITE TURN")
+        return spot
+    elif (n%2)+1 == 2:
+        spot = AImakemoveBlack()
+        while chekchek2(spot, 2):
+            # print('black wanted to make this move but it resulted in check')
+            # print(spot)
+            spot = AImakemoveBlack()
+        print("BLACK TURN")
+        return spot
+
+def playTheGameButAdvanced2AI(): #uses the captur orentied one
+    fillboard()
+    salt = 2
+    termitate = "n"
+    while termitate != "y":
+        print(salt) #shows the turn i think
+        spot = movemove2AdvancedAI(salt) #this sends the turn to movemove2advanceAI
+        if spot == False:
+            print('white loses')
+            break
+        elif spot == True:
+            print('black loses')
+            break
+        movemove(spot)
+        termitate = input("pause:")
+
+        if salt == 100:
+            termitate = 'y'        
+        salt +=1
+    print('get terminateored')
+
+def movemove2AdvancedAI(n): #this is for the AI one
+    if (n%2)+1 == 1: #white turn
+        spot = AdvancedAImakemoveWhite()
+        while chekchek2(spot, 1): #catches move if it is check
+            print('white wanted to make this move but it resulted in check')
+            finland = thefinalfunction()
+            print(f"Finland {finland}") #find out exatully what to bug test instead of finland
+            if finland == False:
+                return False
+            movemove(finland)
+            input(spot)
+            spot = AdvancedAImakemoveWhite() #loops it until it is not check
+        print("WHITE TURN")
+        return spot
+    elif (n%2)+1 == 2:
+        spot = AdvancedAImakemoveBlack()
+        while chekchek2(spot, 2):
+            print('black wanted to make this move but it resulted in check')
+            print(spot)
+            spot = AdvancedAImakemoveBlack()
+        print("BLACK TURN")
+        return spot
+    
+#betatesterfunctins
+def testerSetup():
+    killcode = True
+    while killcode:
+        print("you contol everything\npeices you could choose")
+        
+        print('♚', '♛', '♝', '♞', '♜', '♟', '♔', '♕', '♗', '♘', '♖', '♙')
+        peiceslected = True
+        while peiceslected:
+            pickpeicetomove = input("What Peice would you like to palce: ")
+            for cionfiencdx in valid_pieces:
+                if pickpeicetomove == cionfiencdx:
+                    peiceslected = False
+        ycord = input('What y Cord:')
+        xcord = input('What x Cord:')
+
+        while ycord not in {1, 2, 3, 4, 5, 6, 7, 8} or xcord not in {1, 2, 3, 4, 5, 6, 7, 8}:
+                print("not in range")  #need to find out
+                ycord = input('What y Cord:')
+                xcord = input('What x Cord:')
+#ur cute (this was a note for julia so if you see this and ur not julia dont read)
+        fillSpot(ycord,xcord,pickpeicetomove)
+
+        check = input('you done yet? or not (y/n)')
+        if check == 'y':
+            killcode = False
+        elif check == 'n':
+            print('ok\nrady to add more')
+        else:
+            print('somthing happened.')

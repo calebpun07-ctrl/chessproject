@@ -1,0 +1,144 @@
+uuhhhh
+START OF PROJECT IDK TEH DATE LIKE 7-30-24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+have a board
+teh board gets edited because its an array
+
+each thing can be demited in teh array
+
+i think i should  it in teh text box or whatever
+
+order of turns
+-pickpeice
+-pick 
+
+mss jl
+until valid move played, repaet move function
+
+
+(the list level will have, in order, y cord of starting, x cord of start, peice piece, y cord of final, x cord of final)
+
+pickpeice returns the location of the pickpeice
+    
+    needs location and turn
+pickmove returns where the peice should go 
+
+    needs location of OG peice and place itll move
+movemove would move said peice to place
+movemove never go tused and now pickmove is teh most impoatrant
+
+should make it so that if only one move possible (mainly pawn) it auto make sthat move
+
+once this one is done, make a simple version without all the checks
+
+
+ok plane for checkmate
+
+king cords, 
+Func - run though each avaible postion fo king
+if true = checkmate
+
+8/17/24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OK FUTRUE CALEB WE HAVE A PROBELM:
+THAT NEW FUNCTION YOU WROET TO SAVE TIME IS MISSSING TWO THINGS, CLEAR OPEN MVOES
+AND ADDING TEH CAPTURED MOVES TO THE THING AFTER CLEARING AND DHOWING OPEN MOVESTHIS IS WHAT UOU GET WHEN YOU START WITH pawn
+
+SOLUTION: ADD THE SHOW USER MOVES IN AND ADD IN TEH CATURES LIST, SHOUKLD BE ESASY FIX FOR YOU
+
+GOOD LUCK LOSER I HATE YOU 
+
+dude its 8/19/24 and i have no idea what he is talking about
+what
+
+
+8/28/24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+star log 2024
+
+ok wokring on chekmat 
+Its gonna replace all teh spots where king is with like O or somthing
+then if a peice can take it it will and put one of it tehre, maybe switch up teh order
+so that it will take teh inside on firts so it doe snot block things. or just go with it
+screw it we ball
+idk how im gonna test other peices moves.
+
+i hate pawns
+
+ok checkmate is being a 
+anyways
+ima just make a second main folder
+and that one will just be chess bu you can captre the king
+
+ok im back still have not done anything for chekcmate but now we have AI BABYYYYY
+its still almost comepletly random. if the randomly slected peice can 
+capture a peice it will, but that still really rare
+
+
+OK NEED TO ADD TO CODE SO THAT YOU CANT CAPTURE UR OWN PEIACES.
+ok i think i did that
+
+i think
+
+9/21/2024 help ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+9/22/2024 we at 3553 total lines ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ok ideas for optimizing bishop:
+- i could put all teh move values into a list of four and edit each of thos indivaly, then reste each on after 
+
+9/26/2024 we at 5k lines counting all the chess AI stuff ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10/1/2024 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+log date 7th of 10th month 2024 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+I think I could do checkmate by combing the AI (to run through every sing possible move) 
+and check (to check if there is a move taht prevents check)
+
+BUT taht seems really hard
+
+update on the 7th: spent whole day optimizing rook and bishop it aviod doing chekmate to aviod doing work, saved over 600 lines of code: now at 4404 lines
+
+finshed adding optimization to almost everything (everything in functions, most of teh AI i think)
+now at 4127
+just to play chess its 1340 lines
+did some more editing, added the new rook and bishop code, no wat 3545
+the chessAI has al hte new code, varbles is going exitct, only one left in functions, only 10 left in whole folde
+
+stit i coudhl add
+ - could set up ankin smartypants so that when given option to captur eteh queen it does so
+ -on that point it could be so that each peice has its points value and it woudl captur eteh higehts p[pint value peice it could]
+peepee pooopoe
+
+10/31/24 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+guess who is a genius. yep
+its me 
+caleb li an pun
+i have made chess (or at least have all the componetes to make chess)
+and it works at a 32% success rate.
+take that jeff bezos amazon dont got nothing on me.
+total lines: 3275
+to play a fully working game of chess, 1669 lines
+took me 3 months 
+
+08/29/25 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+i have no idea what the heck this progarm does man im so confused
+i would have to spend like a a week reminding myself and relarning how 
+all this works
+
+
+09/02/25 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+things to do not that i have learned what colors are:
+    print("\033[2J\033[H", end="")
+this thingy above me will essenitally clear console after a print
+
+i could also add colors for the board. i shoudlnt be too hard. i woudl just need to go to 
+showboard() or whtever its called and have a list of dark spaces and ligth spaces so that 
+i can differnetact and then i can use teh full block acII charaters
+
+9/3/25 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OK finally added code that will make the board different colors
+silksong tmmrw
+
+9/4/25 ------------------------------------------------------------------------------------------------------------------
+
+SILKSONG TODAY ITS BEEN 100 YEARS
