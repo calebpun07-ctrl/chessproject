@@ -8,6 +8,7 @@ listOfPossibleMove = []
 def AdvancedAImakemoveBlack():
     A = False
     ourpeices = find_black_pieces()
+    
     checkmove = False
     while checkmove == False:
         movefound = False

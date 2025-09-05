@@ -34,6 +34,11 @@ the coconut file is there because those who know
 
 commenting on this file is spotty, its few adn far between often
 
+HOW TO RUN FILE AND GAMES:
+
+everything is run though my main file. most functions that run chess are in simplestuff and 
+is already imported to the main file.
+
 proffesionalism ending now
 
 ok

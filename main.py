@@ -14,5 +14,4 @@ playTheGameButAdvanced2AI()
 # TheFinalFunction(1)
 # playTheGameButAdvanced2AI()
 
-print(dim("█"))
 
