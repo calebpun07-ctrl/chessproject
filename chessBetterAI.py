@@ -44,6 +44,83 @@ def AdvancedAImakemoveBlack():
         
         return brick
 
+def AdvancedAImakemoveBlack1(): # this the new one and we are working on making it work however i am on a call right now and cannot focus
+    ourpeices = find_black_pieces()
+    counter = 0
+    A = False
+    listOfPossibleMove = []
+    peiceWcaptures = []
+    checkmove = False
+    while checkmove == False: #wtf checkmove is always false
+        movefound = False
+        while movefound == False:
+            list = ourpeices
+            list2 = find_black_pieces()
+            for n in list2:
+                a = list2.index(n)
+                list[a] = pickmoveAI(n) #might need to change
+            nocaptures = True
+            list3 = find_white_pieces()
+            for i in list:
+                if i == []:
+                    continue
+                else:
+                    location = list.index(i)
+                    temp2 = list3[location]
+                    temp = [temp2[0],temp2[1]]
+                    temp.append(i[2])
+                    temp.append(i[0]+1)
+                    temp.append(i[1]+1)
+                    
+                    peiceWcaptures.append(temp)
+                    nocaptures = False #this means that there is a capture to do
+            
+            if nocaptures: #this is when there are no captures
+                #then do teh normal check for all moves
+                
+                while movefound == False:
+                    randomPeaice = random.choice(find_black_pieces())
+
+                    thing = pickmoveAI(randomPeaice)
+                    
+                    if thing != False:
+                        listOfPossibleMove = thing
+                        
+                        # print('list of possible:' + str(listOfPossibleMove) + str(thing))
+                        movefound == True
+                        
+                        break
+                        
+                    elif thing == False:
+                        continue
+            
+            elif not nocaptures:
+                rand2 = random.choice(peiceWcaptures)
+
+                return rand2
+                
+                #get the index of the the possible captures, elmiated the non captures
+                #ranomdly slected on of thos emoves
+                #return that move
+
+                #THE END GOAL OF THIS IS TO HAVE A: randomly select a peice that has one or move captures and B:a list of said possible captures
+            else:
+                print('something happend'+listOfPossibleMove)
+            
+            # print('list of possible:' + str(listOfPossibleMove) + str(nocaptures))
+            move = random.choice(listOfPossibleMove)
+            #building bricks
+            #needs to be starting cords, peice ending cords
+            brick = [randomPeaice[0],randomPeaice[1],randomPeaice[2]]
+            
+            brick.append(move[0]+1)
+            brick.append(move[1]+1)
+            
+            print(f'It is whites turn rn. We would like to make this move: {brick}')
+
+            return brick
+
+
 def AdvancedAImakemoveWhite1():
     ourpeices = find_white_pieces()
     counter = 0
