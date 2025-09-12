@@ -32,4 +32,5 @@ PY FILES
 
 the coconut file is there because those who know
 
-commenting on this file is spotty, its few adn far between often
+commenting on this file is spotty, its few adn far between often. A LOT OF SPAGETTI CODE
+LIKE MORE THAN IN A ITALLIAN RESTURANT IN THE MIDDLE OF VENICE
