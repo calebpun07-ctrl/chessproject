@@ -59,7 +59,8 @@ def fillboard():
     board[7][4] = '♚' 
 
 def showBoard():
-    print("\033[2J\033[H", end="")
+    print("\033[2J\033[H", end="\n")
+    
     global board
     x = False
     n = 1
@@ -214,24 +215,37 @@ def check4chek(whoseturn):
         
         return True
 
-def chekchek(nosebleed,turn): #this function takes the move of teh user and makes teh move
-    spot = nosebleed #if teh move results in check, then retruns false to stop pick mmove
+def chekchek(nosebleed, turn: int, showboard = True): #this function takes the move of teh user and makes teh move
+    """
+    this function takes the move of the user and makes said move
+    if the move results in check and returns True to stop pick move,
+    and tells user that they failed to get out of check
+    if showboard is true, then itll show the baord and print teh you cailed ot get out
+    of check. if it is set to not then it wont
+    """
+
+    spot = nosebleed 
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
     clearSpot(spot[0], spot[1])
-    fillSpotNS(spot[3],spot[4],spot[2])
-    thing = check4chek(turn)
-    if thing:
+    fillSpotNS(spot[3],spot[4],spot[2]) #puts peice in place
+    thing = check4chek(turn) #checks if its in check
+    if thing: #its not in check
         return False
-    elif thing == False:
-        #replace
+    elif thing == False: # its in check
+        #replace the peicace that it was in 
         fillSpotNS(spot[0]+1,spot[1]+1,holder)
         fillSpotNS(spot[3],spot[4],holder2)
-        showBoard()
-        print("You faield to get out of check, try again")
+        if showboard:
+            showBoard()
+            print("You failed to get out of check, try again")
         return True
 
 def chekchek2(nosebleed,turn): #this function takes the move of teh user and makes teh move
+    """
+    chekchek2 is the same as chekchek but it does not show the board.
+    attempting to replace it with chekchek
+    """
     spot = nosebleed #if teh move results in check, then retruns false to stop pick mmove
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)

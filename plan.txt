@@ -148,3 +148,12 @@ SILKSONG TODAY ITS BEEN 100 YEARS
 ok 9/11 note unfortnate timing on that one
 lots of stuffs happened
 anywayss i plan to stream the code itself for fixing chess better AI.py on liek monday or tuesday
+
+9/16/25 -----------------------------------------------------------------------------------------------------------------
+
+have been adding proper documentation for all functions starting at teh functions . py 
+and have discovered that teh chekchek and chekchek2 functions ar eteh same but one
+shows teh board and one doesnt. so im setting a defualt varibel in teh first on so that 
+its defults shows it, but if false it does not.
+
+ok i removed chekchek2 but im keeping teh function for a bit incase i notice any problems

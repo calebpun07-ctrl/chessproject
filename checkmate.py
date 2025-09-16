@@ -1,4 +1,4 @@
-from functions import chekchek2,checkPieceBlackSymbol,checkPieceWhiteSymbol, checkPieceSymbol, pickmoveKing, find_black_pieces, check4chek, checkPiece,fillSpot, checkSpaceClear, clearSpot, fillboard, find_white_pieces, pickpiece, showBoard, board, startGame , pickmove, findPeice
+from functions import chekchek2, chekchek,checkPieceBlackSymbol,checkPieceWhiteSymbol, checkPieceSymbol, pickmoveKing, find_black_pieces, check4chek, checkPiece,fillSpot, checkSpaceClear, clearSpot, fillboard, find_white_pieces, pickpiece, showBoard, board, startGame , pickmove, findPeice
 
 def thefinalfunction():
     ourpeices = find_white_pieces()
@@ -26,7 +26,7 @@ def thefinalfunction():
             brick = [peice[0],peice[1],peice[2]]
             brick.append(move[0]+1)
             brick.append(move[1]+1)
-            checkval = chekchek2(brick, 1)
+            checkval = chekchek(brick, 1, False)
             
             if checkval != True:
                 #this should return a value that gets you out of check
@@ -62,7 +62,7 @@ def thefinalfunctionblack():
             brick = [peice[0],peice[1],peice[2]]
             brick.append(move[0]+1)
             brick.append(move[1]+1)
-            checkval = chekchek2(brick, 1)
+            checkval = chekchek(brick, 1, False)
             
             if checkval != True:
                 #this should return a value that gets you out of check

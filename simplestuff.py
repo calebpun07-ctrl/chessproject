@@ -1,4 +1,4 @@
-from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek2
+from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek2, chekchek
 from chessAI import AImakemoveBlack, AImakemoveWhite
 from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
 from checkmate import thefinalfunction
@@ -96,7 +96,7 @@ def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgein
 def movemove2AI(n): #this is for the AI one
     if (n%2)+1 == 1:
         spot = AImakemoveWhite()
-        while chekchek2(spot, 1):
+        while chekchek(spot, 1, False):
             # print('white wanted to make this move but it resulted in check')
             # print(spot)
             spot = AImakemoveWhite()
@@ -104,7 +104,7 @@ def movemove2AI(n): #this is for the AI one
         return spot
     elif (n%2)+1 == 2:
         spot = AImakemoveBlack()
-        while chekchek2(spot, 2):
+        while chekchek(spot, 2, False):
             # print('black wanted to make this move but it resulted in check')
             # print(spot)
             spot = AImakemoveBlack()
@@ -135,7 +135,7 @@ def playTheGameButAdvanced2AI(): #uses the captur orentied one
 def movemove2AdvancedAI(n): #this is for the AI one
     if (n%2)+1 == 1: #white turn
         spot = AdvancedAImakemoveWhite()
-        while chekchek2(spot, 1): #catches move if it is check
+        while chekchek(spot, 1, False): #catches move if it is check
             print('white wanted to make this move but it resulted in check')
             finland = thefinalfunction()
             print(f"Finland {finland}") #find out exatully what to bug test instead of finland
@@ -148,7 +148,7 @@ def movemove2AdvancedAI(n): #this is for the AI one
         return spot
     elif (n%2)+1 == 2:
         spot = AdvancedAImakemoveBlack()
-        while chekchek2(spot, 2):
+        while chekchek(spot, 2, False):
             print('black wanted to make this move but it resulted in check')
             print(spot)
             spot = AdvancedAImakemoveBlack()
