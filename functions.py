@@ -90,7 +90,13 @@ def showBoard():
     print("          1 2 3 4 5 6 7 8\n") #display x axis
 
 #function to check role/name of a peice. I think its just used once
-def checkPiece(x,y):
+def checkPiece(x: int,y: int):
+    """
+    Takes x and y values and then returns the string name 
+    of the peice, or if its a blank space returns 0 and if
+    its a error returns 1
+    """
+
     piece = board[x][y]
 
     if piece == '♔' or piece == '♚':
@@ -111,7 +117,13 @@ def checkPiece(x,y):
         print("uh oh caleb sucks a coding (this error message is brought to you by the checkPiece function and clabes lack of skill)")
         return 1
 #more important function to check the piece of the peice (USE THIS ONE WHEN CHECKING A PEICE NOT PRIEVIOUS)
-def checkPieceSymbol(x,y):
+def checkPieceSymbol(x: int,y: int):
+    """
+    Takes cords (x and y), and returns the peice that is at
+    those cords. if a blank space returns the blank space.
+    Error returns a 1.
+    """
+
     piece = board[x][y]
 
     if piece in valid_pieces:   
@@ -122,7 +134,10 @@ def checkPieceSymbol(x,y):
         print("uh oh caleb sucks a coding line 90")
         return 1
 #return true if peice is white, false if not
-def checkPieceWhiteSymbol(x,y):
+def checkPieceWhiteSymbol(x: int,y: int):
+    """
+    returns true if its a white piece, false if not or error
+    """
     piece = board[x][y]
 
     if piece in white_pieces:   
@@ -131,8 +146,15 @@ def checkPieceWhiteSymbol(x,y):
         return False
     elif piece == "█":
         return False
+    else:
+        print("uh oh caleb sucks a coding line 150")
+        return False
+
 #return true if peice is black, false if not
-def checkPieceBlackSymbol(x,y):
+def checkPieceBlackSymbol(x: int,y: int):
+    """
+    returns true if its a black piece, false if not or error
+    """
     piece = board[x][y]
     if piece in black_pieces:   
         return True
@@ -140,9 +162,15 @@ def checkPieceBlackSymbol(x,y):
         return False
     elif piece == "█":
         return False
+    else:
+        return False
 
 #if spot clear returns true
 def checkSpaceClear(x,y):
+    """
+    if the spots clear it returns true
+    """
+
     space = checkPieceSymbol(x,y)
     if space == "█":
         return True
@@ -150,14 +178,22 @@ def checkSpaceClear(x,y):
         return False
 
 #checks if the users move is legal, returns true if so
-def checkUserMoveAllowed(listofallowed, usermove):
+def checkUserMoveAllowed(listofallowed: list, usermove: list):
+    """
+    used for making sure the user picks a move from the options given. 
+    used when the we are GETTING the move from the user
+    paras take a list and a the users move, as a 2d list
+    """
     for cord in listofallowed:
         if cord == usermove[0]:
             return True
     return False
 
 def check4chek(whoseturn):
-
+    """
+    Returns false if king is in check. returns true if the user is not 
+    in check.
+    """
     if whoseturn == 1:
         posofallblack = find_black_pieces()
         for sugar in posofallblack:
@@ -166,7 +202,7 @@ def check4chek(whoseturn):
 
         return True
 
-    if whoseturn == 2:
+    elif whoseturn == 2:
         kingCords = findPeice("♔")
         posofallwhite = find_white_pieces()
         
