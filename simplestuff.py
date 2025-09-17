@@ -31,6 +31,10 @@ def playTheGame():
         n +=1
 
 def playTheGameButEASY():
+    """
+    This version of the game only runs for about 20 moves, does not 
+    check for check, simply gets the move and makes it. Does fill the board
+    """
     fillboard()
     showBoard()
     turnNumber = 20
@@ -40,6 +44,9 @@ def playTheGameButEASY():
         turnNumber +=1
 
 def playTheGameButAI():
+    """
+    Plays against the slightly good bot. Does fill the board.
+    """
     fillboard()
     showBoard()
     turnNumber = 4
@@ -84,7 +91,6 @@ def movemove2(n):
 def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgeint AI
     if (n%2)+1 == 1:
         spot = AdvancedAImakemoveWhite()
-        
         return spot
     elif (n%2)+1 == 2:
         spot = pickmove(pickpiece(2),(n%2)+1)
@@ -94,6 +100,9 @@ def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgein
         return spot
 
 def movemove2AI(n): #this is for the AI one
+    """
+    Returns 'spot', gotten from the 'AI' function. gives it back to playthegameAI
+    """
     if (n%2)+1 == 1:
         spot = AImakemoveWhite()
         while chekchek(spot, 1, False):
@@ -111,7 +120,11 @@ def movemove2AI(n): #this is for the AI one
         print("BLACK TURN")
         return spot
 
-def playTheGameButAdvanced2AI(): #uses the captur orentied one
+def playTheGameButAdvanced2AI(): #uses the capture orentied one
+    """
+    plays the game of chess using a bot. using movemvoe2AdvanceAI, if 
+    it ever does not return a move (true or false) then it shows who loses
+    """
     fillboard()
     salt = 2
     termitate = "n"
@@ -133,6 +146,12 @@ def playTheGameButAdvanced2AI(): #uses the captur orentied one
     print('get terminateored')
 
 def movemove2AdvancedAI(n): #this is for the AI one
+    """
+    Returns a move. if the move results in check, and then loops it
+    until it gets out of check. that only works for white for now. for black it simply loops it
+
+    """
+
     if (n%2)+1 == 1: #white turn
         spot = AdvancedAImakemoveWhite()
         while chekchek(spot, 1, False): #catches move if it is check
@@ -150,6 +169,8 @@ def movemove2AdvancedAI(n): #this is for the AI one
         spot = AdvancedAImakemoveBlack()
         while chekchek(spot, 2, False):
             print('black wanted to make this move but it resulted in check')
+            # TODO addd finalnad function   
+
             print(spot)
             spot = AdvancedAImakemoveBlack()
         print("BLACK TURN")
