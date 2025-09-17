@@ -6,21 +6,14 @@ from checkmate import thefinalfunction
 ♔ ♕ ♗ ♘ ♖ ♙ black
 ♚ ♛ ♝ ♞ ♜ ♟ white
 '''
-# fillboard()
+fillboard()
 
-# fillSpotNS(4,4,"♗")
-# fillSpotNS(2,2, '♚')
-# fillSpotNS(1,1,"♖")
-# fillSpotNS(1,8,"♖")
-# fillSpotNS(8,7,"♖")
-# fillSpotNS(2,5,"♜")
-# fillSpotNS(1,4, "♔")
 # showBoard()
-# playTheGameButAdvanced2AI()
+playTheGameButAdvanced2AI()
 # playTheGameBut2AI()
 # playTheGameBut2AI()
 # TheFinalFunction(1)
 # playTheGameButAdvanced2AI()
-playTheGame()
+# playTheGame()
 
 

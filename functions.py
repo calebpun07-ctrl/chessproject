@@ -322,20 +322,24 @@ def clearSpot(y,x):
 
 #yet again, see the name
 def fillSpot(y,x, piece): #piece must be a real peice not some lame name
+    """fills spot, takes fake cords. then shows the board"""
     board[y-1][x-1] = piece
     showBoard()
 #fills spot and does not show
 def fillSpotNS(y,x, piece): #piece must be a real peice not some lame name
+    """fills spot, takes fake cords, does NOT show the board (hence the NS)"""
     board[y-1][x-1] = piece
 
 #experimental funcytion - no longer experimental, now its used
-def showOpenMoves(allowedMoves):
+def showOpenMoves(allowedMoves: list):
+    """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function"""
     for pinapple in allowedMoves:
         fillSpotNS(pinapple[0]+1,pinapple[1]+1, "X")
     showBoard()
     clearOpenMoves(allowedMoves)
 
 def clearOpenMoves(allowedMoves):#paired withg the previous function to clear said spots as to not show errors
+    """Clears spot after showopenmoves, taking the SAME list as before"""
     for applepin in allowedMoves:
         clearSpot(applepin[0],applepin[1])
 
@@ -410,7 +414,7 @@ def pickpiece(turnnum):
         #this may be optional, probally will take it out at sompoint in other thing
         answergotten = False
         while not answergotten:
-            isCorrect = input("you have selected " + piece +"("+piecename+ ") on " + str(level[0]+1)+','+str(level[1]+1) + ".\nWas this correct? (y/n)")
+            isCorrect = input(f"you have selected {piece} ({piecename}) on {str(level[0]+1)},{str(level[1]+1)} .\nWas this correct? (y/n)")
             if isCorrect == "y":
                 answergotten = True
                 peiceselected = True

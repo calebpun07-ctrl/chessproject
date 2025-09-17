@@ -1,7 +1,7 @@
 from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek2, chekchek
 from chessAI import AImakemoveBlack, AImakemoveWhite
 from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
-from checkmate import thefinalfunction
+from checkmate import thefinalfunction, thefinalfunctionblack
 
 valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '♜', '♙', '♟'}
 
@@ -77,7 +77,13 @@ def clearBoardStart():
         movemove(spot)
         turnNumber +=1
 
-def movemove(spot):
+def movemove(spot: list):
+    """
+    Using the list spot, clears the spot where the peice was
+    and fills it at the place its going too. uses list format of:
+    [7, 1, '♞', 6, 1]
+    """
+
     clearSpot(spot[0], spot[1])
     fillSpot(spot[3],spot[4],spot[2])
 
@@ -156,11 +162,11 @@ def movemove2AdvancedAI(n): #this is for the AI one
         spot = AdvancedAImakemoveWhite()
         while chekchek(spot, 1, False): #catches move if it is check
             print('white wanted to make this move but it resulted in check')
-            finland = thefinalfunction()
-            print(f"Finland {finland}") #find out exatully what to bug test instead of finland
-            if finland == False:
+            check_for_check = thefinalfunction()
+            print(f"Finland {check_for_check}") #find out exatully what to bug test instead of finland
+            if check_for_check == False:
                 return False
-            movemove(finland)
+            movemove(check_for_check)
             input(spot)
             spot = AdvancedAImakemoveWhite() #loops it until it is not check
         print("WHITE TURN")
@@ -170,6 +176,11 @@ def movemove2AdvancedAI(n): #this is for the AI one
         while chekchek(spot, 2, False):
             print('black wanted to make this move but it resulted in check')
             # TODO addd finalnad function   
+            check_for_checkmate = thefinalfunctionblack()
+            print(f"BLACK CHECKMATE CHECK: {check_for_checkmate}")
+            if check_for_checkmate == False:
+                return True #returns true if there is no thing black can do to get out of check
+            movemove(check_for_checkmate)
 
             print(spot)
             spot = AdvancedAImakemoveBlack()
