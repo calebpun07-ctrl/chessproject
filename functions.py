@@ -23,6 +23,10 @@ RESET = "\033[0m"
 USE_COLOR = True
 #this function starts teh game (VERY USEFUL DO NOT DELETE)
 def startGame():
+    """
+    This function does nothing at all. literaly. 
+    DO NOT DELETE
+    """
     print("the game has begun\nit is whites turn")
     global turn
     turn = 1 #if you remove this the progarm break liek the coconut image
@@ -72,7 +76,6 @@ def showBoard():
             x = False
         for col in row:
             if col=="█" or col=="▞":
-                    
                 if x:
                     line.append(dim(col))
                     x = False
@@ -990,10 +993,13 @@ def pickmove(level, whoseturn):
         
     else:
         print(GEM +"line 1279")
-#STAY AWAY FROM THIS ONE 
-#STAY AWAY FROM THIS ONE 
-#if you touch it it will break like the last time
-#STAY AWAY FROM THIS ONE 
+
+"""
+STAY AWAY FROM THIS ONE 
+STAY AWAY FROM THIS ONE 
+if you touch it it will break like the last time
+STAY AWAY FROM THIS ONE 
+"""
 def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
     #checks for trun, then picks avalible spots for user to choose
     piece = level[2]

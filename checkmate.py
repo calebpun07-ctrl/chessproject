@@ -22,10 +22,10 @@ def thefinalfunction():
         #building bricks
         #needs to be starting cords, peice ending cords
         longAbsVarbilename = []
-        for move in listOfPossibleMove:
-            brick = [peice[0],peice[1],peice[2]]
-            brick.append(move[0]+1)
-            brick.append(move[1]+1)
+        for move in listOfPossibleMove: 
+            brick = [peice[0],peice[1],peice[2]] 
+            brick.append(move[0]+1) 
+            brick.append(move[1]+1) # makes a [x,y, peice, fake x, fake y,]
             checkval = chekchek(brick, 1, False)
             
             if checkval != True:
@@ -44,7 +44,6 @@ def thefinalfunctionblack():
         while movefound == False:
 
             #ok the goal of pickmoveAI has changed. it will now return all the possible moves of the selected peice
-            
             thing = pickmoveWhite(peice) #NEED TO MAKE PICKMOVEBLACK
             
             if thing != False:
@@ -78,7 +77,6 @@ add all possible moves into one file.
 Then it runs through every single move until out of check.
 should work
 
-
 AImake move white plan:
 instead of a random one, it will just take each white peice value and do that for every single one
 and make those moves and moe to the next one
@@ -96,11 +94,11 @@ def pickmoveWhite(level):
                 allowedMoves.append([level[0]-2,level[1]])
         
         #capturing
-        if level[1] -1 != -1: #diagnal to left
+        if level[1] -1 != -1: #diagonal to left
             if checkPieceBlackSymbol(level[0]-1,level[1]-1):
                 allowedCaptures.append([level[0], level[1]])
         
-        if level[1] +1 != 8: #diagnal to right
+        if level[1] +1 != 8: #diagonal to right
             if checkPieceBlackSymbol(level[0]-1,level[1]+1):
                 allowedCaptures.append([level[0], level[1]+2])
 
@@ -117,7 +115,6 @@ def pickmoveWhite(level):
         return allowedMoves
 
     elif piece == '♜':
-        # print('pp')
         #varbles
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
@@ -379,7 +376,6 @@ def pickmoveBlack(level): #UNFINSIHED
         return allowedMoves
 
     elif piece == '♖':
-        # print('pp')
         #varbles
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
