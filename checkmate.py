@@ -8,7 +8,6 @@ def thefinalfunction():
         while movefound == False:
 
             #ok the goal of pickmoveAI has changed. it will now return all the possible moves of the selected peice
-            
             thing = pickmoveWhite(peice)
             
             if thing != False:
@@ -44,7 +43,7 @@ def thefinalfunctionblack():
         while movefound == False:
 
             #ok the goal of pickmoveAI has changed. it will now return all the possible moves of the selected peice
-            thing = pickmoveWhite(peice) #NEED TO MAKE PICKMOVEBLACK
+            thing = pickmoveBlack(peice) #NEED TO MAKE PICKMOVEBLACK
             
             if thing != False:
                 listOfPossibleMove = thing

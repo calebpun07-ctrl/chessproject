@@ -7,7 +7,7 @@ good luck if you wish to optimize it
 This file is also just the code for playing chess. this has nothing to do with the bot(ai)
 ▞▞▞▞▞▞▞▞▞▞
 
-after liek two years, changed to using █ with dim.
+after like two years, changed to using █ with color.
 """
 # Define board size
 rows, cols = 8, 8
@@ -18,7 +18,7 @@ GEM = "genreic error message"
 valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '♜', '♙', '♟'}
 white_pieces = {'♚', '♛', '♝', '♞', '♜', '♟'}
 black_pieces = {'♔', '♕', '♗', '♘', '♖', '♙'}
-DIM = "\033[30m"
+BLACK = "\033[30m"
 RESET = "\033[0m"
 USE_COLOR = True
 #this function starts teh game (VERY USEFUL DO NOT DELETE)
@@ -32,7 +32,7 @@ def startGame():
     turn = 1 #if you remove this the progarm break liek the coconut image
 
 def dim(s):
-    return (DIM + s + RESET) if USE_COLOR else s # i never knew you could do colors in teh terminal like this
+    return (BLACK + s + RESET) if USE_COLOR else s # i never knew you could do colors in teh terminal like this
 
 def clearboard():
     global board

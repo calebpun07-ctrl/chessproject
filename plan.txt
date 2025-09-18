@@ -126,7 +126,7 @@ all this works
 
 
 09/02/25 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-things to do not that i have learned what colors are:
+things to do now that i have learned what colors are:
     print("\033[2J\033[H", end="")
 this thingy above me will essenitally clear console after a print
 
