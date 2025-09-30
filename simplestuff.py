@@ -56,18 +56,26 @@ def playTheGameButAI():
         turnNumber +=1
 
 def playTheGameBut2AI():
+    """
+    Uses the two random AI's. Does fill the board. Prompts for input 
+    after each move, if it is y, then it ends the loop. Otherwise just keep hitting enter
+    """
+
     fillboard()
-    salt = 2
-    termitate = "n"
+    turn_number = 2
+    termitate = None
     while termitate != "y":
-        print(salt)
-        spot = movemove2AI(salt)
+        # print(turn_number)
+        spot = movemove2AI(turn_number)
         movemove(spot)
         termitate = input("pause:")
-        salt +=1
+        turn_number +=1
     print('get terminateored')
 
 def clearBoardStart():
+    """
+    Starts withe a clear board
+    """
     showBoard()
     turnNumber = 20
     for n in range(2,turnNumber):
@@ -83,7 +91,6 @@ def movemove(spot: list):
     and fills it at the place its going too. uses list format of:
     [7, 1, '♞', 6, 1]
     """
-
     clearSpot(spot[0], spot[1])
     fillSpot(spot[3],spot[4],spot[2])
 
@@ -189,6 +196,9 @@ def movemove2AdvancedAI(n): #this is for the AI one
     
 #betatesterfunctins
 def testerSetup():
+    """
+    Blank tester setup. You can put different peices on the board and then after that run the clearBoardStart
+    """
     killcode = True
     while killcode:
         print("you contol everything\npeices you could choose")
@@ -214,6 +224,6 @@ def testerSetup():
         if check == 'y':
             killcode = False
         elif check == 'n':
-            print('ok\nrady to add more')
+            print('ok\nready to add more')
         else:
             print('somthing happened.')
