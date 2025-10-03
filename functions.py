@@ -93,6 +93,25 @@ def showBoard():
         n+=1
     print("          1 2 3 4 5 6 7 8\n") #display x axis
 
+def vaildate_input(user_prompt, data_type='int', range=(float("-inf"), float("inf"))):
+    """
+    Validates a users input. 
+        user_prompt: The question/input that gets repeated
+        data_type: Whatever data type need to be validated. default is set to int.
+    """
+    while True:
+        input_unchecked = input(user_prompt).strip()
+        if (data_type == 'int'):
+            if input_unchecked.isdigit():
+                input_unchecked = int(input_unchecked)
+                if range[0] <= input_unchecked <= range[1]:
+                    return int(input_unchecked)
+                else:
+                    print(f"Number not in range. Please enter a number from {range[0]} to {range[1]}")
+            else:
+                print("Incorrect data type. Try again")
+                continue
+
 #function to check role/name of a peice. I think its just used once
 def checkPiece(x: int,y: int):
     """
@@ -367,48 +386,36 @@ def getusermovesforpickmove(userMove, allowedMoves): #saved like 200 lines of co
     return moveToCords
 
 #pick teh peice they want to move
-def pickpiece(turnnum):
-    turn = turnnum
-    if turn == 1:
+def pickpiece(turnnum): #this code sucks
+    """
+    Code to get what piece the user wants to move and returns the peiace by the end
+    """
+    if turnnum == 1:
         j= white_pieces
-    elif turn == 2:
+        player = 'White'
+    else:
         j= black_pieces
+        player = 'Black'
     peiceselected = False  #overall thing
     while not peiceselected: #this is so that it can iterate when i want it to
         peiceselected2 = False
         while not peiceselected2: # it will alwas run this once
-            ylevel = int(input("Pick the peice you would like to use\ny cord first:"))
-            xlevel = int(input("x cord now:"))
+            print(f"Pick a {player} peice you would like to use")
+            ylevel = vaildate_input("y cord first:", 'int', (1,8))
+            xlevel = vaildate_input("x cord now:", 'int', (1,8))
 
-            if not 1 <= ylevel <= 8 or not 1 <= xlevel <= 8: # checks on numebrs
-                print("not in range")  #need to find out
+            level = [ylevel -1,xlevel -1]
+            piece = checkPieceSymbol(ylevel -1,xlevel -1)
+            if piece == "█":
+                print(f"You selected a blank space. Please select one of {player}'s peices")
+                continue
+            elif piece not in j:
+                print(f"You need to select one of {player}'s peices")
                 continue
             else:
                 peiceselected2 = True #will cont
             #peiceslected2 will always be true at this point
 
-        peiceselected3 = False
-        while not peiceselected3: #next check, checks if the peice is real
-            global level
-            level = [ylevel -1,xlevel -1]
-            piece = checkPieceSymbol(ylevel -1,xlevel -1)
-
-            if piece == "█":
-                print("not a peice you suck just type in real numbers")
-                peiceselected2 = False
-                break #breaks the loop, sends you back to og Peiceslecteds
-                
-            #checks for the vaild peices and tells user which peic e they piced
-
-            elif piece in j:
-                peiceselected3 = True
-            elif not piece in j:
-                print("Not one of your peices idiot did you forget what turn it was look at this stupid guy\n(if this was a coding error make sure to hate acleb not me)")
-                peiceselected2 = False
-                break #breaks the loop, sends you back to og Peiceslecteds
-            else:
-                print(piece +str(j)+ "line 310") #generic error message    
-        
         if peiceselected2 == False:
             continue
 

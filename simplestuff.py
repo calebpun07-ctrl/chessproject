@@ -199,8 +199,7 @@ def testerSetup():
     """
     Blank tester setup. You can put different peices on the board and then after that run the clearBoardStart
     """
-    killcode = True
-    while killcode:
+    while True:
         print("you contol everything\npeices you could choose")
         
         print('♚', '♛', '♝', '♞', '♜', '♟', '♔', '♕', '♗', '♘', '♖', '♙')
@@ -222,7 +221,7 @@ def testerSetup():
 
         check = input('you done yet? or not (y/n)')
         if check == 'y':
-            killcode = False
+            break
         elif check == 'n':
             print('ok\nready to add more')
         else:
