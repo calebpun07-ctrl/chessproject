@@ -93,11 +93,14 @@ def showBoard():
         n+=1
     print("          1 2 3 4 5 6 7 8\n") #display x axis
 
-def vaildate_input(user_prompt, data_type='int', range=(float("-inf"), float("inf"))):
+def validate_input(user_prompt, data_type='int', range=(float("-inf"), float("inf"))):
     """
     Validates a users input. 
         user_prompt: The question/input that gets repeated
         data_type: Whatever data type need to be validated. default is set to int.
+        range: 
+            for int, is the values that can be input can be within
+            for str, is what the value is allowed to be (ex: yes, no)
     """
     while True:
         input_unchecked = input(user_prompt).strip()
@@ -111,7 +114,12 @@ def vaildate_input(user_prompt, data_type='int', range=(float("-inf"), float("in
             else:
                 print("Incorrect data type. Try again")
                 continue
-
+        
+        elif data_type == 'str':
+            if (input_unchecked not in range) and (range != (float("-inf"), float("inf"))):
+                print(f"Please put {range}")
+                continue
+            return input_unchecked
 #function to check role/name of a peice. I think its just used once
 def checkPiece(x: int,y: int):
     """
@@ -385,10 +393,12 @@ def getusermovesforpickmove(userMove, allowedMoves): #saved like 200 lines of co
     
     return moveToCords
 
-#pick teh peice they want to move
-def pickpiece(turnnum): #this code sucks
+def pickpiece(turnnum): 
     """
-    Code to get what piece the user wants to move and returns the peiace by the end
+    Code to get what piece the user wants to move
+
+    Returns a list with the cordinates of the users piece and the piece itself.
+    [y,x,piece] (also realcords)
     """
     if turnnum == 1:
         j= white_pieces
@@ -396,47 +406,32 @@ def pickpiece(turnnum): #this code sucks
     else:
         j= black_pieces
         player = 'Black'
-    peiceselected = False  #overall thing
-    while not peiceselected: #this is so that it can iterate when i want it to
-        peiceselected2 = False
-        while not peiceselected2: # it will alwas run this once
-            print(f"Pick a {player} peice you would like to use")
-            ylevel = vaildate_input("y cord first:", 'int', (1,8))
-            xlevel = vaildate_input("x cord now:", 'int', (1,8))
+    
+    while True: # it will alwas run this once
+        print(f"Pick a {player} peice you would like to use")
+        ylevel = validate_input("y cord first:", 'int', (1,8))
+        xlevel = validate_input("x cord now:", 'int', (1,8))
 
-            level = [ylevel -1,xlevel -1]
-            piece = checkPieceSymbol(ylevel -1,xlevel -1)
-            if piece == "█":
-                print(f"You selected a blank space. Please select one of {player}'s peices")
-                continue
-            elif piece not in j:
-                print(f"You need to select one of {player}'s peices")
-                continue
-            else:
-                peiceselected2 = True #will cont
-            #peiceslected2 will always be true at this point
-
-        if peiceselected2 == False:
+        level = [ylevel -1,xlevel -1] #adds the real cords to list
+        piece = checkPieceSymbol(ylevel -1,xlevel -1) 
+        if piece == "█":
+            showBoard()
+            print(f"You selected a blank space. Please select one of {player}'s peices")
             continue
-
-        #checks for the vaild peices and tells user which peic e they piced
-        piecename = checkPiece(ylevel -1,xlevel -1)
-        #this may be optional, probally will take it out at sompoint in other thing
-        answergotten = False
-        while not answergotten:
-            isCorrect = input(f"you have selected {piece} ({piecename}) on {str(level[0]+1)},{str(level[1]+1)} .\nWas this correct? (y/n)")
-            if isCorrect == "y":
-                answergotten = True
-                peiceselected = True
-            elif isCorrect == "n":
+        elif piece not in j:
+            showBoard()
+            print(f"You need to select one of {player}'s peices")
+            continue
+        else:
+            piecename = checkPiece(ylevel -1,xlevel -1)
+            isCorrect = validate_input(f"you have selected {piece} ({piecename}) on {str(level[0]+1)},{str(level[1]+1)} .\nWas this correct? (y/n)", 'str', ['y', 'n'])
+            if isCorrect == 'n':
                 showBoard()
                 print("starting over... make better chocies")
-                peiceselected2 = False
-                break #restarts the thing
-            else:
-                print(GEM,"line 329")
-        if not answergotten:
-            continue
+                continue
+            elif isCorrect == 'y':
+                break
+
     level.append(piece)
     print(level)
     return level
