@@ -31,7 +31,8 @@ def startGame():
     global turn
     turn = 1 #if you remove this the progarm break liek the coconut image
 
-def dim(s):
+def dim(s): 
+    """adds black to a blank space"""
     return (BLACK + s + RESET) if USE_COLOR else s # i never knew you could do colors in teh terminal like this
 
 def clearboard():
@@ -339,6 +340,7 @@ def find_white_pieces():
     return white_pieces_positions
 
 def findPeice(peice):
+    """Taking the str of a peice, will return the cords of nearest one, starting from the top left down"""
     rat = peice
     for y in range(8):
         for x in range(8):
@@ -348,6 +350,7 @@ def findPeice(peice):
 
 #see name
 def clearSpot(y,x):
+    """Sets spot at y,x to a blank space"""
     board[y][x] = "█"
 
 #yet again, see the name
@@ -436,7 +439,8 @@ def pickpiece(turnnum):
 
 def pickmove(level, whoseturn):
     """
-    Final function for main "functions". Takes user input of peice and its location, along with the turn number, and returns
+    Final function for main "functions". Takes user input of peice and its location, along with the turn number, 
+    and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are teh peice moving and the last two are where the peice goes.
     """
     vanillawafer = level
     #checks for trun, then picks avalible spots for user to choose
