@@ -216,7 +216,7 @@ def checkUserMoveAllowed(listofallowed: list, usermove: list):
     paras take a list and a the users move, as a 2d list
     """
     for cord in listofallowed:
-        if cord == usermove[0]:
+        if (cord == usermove[0]) or (cord == usermove):
             return True
     return False
 
@@ -373,23 +373,21 @@ def clearOpenMoves(allowedMoves):#paired withg the previous function to clear sa
     for applepin in allowedMoves:
         clearSpot(applepin[0],applepin[1])
 
-def getusermovesforpickmove(userMove, allowedMoves): #saved like 200 lines of code - nope im back it does not work - it works now
-    moveToCordsY = int(input('What y level for yours: '))
-    moveToCordsX = int(input('What x level for yours: '))
-    place = userMove # palceholder for usermove
-    userMove.append([moveToCordsY-1,moveToCordsX-1])
+def getusermovesforpickmove(userMove, allowedMoves) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
+    """
+    Takes a list of allowed moves and keeps asking until you give a varible withing allowed moves. Used within pickmove(). returns a list with the [y,x] varibles
+    """
+    moveToCordsY = validate_input('What y level for yours: ', 'int')
+    moveToCordsX = validate_input('What x level for yours: ', 'int')
 
-    moveToll = checkUserMoveAllowed(allowedMoves,userMove)
+    moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
     while moveToll == False: #loop to check if users move was vaild
+        showBoard()
         print('either code is broken or that wasnt a vaild move bro. either way, not cool')
         moveToCordsY = int(input('What y level for yours: '))
         moveToCordsX = int(input('What x level for yours: '))
-        userMove = place  #resets userMove to orginal
-        userMove.append([moveToCordsY-1,moveToCordsX-1]) #adds back on the movetocords
-        moveToll = checkUserMoveAllowed(allowedMoves,userMove)
-    moveToCords = []
-    moveToCords.append(moveToCordsY)
-    moveToCords.append(moveToCordsX)
+        moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
+    moveToCords = [moveToCordsY, moveToCordsX]
     
     return moveToCords
 
@@ -437,7 +435,9 @@ def pickpiece(turnnum):
     return level
 
 def pickmove(level, whoseturn):
-    
+    """
+    Final function for main "functions". Takes user input of peice and its location, along with the turn number, and returns
+    """
     vanillawafer = level
     #checks for trun, then picks avalible spots for user to choose
     allowedMoves = []

@@ -11,7 +11,6 @@ def playTheGame():
     n = 0
     while True:
         if check4chek((n%2)+1) == False: # this one is a function that for now gets you automaticly out of check
-            
             finland = thefinalfunction()
             if finland == False:
                 print("game over.")
