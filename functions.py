@@ -40,9 +40,8 @@ def clearboard():
     rows, cols = 8, 8
     board = [["█"for _ in range(cols)] for _ in range(rows)]
 
-#fills board with the normal peices
 def fillboard():
-    
+    """Fills the board 2d array with White and Black pieaces"""
     for col in range(cols):
         board[1][col] = '♙'  #White
         board[6][col] = '♟'  #Black
@@ -64,6 +63,7 @@ def fillboard():
     board[7][4] = '♚' 
 
 def showBoard():
+    """Auto 'clears' the board, then prints the chars in the board and dims every other char to make checker pattern"""
     print("\033[2J\033[H", end="\n")
     
     global board
@@ -71,10 +71,8 @@ def showBoard():
     n = 1
     for row in board:
         line = []
-        if n%2 == 0:
-            x = True
-        else:
-            x = False
+        if n%2 == 0: x = True
+        else: x = False
         for col in row:
             if col=="█" or col=="▞":
                 if x:
@@ -108,10 +106,8 @@ def validate_input(user_prompt, data_type='int', range=(float("-inf"), float("in
         if (data_type == 'int'):
             if input_unchecked.isdigit():
                 input_unchecked = int(input_unchecked)
-                if range[0] <= input_unchecked <= range[1]:
-                    return int(input_unchecked)
-                else:
-                    print(f"Number not in range. Please enter a number from {range[0]} to {range[1]}")
+                if range[0] <= input_unchecked <= range[1]: return int(input_unchecked)
+                else: print(f"Number not in range. Please enter a number from {range[0]} to {range[1]}")
             else:
                 print("Incorrect data type. Try again")
                 continue
@@ -121,136 +117,86 @@ def validate_input(user_prompt, data_type='int', range=(float("-inf"), float("in
                 print(f"Please put {range}")
                 continue
             return input_unchecked
-#function to check role/name of a peice. I think its just used once
+
 def checkPiece(x: int,y: int):
     """
-    Takes x and y values and then returns the string name 
-    of the peice, or if its a blank space returns 0 and if
-    its a error returns 1
+    Takes x and y values and then returns the string NAME of the peice, or if its a blank space returns 0 and if
+    its a error returns 1. Used to check NAME!
     """
 
     piece = board[x][y]
 
-    if piece == '♔' or piece == '♚':
-        return "king"
-    elif piece == '♕' or piece == '♛':
-        return "queen" #j
-    elif piece == '♗' or piece == '♝':
-        return "bishop"
-    elif piece == '♘' or piece == '♞':
-        return "knight"
-    elif piece == '♖' or piece == '♜':
-        return "rook"
-    elif piece == '♙' or piece == '♟':
-        return "pawn"
-    elif piece == "█":
-        return 0
+    if piece == '♔' or piece == '♚':return "king"
+    elif piece == '♕' or piece == '♛':return "queen" #j
+    elif piece == '♗' or piece == '♝':return "bishop"
+    elif piece == '♘' or piece == '♞':return "knight"
+    elif piece == '♖' or piece == '♜':return "rook"
+    elif piece == '♙' or piece == '♟':return "pawn"
+    elif piece == "█": return 0
     else:
         print("uh oh caleb sucks a coding (this error message is brought to you by the checkPiece function and clabes lack of skill)")
         return 1
-#more important function to check the piece of the peice (USE THIS ONE WHEN CHECKING A PEICE NOT PRIEVIOUS)
+
 def checkPieceSymbol(x: int,y: int):
     """
-    Takes cords (x and y), and returns the peice that is at
-    those cords. if a blank space returns the blank space.
-    Error returns a 1.
+    Takes cords (x and y), and returns the peice that is at those cords. if a blank space returns the blank space. Error returns a 1. more important function to check the piece of the peice
     """
 
     piece = board[x][y]
-
-    if piece in valid_pieces:   
-        return piece
-    elif piece == "█":
-        return "█"
+    if piece in valid_pieces: return piece
+    elif piece == "█": return "█"
     else:
         print("uh oh caleb sucks a coding line 90")
         return 1
-#return true if peice is white, false if not
-def checkPieceWhiteSymbol(x: int,y: int):
-    """
-    returns true if its a white piece, false if not or error
-    """
+
+def checkPieceWhiteSymbol(x: int,y: int) -> bool:
+    """returns true if its a white piece, false if not or error"""
     piece = board[x][y]
 
-    if piece in white_pieces:   
-        return True
-    elif piece in black_pieces:
-        return False
-    elif piece == "█":
-        return False
-    else:
-        print("uh oh caleb sucks a coding line 150")
-        return False
+    if piece in white_pieces: return True
+    else: return False
 
-#return true if peice is black, false if not
-def checkPieceBlackSymbol(x: int,y: int):
-    """
-    returns true if its a black piece, false if not or error
-    """
+def checkPieceBlackSymbol(x: int,y: int) -> bool:
+    """returns true if its a black piece, false if not or error"""
     piece = board[x][y]
-    if piece in black_pieces:   
-        return True
-    elif piece in white_pieces:
-        return False
-    elif piece == "█":
-        return False
-    else:
-        return False
+    if piece in black_pieces: return True
+    else: return False
 
-#if spot clear returns true
 def checkSpaceClear(x,y):
-    """
-    if the spots clear it returns true
-    """
-
+    """if the spots clear it returns true, if anything else it treturns false    """
     space = checkPieceSymbol(x,y)
-    if space == "█":
-        return True
-    else:
-        return False
+    if space == "█": return True
+    else: return False
 
-#checks if the users move is legal, returns true if so
 def checkUserMoveAllowed(listofallowed: list, usermove: list):
     """
-    used for making sure the user picks a move from the options given. 
-    used when the we are GETTING the move from the user
-    paras take a list and a the users move, as a 2d list
+    used for making sure the user picks a move from the options given. used when the we are GETTING the move from the user. paras take a list and a the users move, as a 2d list
     """
     for cord in listofallowed:
-        if (cord == usermove[0]) or (cord == usermove):
-            return True
+        if (cord == usermove[0]) or (cord == usermove): return True
     return False
 
 def check4chek(whoseturn):
     """
-    Returns false if king is in check. returns true if the user is not 
-    in check.
+    Returns false if king is in check. returns true if the user is not in check.
     """
     if whoseturn == 1:
         posofallblack = find_black_pieces()
         for sugar in posofallblack:
             if pickmoveKing(sugar, 2):
                 return False
-
         return True
 
     elif whoseturn == 2:
-        kingCords = findPeice("♔")
         posofallwhite = find_white_pieces()
-        
         for choclate in posofallwhite:
             if pickmoveKing(choclate, 1):
-                # print("Check c4c")
-                # input(choclate)
                 return False
-        
         return True
 
 def chekchek(nosebleed, turn: int, showboard = True): #this function takes the move of teh user and makes teh move
     """
-    this function takes the move of the user and makes said move
-    if the move results in check and returns True to stop pick move,
-    and tells user that they failed to get out of check
+    this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check
     if showboard is true, then itll show the baord and print teh you cailed ot get out
     of check. if it is set to not then it wont
     """
@@ -284,8 +230,7 @@ def chekchek2(nosebleed,turn): #this function takes the move of teh user and mak
     fillSpotNS(spot[3],spot[4],spot[2])
     thing = check4chek(turn)
     
-    if thing:
-        return False
+    if thing: return False
     elif thing == False:
         #replace
         fillSpotNS(spot[0]+1,spot[1]+1,holder)
@@ -302,41 +247,35 @@ def TheFinalFunction(whoseturn):
             print(sugar)
             if pickmoveKing(sugar, 2):
                 print("Check TFF")
-
                 return False
-
         return True
 
     if whoseturn == 2:
         kingCords = findPeice("♔")
         posofallwhite = find_white_pieces()
-        
         for choclate in posofallwhite:
             if pickmoveKing(choclate, 1):
                 print("Check TFF")
                 return False
-        
         return True
 
 def find_black_pieces():
+    """Returns a list of black pieces. each index has (y,x,piece)"""
     blackpiecespositions = []
-
     for y in range(8):  # go through rows
         for x in range(8):  # go through columns
             if board[y][x] in black_pieces:
                 blackpiecespositions.append((y, x, board[y][x]))
-
     return blackpiecespositions
 
-def find_white_pieces():
+def find_white_pieces() -> list:
+    """Returns a list of white pieces. each index has (y,x,piece)"""
     white_pieces = {'♚', '♛', '♝', '♞', '♜', '♟'}
     white_pieces_positions = []
-
     for y in range(8):  # yet again through rows
         for x in range(8):  # yet go the through columns
             if board[y][x] in white_pieces:
                 white_pieces_positions.append((y, x, board[y][x]))
-
     return white_pieces_positions
 
 def findPeice(peice):
@@ -348,22 +287,19 @@ def findPeice(peice):
                 honey = [y,x]
                 return honey      
 
-#see name
 def clearSpot(y,x):
     """Sets spot at y,x to a blank space"""
     board[y][x] = "█"
 
-#yet again, see the name
 def fillSpot(y,x, piece): #piece must be a real peice not some lame name
     """fills spot, takes fake cords. then shows the board"""
     board[y-1][x-1] = piece
     showBoard()
 #fills spot and does not show
-def fillSpotNS(y,x, piece): #piece must be a real peice not some lame name
+def fillSpotNS(y: int,x: int, piece): #piece must be a real peice not some lame name
     """fills spot, takes fake cords, does NOT show the board (hence the NS)"""
     board[y-1][x-1] = piece
 
-#experimental funcytion - no longer experimental, now its used
 def showOpenMoves(allowedMoves: list):
     """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function"""
     for pinapple in allowedMoves:
@@ -453,11 +389,7 @@ def pickmove(level, whoseturn):
         if piece == '♟':
             print("possible moves")
             # this is for the pawn forward two moves
-            if checkSpaceClear(level[0]-1,level[1]): #omg i spent so long right here thign that tehre was some error 
-                #print(level[0], ",", level[1]+1) # but in reality i had a +  instead of a minus i hate coding
-                #lol now its giving an error i hate everyings
-#its future caleb i figured it out and i hate everything a little bit less :)
-#guess whos backkkkk ima kms
+            if checkSpaceClear(level[0]-1,level[1]): 
                 allowedMoves.append([level[0]-1,level[1]])
                 if checkSpaceClear(level[0]-2,level[1]) and level[0] ==6:  
                     # print(level[0]-1, ",", level[1]+1) lol back when i would print stuff
@@ -521,8 +453,6 @@ def pickmove(level, whoseturn):
 
             return vanillawafer
 
-        #100% you can optimze knight
-        #I OPtimzed it
         elif piece == '♞':
             print("possible moves")
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
@@ -562,11 +492,9 @@ def pickmove(level, whoseturn):
 
                 while not orca:
                     moverow += rawrow
-                    
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
 
                     if checkSpaceClear(moverow, movecol):
                         allowedMoves.append([moverow, movecol])
@@ -625,8 +553,7 @@ def pickmove(level, whoseturn):
                     
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
 
                     if checkSpaceClear(moverow, movecol):
                         allowedMoves.append([moverow, movecol])
@@ -1014,13 +941,10 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
         if piece == '♟':
 
             if level[1] -1 != -1: #diagnal to left
-                if checkPieceSymbol(level[0]-1,level[1]-1) == "♔":
-                    return True
+                if checkPieceSymbol(level[0]-1,level[1]-1) == "♔": return True
             elif level[1] +1 != 8: #diagnal to right
-                if checkPieceSymbol(level[0]-1,level[1]+1) == "♔":
-                    return True
-            else:
-                return False
+                if checkPieceSymbol(level[0]-1,level[1]+1) == "♔": return True
+            else: return False
 
         elif piece == '♜':
        
@@ -1034,14 +958,12 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                     moverow += row
                     movecol += col
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  #cut if out of 
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
 
                     if checkSpaceClear(moverow, movecol) == False:
                         if checkPieceSymbol(moverow, movecol) == "♔":
                             return True
                         scc = True  # make sur ethy cant teleprot
-
             return False
 
         #100% you can optimze knight
@@ -1056,7 +978,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         if not checkSpaceClear(yaxe, xaxe):  # capture
                             if checkPieceSymbol(yaxe, xaxe)== "♔":
                                 return True
-
             return False
 
         elif piece == '♝':
@@ -1082,7 +1003,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
 
         elif piece == '♛':
         
-            #literlly just added rook and bishop
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
             
             for rawrow, hidcol in directions:
@@ -1137,22 +1057,18 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
 #why do i say we so much when im just talking about me
     elif whoseturn == 2: # blacks turn
         if piece == '♙':
-            
             if level[1] -1 != -1: #diagnal to left
                 if checkPieceSymbol(level[0]+1,level[1]-1) == "♚":
                     return True
-    
             if level[1] +1 != 8: #diagnal to right
                 if checkPieceSymbol(level[0]+1,level[1]+1) == "♚":
                     return True
-
             return False
 
         #rook took longest only because i had no idea what i was doing                WARNING YOU ARE EDITING TEH PICKKIGN NOT PICK MOVE
         elif piece == '♖':
 
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
-
             for row, col in directions:
                 moverow, movecol = level[0], level[1]
                 scc = False
@@ -1168,7 +1084,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         if checkPieceSymbol(moverow, movecol) == "♚":
                             return True
                         scc = True  # make sur ethy cant teleprot
-
             return False
 
         elif piece == '♘':
@@ -1241,12 +1156,10 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         if checkPieceSymbol(moverow, movecol) == "♚":
                             return True
                         scc = True  # make sur ethy cant teleprot
-
             return False
         
         elif piece == '♔':
             kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
-            
             for cherry in kingking:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
@@ -1255,14 +1168,10 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
                             if (checkPieceSymbol(yaxe, xaxe)== "♚"):
                                 return True
-            
             return False
-
-        #king and knight took shortest amount of time to code 
         else:
             print("why did you have to pick a white peice, try again")
             return False
-        
     else:
         print(GEM +' line 1816')
 
