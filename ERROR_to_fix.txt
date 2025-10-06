@@ -23,3 +23,4 @@ big test message
 
 and movemove2advanceai might be the problem for black
 
+make it so taht if they picka. peice that has no moves 

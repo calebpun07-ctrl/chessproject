@@ -119,7 +119,6 @@ def AdvancedAImakemoveBlack1(): # this the new one and we are working on making 
 
             return brick
 
-
 def AdvancedAImakemoveWhite1():
     ourpeices = find_white_pieces()
     counter = 0

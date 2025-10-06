@@ -402,22 +402,15 @@ def pickmove(level, whoseturn):
 
             for rawrow, hidcol in directions:
                 moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                while True:
                     moverow += rawrow
                     movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
-
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceBlackSymbol(moverow, movecol):
                             allowedCaptures.append([moverow, movecol])
-                        scc = True  # Stop moving in this direction if we hit a piece
+                        break  # Stop moving in this direction if we hit a piece
 
             showOpenMoves(allowedMoves)
             allowedMoves.extend(allowedCaptures)
@@ -467,21 +460,15 @@ def pickmove(level, whoseturn):
 
             for rawrow, hidcol in directions:
                 moverow, movecol = level[0], level[1]
-                orca = False
-
-                while not orca:
+                while True:
                     moverow += rawrow
                     movecol += hidcol
-                   
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
-
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceBlackSymbol(moverow, movecol):
                             allowedCaptures.append([moverow, movecol])
-                        orca = True  # Stop moving in this direction if we hit a piece
+                        break  # Stop moving in this direction if we hit a piece
 
             showOpenMoves(allowedMoves)
             allowedMoves.extend(allowedCaptures)
@@ -502,45 +489,32 @@ def pickmove(level, whoseturn):
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
-                    
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
-
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceBlackSymbol(moverow, movecol):
                             allowedCaptures.append([moverow, movecol])
-                        scc = True  # Stop moving in this direction if we hit a piece
+                        break  # Stop moving in this direction if we hit a piece
 
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
 
             for ramrow, hidcol in directions:
                 moverow, movecol = level[0], level[1]
-                orca = False
-
-                while not orca:
+                
+                while True:
                     moverow += ramrow
-                    
-                    movecol += hidcol
-                   
+                    movecol += hidcol 
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
-
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceBlackSymbol(moverow, movecol):
                             allowedCaptures.append([moverow, movecol])
-                        orca = True  # Stop moving in this direction if we hit a piece
+                        break  # Stop moving in this direction if we hit a piece
 
             showOpenMoves(allowedMoves)
             for x in allowedCaptures:
@@ -646,24 +620,16 @@ def pickmove(level, whoseturn):
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
             for ramrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
-                    moverow += ramrow
-                    
+                moverow, movecol = level[0], level[1] 
+                while True:
+                    moverow += ramrow 
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
-
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceWhiteSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
-                        scc = True  # Stop moving in this direction if we hit a piece
+                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
+                        break  # Stop moving in this direction if we hit a piece
 
             showOpenMoves(allowedMoves)
             allowedMoves.extend(allowedCaptures)
@@ -713,21 +679,17 @@ def pickmove(level, whoseturn):
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
 
             for ramrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                orca = False
-
-                while not orca:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += ramrow
                     movecol += hidcol
                    
-                    if not (0 <= moverow <=7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
+                    if not (0 <= moverow <=7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceWhiteSymbol(moverow, movecol):
                             allowedCaptures.append([moverow, movecol])
-                        orca = True  # Stop moving in this direction if we hit a piece
+                        break  # Stop moving in this direction if we hit a piece
 
             showOpenMoves(allowedMoves)
             allowedMoves.extend(allowedCaptures)
@@ -749,43 +711,30 @@ def pickmove(level, whoseturn):
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
 
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                orca = False
-
-                while not orca:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceWhiteSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
-                        orca = True  # Stop moving in this direction if we hit a piece
+                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
+                        break  # Stop moving in this direction if we hit a piece
 
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
-                    
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
-
-                    if checkSpaceClear(moverow, movecol):
-                        allowedMoves.append([moverow, movecol])
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceWhiteSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
-                        scc = True  # Stop moving in this direction if we hit a piece
+                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
+                        break  # Stop moving in this direction if we hit a piece
 
             showOpenMoves(allowedMoves)
             clearOpenMoves(allowedMoves)
@@ -928,26 +877,19 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
         elif piece == '♜':
        
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
-
             for row, col in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += row
                     movecol += col
                    
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
-
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔":
-                            return True
-                        scc = True  # make sur ethy cant teleprot
+                        if checkPieceSymbol(moverow, movecol) == "♔": return True
+                        break  
             return False
 
-        #100% you can optimze knight
-        elif piece == '♞':
-            
+        elif piece == '♞':     
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)] 
             for cherry in nightnight:
                 yaxe = level[0] + cherry[0]
@@ -963,21 +905,14 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
             
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                orca = False
-                
-                while not orca:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
                     movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔":
-                            # print("pooooooooooooooooooooooooooooooooooooooooooooooooooooooooop")
-                            return True
-                        orca = True  # Stop moving in this direction if we hit a piece
-
+                        if checkPieceSymbol(moverow, movecol) == "♔": return True
+                        break  # Stop moving in this direction if we hit a piece
             return False
 
         elif piece == '♛':
@@ -985,38 +920,28 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
             
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                orca = False
-                
-                while not orca:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔":
-                            # print("pooooooooooooooooooooooooooooooooooooooooooooooooooooooooop")
-                            return True
-                        orca = True  # Stop moving in this direction if we hit a piece
+                        if checkPieceSymbol(moverow, movecol) == "♔": return True
+                        break  # Stop moving in this direction if we hit a piece
 
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
 
             for row, col in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += row
                     movecol += col
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  #cut if out of 
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔":
-                            return True
-                        scc = True  # make sur ethy cant teleprot
+                        if checkPieceSymbol(moverow, movecol) == "♔": return True
+                        break  # make sur ethy cant teleprot
 
             return False
 
@@ -1029,19 +954,15 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 #check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
-                            if (checkPieceSymbol(yaxe, xaxe)== "♚"):
-                                return True
-            
+                            if (checkPieceSymbol(yaxe, xaxe)== "♚"): return True
             return False
 #why do i say we so much when im just talking about me
     elif whoseturn == 2: # blacks turn
         if piece == '♙':
             if level[1] -1 != -1: #diagnal to left
-                if checkPieceSymbol(level[0]+1,level[1]-1) == "♚":
-                    return True
+                if checkPieceSymbol(level[0]+1,level[1]-1) == "♚": return True
             if level[1] +1 != 8: #diagnal to right
-                if checkPieceSymbol(level[0]+1,level[1]+1) == "♚":
-                    return True
+                if checkPieceSymbol(level[0]+1,level[1]+1) == "♚": return True
             return False
 
         #rook took longest only because i had no idea what i was doing                WARNING YOU ARE EDITING TEH PICKKIGN NOT PICK MOVE
@@ -1049,20 +970,15 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
 
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
             for row, col in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += row
                     movecol += col
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  #cut if out of 
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚":
-                            return True
-                        scc = True  # make sur ethy cant teleprot
+                        if checkPieceSymbol(moverow, movecol) == "♚": return True
+                        break  # make sur ethy cant teleprot
             return False
 
         elif piece == '♘':
@@ -1073,29 +989,21 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 # Check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # capture
-                            if checkPieceSymbol(yaxe, xaxe)== "♚":
-                                return True
+                            if checkPieceSymbol(yaxe, xaxe)== "♚": return True
             return False
 
         elif piece == '♗':
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
             
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                orca = False
-                
-                while not orca:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
                     movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚":
-                            # print("pooooooooooooooooooooooooooooooooooooooooooooooooooooooooop")
-                            return True
-                        orca = True  # Stop moving in this direction if we hit a piece
-
+                        if checkPieceSymbol(moverow, movecol) == "♚": return True
+                        break  # Stop moving in this direction if we hit a piece
             return False
         
         elif piece == '♕':
@@ -1103,38 +1011,28 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
             
             for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                orca = False
-                
-                while not orca:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += rawrow
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚":
-                            # print("pooooooooooooooooooooooooooooooooooooooooooooooooooooooooop")
-                            return True
-                        orca = True  # Stop moving in this direction if we hit a piece
+                        if checkPieceSymbol(moverow, movecol) == "♚": return True
+                        break  # Stop moving in this direction if we hit a piece
 
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
 
             for row, col in directions:
-                moverow, movecol = level[0], level[1]
-                scc = False
-
-                while not scc:
+                moverow, movecol = level[0], level[1] 
+                while True:
                     moverow += row
                     movecol += col
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                        break  #cut if out of 
-
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
                     if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚":
-                            return True
-                        scc = True  # make sur ethy cant teleprot
+                        if checkPieceSymbol(moverow, movecol) == "♚": return True
+                        break  # make sur ethy cant teleprot
             return False
         
         elif piece == '♔':
@@ -1145,13 +1043,11 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 #check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
-                            if (checkPieceSymbol(yaxe, xaxe)== "♚"):
-                                return True
+                            if (checkPieceSymbol(yaxe, xaxe)== "♚"): return True
             return False
         else:
             print("why did you have to pick a white peice, try again")
             return False
-    else:
-        print(GEM +' line 1816')
+    else: print(GEM +' line 1816')
 
 #fin
