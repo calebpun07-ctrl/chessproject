@@ -1,4 +1,4 @@
-from functions import chekchek2, chekchek,checkPieceBlackSymbol,checkPieceWhiteSymbol, checkPieceSymbol, pickmoveKing, find_black_pieces, check4chek, checkPiece,fillSpot, checkSpaceClear, clearSpot, fillboard, find_white_pieces, pickpiece, showBoard, board, startGame , pickmove, findPeice
+from functions import chekchek,checkPieceBlackSymbol,checkPieceWhiteSymbol, checkPieceSymbol, pickmoveKing, find_black_pieces, check4chek, checkPiece,fillSpot, checkSpaceClear, clearSpot, fillboard, find_white_pieces, pickpiece, showBoard, board, startGame , pickmove, findPeice
 
 def thefinalfunction():
     ourpeices = find_white_pieces()

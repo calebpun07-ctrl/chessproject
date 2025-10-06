@@ -1,6 +1,6 @@
 import random
 
-from functions import checkSpaceClear,checkPieceSymbol,checkPieceBlackSymbol,checkSpaceClear,checkPieceWhiteSymbol, chekchek2, findPeice, showOpenMoves, pickmove, find_black_pieces, find_white_pieces
+from functions import checkSpaceClear,checkPieceSymbol,checkPieceBlackSymbol,checkSpaceClear,checkPieceWhiteSymbol, findPeice, showOpenMoves, pickmove, find_black_pieces, find_white_pieces
 # should get every possible move then return a random one
 listOfPossibleMove = []
 
@@ -37,7 +37,7 @@ def AImakemoveBlack():
         
         brick.append(move[0]+1)
         brick.append(move[1]+1)
-        # if chekchek2(brick,2):
+        # if chekchek(brick,2,False):
         #     A = True
         #     print('location of piece:'+str(brick))
         #     a = input("test")
@@ -79,7 +79,7 @@ def AImakemoveWhite():
         
         brick.append(move[0]+1)
         brick.append(move[1]+1)
-        # if chekchek2(brick,1):
+        # if chekchek(brick,1,False):
         #     A = True
         #     print('location of piece:'+str(brick))
         #     a = input("test")
@@ -91,7 +91,7 @@ def AImakemoveWhite():
         return brick
 
 def pickmoveAI(level):
-    
+    """returns the list allowedMoves, if there are captures it will return that"""
     #checks for trun, then picks avalible spots for user to choose
     allowedMoves = []
     allowedCaptures = []
@@ -405,11 +405,9 @@ def pickmoveWhite(level):
 
             while not scc:
                 moverow += rawrow
-                
                 movecol += hidcol
                 
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  
+                if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  
                 if checkSpaceClear(moverow, movecol):
                     allowedMoves.append([moverow, movecol])
 

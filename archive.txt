@@ -355,3 +355,21 @@ return vanillawafer
 
 achive rules:
 please acivhce them, ttitle and provide dashes until off screen
+
+def chekchek2(nosebleed,turn): #this function takes the move of teh user and makes teh move
+    """
+    chekchek2 is the same as chekchek but it does not show the board.
+    attempting to replace it with chekchek
+    """
+    spot = nosebleed #if teh move results in check, then retruns false to stop pick mmove
+    holder = checkPieceSymbol(spot[0], spot[1])
+    holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
+    clearSpot(spot[0], spot[1])
+    fillSpotNS(spot[3],spot[4],spot[2])
+    thing = check4chek(turn)
+    if thing: return False
+    elif thing == False:
+        #replace
+        fillSpotNS(spot[0]+1,spot[1]+1,holder)
+        fillSpotNS(spot[3],spot[4],holder2)
+        return True

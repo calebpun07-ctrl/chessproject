@@ -200,15 +200,13 @@ def chekchek(nosebleed, turn: int, showboard = True): #this function takes the m
     if showboard is true, then itll show the baord and print teh you cailed ot get out
     of check. if it is set to not then it wont
     """
-
     spot = nosebleed 
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
     clearSpot(spot[0], spot[1])
     fillSpotNS(spot[3],spot[4],spot[2]) #puts peice in place
     thing = check4chek(turn) #checks if its in check
-    if thing: #its not in check
-        return False
+    if thing: return False #its not in check
     elif thing == False: # its in check
         #replace the peicace that it was in 
         fillSpotNS(spot[0]+1,spot[1]+1,holder)
@@ -216,25 +214,6 @@ def chekchek(nosebleed, turn: int, showboard = True): #this function takes the m
         if showboard:
             showBoard()
             print("You failed to get out of check, try again")
-        return True
-
-def chekchek2(nosebleed,turn): #this function takes the move of teh user and makes teh move
-    """
-    chekchek2 is the same as chekchek but it does not show the board.
-    attempting to replace it with chekchek
-    """
-    spot = nosebleed #if teh move results in check, then retruns false to stop pick mmove
-    holder = checkPieceSymbol(spot[0], spot[1])
-    holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
-    clearSpot(spot[0], spot[1])
-    fillSpotNS(spot[3],spot[4],spot[2])
-    thing = check4chek(turn)
-    
-    if thing: return False
-    elif thing == False:
-        #replace
-        fillSpotNS(spot[0]+1,spot[1]+1,holder)
-        fillSpotNS(spot[3],spot[4],holder2)
         return True
 
 def TheFinalFunction(whoseturn):

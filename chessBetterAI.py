@@ -1,6 +1,6 @@
 import random
 
-from functions import checkSpaceClear,checkPieceSymbol,checkPieceBlackSymbol,checkSpaceClear,checkPieceWhiteSymbol, chekchek2, findPeice, showOpenMoves, pickmove, find_black_pieces, find_white_pieces
+from functions import checkSpaceClear,checkPieceSymbol,checkPieceBlackSymbol,checkSpaceClear,checkPieceWhiteSymbol, findPeice, showOpenMoves, pickmove, find_black_pieces, find_white_pieces
 # should get every possible move then return a random one
 listOfPossibleMove = []
 

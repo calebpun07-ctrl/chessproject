@@ -157,3 +157,7 @@ shows teh board and one doesnt. so im setting a defualt varibel in teh first on 
 its defults shows it, but if false it does not.
 
 ok i removed chekchek2 but im keeping teh function for a bit incase i notice any problems
+
+10/6/25 -----------------------------------------------------------------------------------------------------------------
+
+removing chekchek2

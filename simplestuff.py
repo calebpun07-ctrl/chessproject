@@ -1,4 +1,4 @@
-from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek2, chekchek
+from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek
 from chessAI import AImakemoveBlack, AImakemoveWhite
 from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
 from checkmate import thefinalfunction, thefinalfunctionblack
@@ -31,8 +31,7 @@ def playTheGame():
 
 def playTheGameButEASY():
     """
-    This version of the game only runs for about 20 moves, does not 
-    check for check, simply gets the move and makes it. Does fill the board
+    This version of the game only runs for about 20 moves, does not check for check, simply gets the move and makes it. Does fill the board
     """
     fillboard()
     showBoard()
@@ -161,7 +160,6 @@ def movemove2AdvancedAI(n): #this is for the AI one
     """
     Returns a move. if the move results in check, and then loops it
     until it gets out of check. that only works for white for now. for black it simply loops it
-
     """
 
     if (n%2)+1 == 1: #white turn
@@ -215,7 +213,6 @@ def testerSetup():
                 print("not in range")  #need to find out
                 ycord = input('What y Cord:')
                 xcord = input('What x Cord:')
-#ur cute (this was a note for julia so if you see this and ur not julia dont read)
         fillSpot(ycord,xcord,pickpeicetomove)
 
         check = input('you done yet? or not (y/n)')

@@ -10,10 +10,9 @@ fillboard()
 
 # showBoard()
 # playTheGameButAdvanced2AI()
-# playTheGameBut2AI()
-# playTheGameBut2AI()
+playTheGameBut2AI()
 # TheFinalFunction(1)
 # playTheGameButAdvanced2AI()
-playTheGame()
+# playTheGame()
 
 
