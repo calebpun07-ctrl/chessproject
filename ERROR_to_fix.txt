@@ -23,4 +23,7 @@ big test message
 
 and movemove2advanceai might be the problem for black
 
-make it so taht if they picka. peice that has no moves 
+make it so taht if they picka. peice that has no moves it does not allow
+
+remove the code and turn into a function from picmove that gets the input from the user and returns eitehr the move or false
+

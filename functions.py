@@ -19,6 +19,7 @@ valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '
 white_pieces = {'♚', '♛', '♝', '♞', '♜', '♟'}
 black_pieces = {'♔', '♕', '♗', '♘', '♖', '♙'}
 BLACK = "\033[30m"
+RED = "\033[31m"
 RESET = "\033[0m"
 USE_COLOR = True
 #this function starts teh game (VERY USEFUL DO NOT DELETE)
@@ -34,6 +35,10 @@ def startGame():
 def dim(s): 
     """adds black to a blank space"""
     return (BLACK + s + RESET) if USE_COLOR else s # i never knew you could do colors in teh terminal like this
+
+def red(peice):
+    """adds red to peice to show capture"""
+    return (RED + peice + RESET) if USE_COLOR else peice
 
 def clearboard():
     global board
@@ -162,36 +167,30 @@ def checkPieceBlackSymbol(x: int,y: int) -> bool:
     if piece in black_pieces: return True
     else: return False
 
-def checkSpaceClear(x,y):
+def checkSpaceClear(x: int,y: int):
     """if the spots clear it returns true, if anything else it treturns false    """
     space = checkPieceSymbol(x,y)
     if space == "█": return True
     else: return False
 
-def checkUserMoveAllowed(listofallowed: list, usermove: list):
-    """
-    used for making sure the user picks a move from the options given. used when the we are GETTING the move from the user. paras take a list and a the users move, as a 2d list
-    """
+def checkUserMoveAllowed(listofallowed: list, usermove: list) -> bool:
+    """used for making sure the user picks a move from the options given. used when the we are GETTING the move from the user. paras take a list and a the users move, as a 2d list """
     for cord in listofallowed:
         if (cord == usermove[0]) or (cord == usermove): return True
     return False
 
-def check4chek(whoseturn):
-    """
-    Returns false if king is in check. returns true if the user is not in check.
-    """
+def check4chek(whoseturn: int) -> bool:
+    """Returns false if king is in check. returns true if the user is not in check. """
     if whoseturn == 1:
         posofallblack = find_black_pieces()
         for sugar in posofallblack:
-            if pickmoveKing(sugar, 2):
-                return False
+            if pickmoveKing(sugar, 2): return False
         return True
 
     elif whoseturn == 2:
         posofallwhite = find_white_pieces()
         for choclate in posofallwhite:
-            if pickmoveKing(choclate, 1):
-                return False
+            if pickmoveKing(choclate, 1): return False
         return True
 
 def chekchek(nosebleed, turn: int, showboard = True): #this function takes the move of teh user and makes teh move
@@ -204,13 +203,13 @@ def chekchek(nosebleed, turn: int, showboard = True): #this function takes the m
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
     clearSpot(spot[0], spot[1])
-    fillSpotNS(spot[3],spot[4],spot[2]) #puts peice in place
+    fillSpot(spot[3],spot[4],spot[2], False) #puts peice in place
     thing = check4chek(turn) #checks if its in check
     if thing: return False #its not in check
     elif thing == False: # its in check
         #replace the peicace that it was in 
-        fillSpotNS(spot[0]+1,spot[1]+1,holder)
-        fillSpotNS(spot[3],spot[4],holder2)
+        fillSpot(spot[0]+1,spot[1]+1,holder, False)
+        fillSpot(spot[3],spot[4],holder2, False)
         if showboard:
             showBoard()
             print("You failed to get out of check, try again")
@@ -270,19 +269,15 @@ def clearSpot(y,x):
     """Sets spot at y,x to a blank space"""
     board[y][x] = "█"
 
-def fillSpot(y,x, piece): #piece must be a real peice not some lame name
-    """fills spot, takes fake cords. then shows the board"""
+def fillSpot(y,x, piece, show=True): #piece must be a real peice not some lame name
+    """fills spot, takes fake cords. then shows the board. Defaultly shows the board, if show is set to false it will not"""
     board[y-1][x-1] = piece
-    showBoard()
-#fills spot and does not show
-def fillSpotNS(y: int,x: int, piece): #piece must be a real peice not some lame name
-    """fills spot, takes fake cords, does NOT show the board (hence the NS)"""
-    board[y-1][x-1] = piece
+    if show:showBoard()
 
-def showOpenMoves(allowedMoves: list):
+def showOpenMoves(allowedMoves: list, captures = []):
     """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function"""
     for pinapple in allowedMoves:
-        fillSpotNS(pinapple[0]+1,pinapple[1]+1, "X")
+        fillSpot(pinapple[0]+1,pinapple[1]+1, "X",False)
     showBoard()
     clearOpenMoves(allowedMoves)
 
@@ -291,7 +286,7 @@ def clearOpenMoves(allowedMoves):#paired withg the previous function to clear sa
     for applepin in allowedMoves:
         clearSpot(applepin[0],applepin[1])
 
-def getusermovesforpickmove(userMove, allowedMoves) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
+def getusermovesforpickmove(allowedMoves) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
     """
     Takes a list of allowed moves and keeps asking until you give a varible withing allowed moves. Used within pickmove(). returns a list with the [y,x] varibles
     """
@@ -308,6 +303,17 @@ def getusermovesforpickmove(userMove, allowedMoves) ->list: #saved like 200 line
     moveToCords = [moveToCordsY, moveToCordsX]
     
     return moveToCords
+
+def return_user_move(allowedMoves, allowedCaptures, VW, turn):
+    """To be run after code has checked all the spots a peice can move. Will showopenmoves, then get move from user, and complete the check for check, and the return the list of [x,y,peaice,x,y]"""
+    moves = allowedMoves
+    vanillawafer = VW
+    showOpenMoves(moves)
+    moves.extend(allowedCaptures)
+    vanillawafer.extend(getusermovesforpickmove(moves))
+    if chekchek(vanillawafer, turn):
+        return False
+    return vanillawafer
 
 def pickpiece(turnnum): 
     """
@@ -384,9 +390,9 @@ def pickmove(level, whoseturn):
                     allowedCaptures.append([level[0], level[1]+2])
 
             showOpenMoves(allowedMoves)
-            for x in allowedCaptures:
-                allowedMoves.append(x)
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
+            allowedMoves.extend(allowedCaptures)
+            
+            placholderlist = getusermovesforpickmove(allowedMoves)
 
             for x in placholderlist:
                 vanillawafer.append(x)
@@ -412,18 +418,7 @@ def pickmove(level, whoseturn):
                             allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
-            showOpenMoves(allowedMoves)
-            allowedMoves.extend(allowedCaptures)
-
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for back in placholderlist:
-                vanillawafer.append(back)
-
-            if chekchek(vanillawafer, 1):
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♞':
             print("possible moves")
@@ -440,19 +435,7 @@ def pickmove(level, whoseturn):
                         else:  #move to an emtpy square
                             allowedMoves.append([yaxe, xaxe])
 
-            showOpenMoves(allowedMoves)
-            
-            for x in allowedCaptures:
-                allowedMoves.append(x)
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for x in placholderlist:
-                vanillawafer.append(x)
-
-            if chekchek(vanillawafer,1):    
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♝':
             print("possible moves")
@@ -470,19 +453,7 @@ def pickmove(level, whoseturn):
                             allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
-            showOpenMoves(allowedMoves)
-            allowedMoves.extend(allowedCaptures)
-
-            # Assuming getusermovesforpickmove and chekchek are defined elsewhere
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for back in placholderlist:
-                vanillawafer.append(back)
-
-            if chekchek(vanillawafer, 1):
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♛':
             print("possible moves")
@@ -516,19 +487,8 @@ def pickmove(level, whoseturn):
                             allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
-            showOpenMoves(allowedMoves)
-            for x in allowedCaptures:
-                allowedMoves.append(x)
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for x in placholderlist:
-                vanillawafer.append(x)
-
-            if chekchek(vanillawafer,1):    
-                return False
-
-            return vanillawafer
-        
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
+     
         elif piece == '♚':
             print("possible moves")
             kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
@@ -545,15 +505,12 @@ def pickmove(level, whoseturn):
                             allowedMoves.append([yaxe, xaxe])
             
             showOpenMoves(allowedMoves)
+            allowedMoves.extend(allowedCaptures)
 
             moveToCordsY = int(input('What y level for yours: '))
             moveToCordsX = int(input('What x level for yours: '))
 
             userMove.append([moveToCordsY-1,moveToCordsX-1])
-            clearOpenMoves(allowedMoves)
-
-            for x in allowedCaptures: #add in those captures
-                allowedMoves.append(x)
             
             moveToll = checkUserMoveAllowed(allowedMoves,userMove)
             while moveToll == False:
@@ -601,19 +558,8 @@ def pickmove(level, whoseturn):
                 if checkPieceWhiteSymbol(level[0]+1,level[1]+1):
                     allowedCaptures.append([level[0]+1, level[1]+1])
 
-            showOpenMoves(allowedMoves)
-            clearOpenMoves(allowedMoves)
-            for x in allowedCaptures:
-                allowedMoves.append(x)
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-            for place in placholderlist:
-                vanillawafer.append(place)
-
-            if chekchek(vanillawafer,2):    
-                return False
-            
-            return vanillawafer
         #rook took longest only because i had no idea what i was doing
         elif piece == '♖':
             print("possible moves")
@@ -631,18 +577,7 @@ def pickmove(level, whoseturn):
                         if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
-            showOpenMoves(allowedMoves)
-            allowedMoves.extend(allowedCaptures)
-
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for back in placholderlist:
-                vanillawafer.append(back)
-
-            if chekchek(vanillawafer, 1):
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♘':
             print("possible moves")
@@ -660,19 +595,7 @@ def pickmove(level, whoseturn):
                         else:  # go empty square
                             allowedMoves.append([yaxe, xaxe])
 
-            showOpenMoves(allowedMoves)
-            clearOpenMoves(allowedMoves)
-            for x in allowedCaptures:
-                allowedMoves.append(x)
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for x in placholderlist:
-                vanillawafer.append(x)
-            
-            if chekchek(vanillawafer,2):    
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♗':
             print("possible moves")
@@ -691,19 +614,7 @@ def pickmove(level, whoseturn):
                             allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
-            showOpenMoves(allowedMoves)
-            allowedMoves.extend(allowedCaptures)
-
-            # Assuming getusermovesforpickmove and chekchek are defined elsewhere
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for back in placholderlist:
-                vanillawafer.append(back)
-
-            if chekchek(vanillawafer, 1):
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
         elif piece == '♕':
             print("possible moves")
@@ -736,19 +647,7 @@ def pickmove(level, whoseturn):
                         if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
-            showOpenMoves(allowedMoves)
-            clearOpenMoves(allowedMoves)
-            for x in allowedCaptures:
-                allowedMoves.append(x)
-            placholderlist = getusermovesforpickmove(userMove, allowedMoves)
-
-            for x in placholderlist:
-                vanillawafer.append(x)
-            
-            if chekchek(vanillawafer,2):    
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
         #king and knight took shortest amount of time to code (not counting queen)
         elif piece == '♔':

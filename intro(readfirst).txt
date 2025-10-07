@@ -64,7 +64,7 @@ however, in teh code, teh X would be located at 3,3 because the genius who made 
 so be wary of that
 some functions (I think most of them) take the Real set of cords, like 0,0 to 7,7
 however some dont
-fillSpotNS takes fake cords, as well as fillSpot
+fillSpot takes fake cords
 
 realcords:
     clearSpot

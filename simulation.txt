@@ -3,10 +3,10 @@
 CHECK TESTER
 
 
-# fillSpotNS(4,4,"♗")
-# fillSpotNS(2,2, '♚')
-# fillSpotNS(1,1,"♖")
-# fillSpotNS(1,8,"♖")
-# fillSpotNS(8,7,"♖")
-# fillSpotNS(2,5,"♜")
-# fillSpotNS(1,4, "♔")
+# fillSpot(4,4,"♗")
+# fillSpot(2,2, '♚')
+# fillSpot(1,1,"♖")
+# fillSpot(1,8,"♖")
+# fillSpot(8,7,"♖")
+# fillSpot(2,5,"♜")
+# fillSpot(1,4, "♔")
