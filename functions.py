@@ -1,11 +1,10 @@
 """
 anyone who sees this be warned
-this code is the worst, most jank peice of crap ever made.
-90% of the varibles probally are not needed. 
-i made this on a roadtrip in washinton  on very windy roads, many the varibles names make little sense out of context
+this can be confusing at some times. unfortunatly, a stupid highschooler began writing this, 
+and many varible names are bad varible names. I am afriad to change them
+i started this on a roadtrip in washinton on very windy roads.
 good luck if you wish to optimize it
 This file is also just the code for playing chess. this has nothing to do with the bot(ai)
-▞▞▞▞▞▞▞▞▞▞
 
 after like two years, changed to using █ with color.
 """
@@ -279,17 +278,11 @@ def showOpenMoves(allowedMoves: list, captures = []):
     for pinapple in allowedMoves:
         fillSpot(pinapple[0]+1,pinapple[1]+1, "X",False)
     showBoard()
-    clearOpenMoves(allowedMoves)
-
-def clearOpenMoves(allowedMoves):#paired withg the previous function to clear said spots as to not show errors
-    """Clears spot after showopenmoves, taking the SAME list as before"""
     for applepin in allowedMoves:
         clearSpot(applepin[0],applepin[1])
 
 def getusermovesforpickmove(allowedMoves) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
-    """
-    Takes a list of allowed moves and keeps asking until you give a varible withing allowed moves. Used within pickmove(). returns a list with the [y,x] varibles
-    """
+    """Takes a list of allowed moves and keeps asking until you give a varible withing allowed moves. Used within pickmove(). returns a list with the [y,x] varibles"""
     moveToCordsY = validate_input('What y level for yours: ', 'int')
     moveToCordsX = validate_input('What x level for yours: ', 'int')
 
@@ -721,7 +714,6 @@ def pickmove(level, whoseturn):
             moveToCordsX = int(input('What x level for yours: '))
 
             userMove.append([moveToCordsY-1,moveToCordsX-1])
-            clearOpenMoves(allowedMoves)
 
             for x in allowedCaptures: #add in those captures
                 allowedMoves.append(x)

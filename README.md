@@ -33,5 +33,9 @@ PY FILES
 
 the coconut file is there because those who know
 
+VARIBLE NAMES:
+
+Many varible names are completely nonsensical and have no meaning at all (Some I asked my girlfreind to name). I am very afriad to make any mass changes to varibles for fear of breaking the code. Apolgizes.
+
 commenting on this file is spotty, its few adn far between often. A LOT OF SPAGETTI CODE
 LIKE MORE THAN IN A ITALLIAN RESTURANT IN THE MIDDLE OF VENICE
