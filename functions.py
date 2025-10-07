@@ -79,19 +79,13 @@ def showBoard():
         else: x = False
         for col in row:
             if col=="█" or col=="▞":
-                if x:
-                    line.append(dim(col))
-                    x = False
-                else:
-                    line.append(col)
-                    x = True
+                if x: line.append(dim(col)) 
+                else: line.append(col)
+                x = not x
             else:
-                if x:
-                    line.append(col)
-                    x = False
-                else:
-                    line.append(col)
-                    x = True
+                if x: line.append(col)
+                else: line.append(col)
+                x = not x
         print("       ",n,' '.join(str(piece) for piece in line)) # display peices and y axis
         n+=1
     print("          1 2 3 4 5 6 7 8\n") #display x axis
@@ -192,7 +186,7 @@ def check4chek(whoseturn: int) -> bool:
             if pickmoveKing(choclate, 1): return False
         return True
 
-def chekchek(nosebleed, turn: int, showboard = True): #this function takes the move of teh user and makes teh move
+def chekchek(nosebleed, turn: int, showboard = True) ->bool: #this function takes the move of teh user and makes teh move
     """
     this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check
     if showboard is true, then itll show the baord and print teh you cailed ot get out
@@ -214,26 +208,17 @@ def chekchek(nosebleed, turn: int, showboard = True): #this function takes the m
             print("You failed to get out of check, try again")
         return True
 
-def TheFinalFunction(whoseturn):
+def TheFinalFunction(whoseturn:int) ->bool:
+    """Uses pickmoveKing."""
     #checkmate function
     if whoseturn == 1:
-        kingCords = findPeice("♚")
-        posofallblack = find_black_pieces()
-
-        for sugar in posofallblack:
-            print(sugar)
-            if pickmoveKing(sugar, 2):
-                print("Check TFF")
-                return False
+        for sugar in find_black_pieces():
+            if pickmoveKing(sugar, 2): return False
         return True
 
     if whoseturn == 2:
-        kingCords = findPeice("♔")
-        posofallwhite = find_white_pieces()
-        for choclate in posofallwhite:
-            if pickmoveKing(choclate, 1):
-                print("Check TFF")
-                return False
+        for choclate in find_white_pieces():
+            if pickmoveKing(choclate, 1): return False
         return True
 
 def find_black_pieces():
@@ -274,7 +259,8 @@ def fillSpot(y,x, piece, show=True): #piece must be a real peice not some lame n
     if show:showBoard()
 
 def showOpenMoves(allowedMoves: list, captures = []):
-    """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function"""
+    """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function. 
+    I would like to add showing capture in RED"""
     for pinapple in allowedMoves:
         fillSpot(pinapple[0]+1,pinapple[1]+1, "X",False)
     showBoard()

@@ -14,7 +14,6 @@ order of turns
 mss jl
 until valid move played, repaet move function
 
-
 (the list level will have, in order, y cord of starting, x cord of start, peice piece, y cord of final, x cord of final)
 
 pickpeice returns the location of the pickpeice
@@ -29,7 +28,6 @@ movemove never go tused and now pickmove is teh most impoatrant
 should make it so that if only one move possible (mainly pawn) it auto make sthat move
 
 once this one is done, make a simple version without all the checks
-
 
 ok plane for checkmate
 
@@ -161,3 +159,12 @@ ok i removed chekchek2 but im keeping teh function for a bit incase i notice any
 10/6/25 -----------------------------------------------------------------------------------------------------------------
 
 removing chekchek2
+
+10/7/25 -----------------------------------------------------------------------------------------------------------------
+
+OK many things have happened. I removed a LOT (almost all) of the 
+repetive code in pickmove with return_user_move. very useful
+also removed clearopenmove and integreated it into showopenmove. 
+removed fillspotNS and mvoed it into fillspot. Also updated the readme and
+made some stuff move effectent.
+

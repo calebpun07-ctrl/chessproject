@@ -2,7 +2,6 @@
 
 CHECK TESTER
 
-
 # fillSpot(4,4,"♗")
 # fillSpot(2,2, '♚')
 # fillSpot(1,1,"♖")
