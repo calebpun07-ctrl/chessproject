@@ -48,7 +48,6 @@ def AImakemoveBlack():
 
 def AImakemoveWhite():
     ourpeices = find_white_pieces()
-    counter = 0
     A = False
     checkmove = False
     while checkmove == False:
@@ -386,11 +385,9 @@ def pickmoveWhite(level):
             allowedMoves.append(x)
 
         #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
+        if allowedCaptures != []: allowedMoves = allowedCaptures
 
-        if allowedMoves == []:
-            return False
+        if allowedMoves == []: return False
 
         return allowedMoves
 
@@ -412,8 +409,7 @@ def pickmoveWhite(level):
                     allowedMoves.append([moverow, movecol])
 
                 else:
-                    if checkPieceBlackSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
+                    if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                     scc = True  
 
         for x in allowedCaptures:
@@ -447,8 +443,7 @@ def pickmoveWhite(level):
             allowedMoves.append(x)
 
         #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
+        if allowedCaptures != []: allowedMoves = allowedCaptures
 
         if allowedMoves == []:
             return False

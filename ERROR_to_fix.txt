@@ -27,3 +27,5 @@ make it so taht if they picka. peice that has no moves it does not allow
 
 remove the code and turn into a function from picmove that gets the input from the user and returns eitehr the move or false
 
+things are broken: checkmate, put queen at 5,5 and and take kings pawn to see error
+

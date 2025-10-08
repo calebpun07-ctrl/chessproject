@@ -20,9 +20,9 @@ def playTheGame():
                 while vaildmoveinputed != True:
                     input("go")
                     #make loop to go theough and get user input until there input is one of the ways to get out of check.
-            movemove(finland)#remove once user input mad eor mad euse rinput finladn
+            # movemove(finland)#remove once user input mad eor mad euse rinput finladn
             print("you are in check please get out of check or no")
-            n +=1
+            # n +=1
             continue
 
         spot = movemove2(n)

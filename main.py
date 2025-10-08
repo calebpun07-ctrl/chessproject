@@ -8,13 +8,12 @@ from checkmate import thefinalfunction, thefinalfunctionblack
 '''
 
 fillboard()
-# fillSpot(8,5,"♙")
+fillSpot(5,5,"♛")
 # fillSpot(5,1,"♙")
 # fillSpot(1,5,"♙")
 # fillSpot(2,2,"♚")
 # fillSpot(2,3,"♔")
 
-# showBoard()
 # playTheGameButAdvanced2AI()
 # playTheGameBut2AI()
 # TheFinalFunction(1)

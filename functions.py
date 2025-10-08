@@ -355,31 +355,16 @@ def pickmove(level, whoseturn):
             # this is for the pawn forward two moves
             if checkSpaceClear(level[0]-1,level[1]): 
                 allowedMoves.append([level[0]-1,level[1]])
-                if checkSpaceClear(level[0]-2,level[1]) and level[0] ==6:  
-                    # print(level[0]-1, ",", level[1]+1) lol back when i would print stuff
-                    allowedMoves.append([level[0]-2,level[1]])
+                if checkSpaceClear(level[0]-2,level[1]) and level[0] ==6: allowedMoves.append([level[0]-2,level[1]])
             
             #capturing
             if level[1] -1 != -1: #diagnal to left
-                if checkPieceBlackSymbol(level[0]-1,level[1]-1):
-                    allowedCaptures.append([level[0], level[1]])
+                if checkPieceBlackSymbol(level[0]-1,level[1]-1): allowedCaptures.append([level[0], level[1]])
             
             if level[1] +1 != 8: #diagnal to right
-                if checkPieceBlackSymbol(level[0]-1,level[1]+1):
-                    allowedCaptures.append([level[0], level[1]+2])
-
-            showOpenMoves(allowedMoves)
-            allowedMoves.extend(allowedCaptures)
+                if checkPieceBlackSymbol(level[0]-1,level[1]+1): allowedCaptures.append([level[0], level[1]+2])
             
-            placholderlist = getusermovesforpickmove(allowedMoves)
-
-            for x in placholderlist:
-                vanillawafer.append(x)
-
-            if chekchek(vanillawafer,1):    
-                return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♜':
             print("possible moves")
@@ -393,8 +378,7 @@ def pickmove(level, whoseturn):
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceBlackSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
+                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
@@ -409,11 +393,9 @@ def pickmove(level, whoseturn):
                 #check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
-                            if checkPieceBlackSymbol(yaxe, xaxe):
-                                allowedCaptures.append([yaxe, xaxe])
-                        else:  #move to an emtpy square
-                            allowedMoves.append([yaxe, xaxe])
-
+                            if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
+                        else: allowedMoves.append([yaxe, xaxe]) #move to an emtpy square
+                            
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♝':
@@ -428,8 +410,7 @@ def pickmove(level, whoseturn):
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceBlackSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
+                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
@@ -447,8 +428,7 @@ def pickmove(level, whoseturn):
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceBlackSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
+                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
             directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
@@ -462,8 +442,7 @@ def pickmove(level, whoseturn):
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceBlackSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
+                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
@@ -478,8 +457,7 @@ def pickmove(level, whoseturn):
                 #check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
-                            if checkPieceBlackSymbol(yaxe, xaxe):
-                                allowedCaptures.append([yaxe, xaxe])
+                            if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                         else:  #move to an emtpy square
                             allowedMoves.append([yaxe, xaxe])
             
@@ -510,9 +488,7 @@ def pickmove(level, whoseturn):
             vanillawafer.append(moveToCordsY)
             vanillawafer.append(moveToCordsX)
             
-            if chekchek(vanillawafer,1):
-                
-                return False
+            if chekchek(vanillawafer,1): return False
 
             return vanillawafer
             
@@ -526,16 +502,13 @@ def pickmove(level, whoseturn):
             # this is for the pawn forward two moves
             if checkSpaceClear(level[0]+1,level[1]): 
                 allowedMoves.append([level[0]+1, level[1]])
-                if checkSpaceClear(level[0]+2,level[1]) and level[0] ==1:  
-                    allowedMoves.append([level[0]+2, level[1]])
+                if checkSpaceClear(level[0]+2,level[1]) and level[0] ==1: allowedMoves.append([level[0]+2, level[1]])
             
             if level[1] -1 != -1: #diagnal to left
-                if checkPieceWhiteSymbol(level[0]+1,level[1]-1):
-                    allowedCaptures.append([level[0]+1, level[1]-1])
+                if checkPieceWhiteSymbol(level[0]+1,level[1]-1): allowedCaptures.append([level[0]+1, level[1]-1])
             
             if level[1] +1 != 8: #diagnal to right
-                if checkPieceWhiteSymbol(level[0]+1,level[1]+1):
-                    allowedCaptures.append([level[0]+1, level[1]+1])
+                if checkPieceWhiteSymbol(level[0]+1,level[1]+1): allowedCaptures.append([level[0]+1, level[1]+1])
 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
@@ -569,11 +542,9 @@ def pickmove(level, whoseturn):
                 # Check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # capture
-                            if checkPieceBlackSymbol(yaxe, xaxe):
-                                allowedCaptures.append([yaxe, xaxe])
-                        else:  # go empty square
-                            allowedMoves.append([yaxe, xaxe])
-
+                            if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
+                        else: allowedMoves.append([yaxe, xaxe]) # go empty square
+                            
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♗':
@@ -598,34 +569,20 @@ def pickmove(level, whoseturn):
         elif piece == '♕':
             print("possible moves")
 
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                    else:
-                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
-
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                    else:
-                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
+            directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)] 
+            for direction in directions:
+                for rawrow, hidcol in direction:
+                    moverow, movecol = level[0], level[1] 
+                    while True:
+                        moverow += rawrow
+                        movecol += hidcol
+                    
+                        if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                        if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
+                        else:
+                            if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
+                            break  # Stop moving in this direction if we hit a piece
+                
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
         #king and knight took shortest amount of time to code (not counting queen)
@@ -634,47 +591,36 @@ def pickmove(level, whoseturn):
 
             if level[0]-1 != -1:
                 
-                if checkSpaceClear(level[0]-1, level[1]):
-                    allowedMoves.append([level[0]-1, level[1]])
+                if checkSpaceClear(level[0]-1, level[1]): allowedMoves.append([level[0]-1, level[1]])
                 else:
-                    if checkPieceWhiteSymbol(level[0]-1, level[1]):
-                        allowedCaptures.append([level[0]-1, level[1]])
+                    if checkPieceWhiteSymbol(level[0]-1, level[1]): allowedCaptures.append([level[0]-1, level[1]])
 
                 if level[1]-1 != -1:
-                    if checkSpaceClear(level[0]-1, level[1]-1):
-                        allowedMoves.append([level[0]-1, level[1]-1])
+                    if checkSpaceClear(level[0]-1, level[1]-1): allowedMoves.append([level[0]-1, level[1]-1])
                     else:
-                        if checkPieceWhiteSymbol(level[0]-1, level[1]-1):
-                            allowedCaptures.append([level[0]-1, level[1]-1])
+                        if checkPieceWhiteSymbol(level[0]-1, level[1]-1): allowedCaptures.append([level[0]-1, level[1]-1])
 
                 if level[1]+1 != 8:
-                    if checkSpaceClear(level[0]-1, level[1]+1):
-                        allowedMoves.append([level[0]-1, level[1]+1])
+                    if checkSpaceClear(level[0]-1, level[1]+1): allowedMoves.append([level[0]-1, level[1]+1])
                     else:
-                        if checkPieceWhiteSymbol(level[0]-1, level[1]+1):
-                            allowedCaptures.append([level[0]-1, level[1]+1])
+                        if checkPieceWhiteSymbol(level[0]-1, level[1]+1): allowedCaptures.append([level[0]-1, level[1]+1])
 
             if level[0]+1 != 8:
                 
-                if checkSpaceClear(level[0]+1, level[1]):
-                    allowedMoves.append([level[0]+1, level[1]])
+                if checkSpaceClear(level[0]+1, level[1]): allowedMoves.append([level[0]+1, level[1]])
                 else:
-                    if checkPieceWhiteSymbol(level[0]+1, level[1]):
-                        allowedCaptures.append([level[0]+1, level[1]])
+                    if checkPieceWhiteSymbol(level[0]+1, level[1]): allowedCaptures.append([level[0]+1, level[1]])
 
                 if level[1]-1 != -1:
-                    if checkSpaceClear(level[0]+1, level[1]-1):
-                        allowedMoves.append([level[0]+1, level[1]-1])
+                    if checkSpaceClear(level[0]+1, level[1]-1): allowedMoves.append([level[0]+1, level[1]-1])
                     else:
-                        if checkPieceWhiteSymbol(level[0]+1, level[1]-1):
-                            allowedCaptures.append([level[0]+1, level[1]-1])
+                        if checkPieceWhiteSymbol(level[0]+1, level[1]-1): allowedCaptures.append([level[0]+1, level[1]-1])
 
                 if level[1]+1 != 8:
                     if checkSpaceClear(level[0]+1, level[1]+1):
                         allowedMoves.append([level[0]+1, level[1]+1])
                     else:
-                        if checkPieceWhiteSymbol(level[0]+1, level[1]+1):
-                            allowedCaptures.append([level[0]+1, level[1]+1])
+                        if checkPieceWhiteSymbol(level[0]+1, level[1]+1):  allowedCaptures.append([level[0]+1, level[1]+1])
             
             if level[1]-1 != -1:
                 if checkSpaceClear(level[0], level[1]-1):
@@ -682,8 +628,7 @@ def pickmove(level, whoseturn):
                     if level[1]-2 != -1 and checkSpaceClear(level[0], level[1]-3) and checkSpaceClear(level[0], level[1]-2) and checkPieceSymbol(0,0) == "♖":
                         allowedMoves.append([level[0], level[1]-2])
                 else:
-                    if checkPieceWhiteSymbol(level[0], level[1]-1):
-                        allowedCaptures.append([level[0], level[1]-1])
+                    if checkPieceWhiteSymbol(level[0], level[1]-1): allowedCaptures.append([level[0], level[1]-1])
 
             if level[1]+1 != 8:
                 if checkSpaceClear(level[0], level[1]+1):
@@ -691,8 +636,7 @@ def pickmove(level, whoseturn):
                     if level[1]+2 != 8 and checkSpaceClear(level[0], level[1]+2) and checkPieceSymbol(7,7) == "♖":
                         allowedMoves.append([level[0], level[1]+2])
                 else:
-                    if checkPieceWhiteSymbol(level[0], level[1]+1):
-                        allowedCaptures.append([level[0], level[1]+1])
+                    if checkPieceWhiteSymbol(level[0], level[1]+1): allowedCaptures.append([level[0], level[1]+1])
 
             showOpenMoves(allowedMoves)
             
@@ -701,8 +645,7 @@ def pickmove(level, whoseturn):
 
             userMove.append([moveToCordsY-1,moveToCordsX-1])
 
-            for x in allowedCaptures: #add in those captures
-                allowedMoves.append(x)
+            allowedMoves.extend(allowedCaptures) #add in those captures
 
             moveToll = checkUserMoveAllowed(allowedMoves,userMove)
             while moveToll == False:
@@ -729,8 +672,7 @@ def pickmove(level, whoseturn):
             print("why did you have to pick a white peice, try again")
             return False
         
-    else:
-        print(GEM +"line 1279")
+    else: print(GEM +"line 1279")
 
 """
 STAY AWAY FROM THIS ONE 
