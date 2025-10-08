@@ -381,7 +381,7 @@ def pickmove(level, whoseturn):
                             
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-        elif (piece == '♛') or (piece == '♜') or (piece == '♝'): #combined queen, rook and bishop
+        elif piece in ['♛', '♜', '♝']: #combined queen, rook and bishop
             print("possible moves")
             if piece == '♛': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
             elif piece == '♜': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
@@ -506,54 +506,15 @@ def pickmove(level, whoseturn):
         elif piece == '♔':
             print("possible moves")
 
-            if level[0]-1 != -1:
-                
-                if checkSpaceClear(level[0]-1, level[1]): allowedMoves.append([level[0]-1, level[1]])
-                else:
-                    if checkPieceWhiteSymbol(level[0]-1, level[1]): allowedCaptures.append([level[0]-1, level[1]])
-
-                if level[1]-1 != -1:
-                    if checkSpaceClear(level[0]-1, level[1]-1): allowedMoves.append([level[0]-1, level[1]-1])
-                    else:
-                        if checkPieceWhiteSymbol(level[0]-1, level[1]-1): allowedCaptures.append([level[0]-1, level[1]-1])
-
-                if level[1]+1 != 8:
-                    if checkSpaceClear(level[0]-1, level[1]+1): allowedMoves.append([level[0]-1, level[1]+1])
-                    else:
-                        if checkPieceWhiteSymbol(level[0]-1, level[1]+1): allowedCaptures.append([level[0]-1, level[1]+1])
-
-            if level[0]+1 != 8:
-                
-                if checkSpaceClear(level[0]+1, level[1]): allowedMoves.append([level[0]+1, level[1]])
-                else:
-                    if checkPieceWhiteSymbol(level[0]+1, level[1]): allowedCaptures.append([level[0]+1, level[1]])
-
-                if level[1]-1 != -1:
-                    if checkSpaceClear(level[0]+1, level[1]-1): allowedMoves.append([level[0]+1, level[1]-1])
-                    else:
-                        if checkPieceWhiteSymbol(level[0]+1, level[1]-1): allowedCaptures.append([level[0]+1, level[1]-1])
-
-                if level[1]+1 != 8:
-                    if checkSpaceClear(level[0]+1, level[1]+1):
-                        allowedMoves.append([level[0]+1, level[1]+1])
-                    else:
-                        if checkPieceWhiteSymbol(level[0]+1, level[1]+1):  allowedCaptures.append([level[0]+1, level[1]+1])
-            
-            if level[1]-1 != -1:
-                if checkSpaceClear(level[0], level[1]-1):
-                    allowedMoves.append([level[0], level[1]-1])
-                    if level[1]-2 != -1 and checkSpaceClear(level[0], level[1]-3) and checkSpaceClear(level[0], level[1]-2) and checkPieceSymbol(0,0) == "♖":
-                        allowedMoves.append([level[0], level[1]-2])
-                else:
-                    if checkPieceWhiteSymbol(level[0], level[1]-1): allowedCaptures.append([level[0], level[1]-1])
-
-            if level[1]+1 != 8:
-                if checkSpaceClear(level[0], level[1]+1):
-                    allowedMoves.append([level[0], level[1]+1])
-                    if level[1]+2 != 8 and checkSpaceClear(level[0], level[1]+2) and checkPieceSymbol(7,7) == "♖":
-                        allowedMoves.append([level[0], level[1]+2])
-                else:
-                    if checkPieceWhiteSymbol(level[0], level[1]+1): allowedCaptures.append([level[0], level[1]+1])
+            directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+            for cord in directions:
+                yaxe = level[0] + cord[0]
+                xaxe = level[1] + cord[1]
+                # Check if the move is within the bounds of the board
+                if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
+                    if not checkSpaceClear(yaxe, xaxe):  # capture
+                        if checkPieceWhiteSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
+                    else: allowedMoves.append([yaxe, xaxe]) # go empty square
 
             showOpenMoves(allowedMoves)
             
