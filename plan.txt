@@ -168,3 +168,7 @@ also removed clearopenmove and integreated it into showopenmove.
 removed fillspotNS and mvoed it into fillspot. Also updated the readme and
 made some stuff move effectent.
 
+10/8/25 -----------------------------------------------------------------------------------------------------------------
+
+ok so IDEA: can make queen, bischop and rook code in functions all in one loop, and all that matters is
+the directions list, and whether or not 

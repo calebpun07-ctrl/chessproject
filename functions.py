@@ -366,23 +366,6 @@ def pickmove(level, whoseturn):
             
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-        elif piece == '♜':
-            print("possible moves")
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
-
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                    else:
-                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-
         elif piece == '♞':
             print("possible moves")
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
@@ -398,26 +381,11 @@ def pickmove(level, whoseturn):
                             
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-        elif piece == '♝':
+        elif (piece == '♛') or (piece == '♜') or (piece == '♝'): #combined queen, rook and bishop
             print("possible moves")
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                    else:
-                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-
-        elif piece == '♛':
-            print("possible moves")
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
+            if piece == '♛': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
+            elif piece == '♜': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
+            else: directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
 
             for rawrow, hidcol in directions:
                 moverow, movecol = level[0], level[1] 
@@ -425,20 +393,6 @@ def pickmove(level, whoseturn):
                     moverow += rawrow
                     movecol += hidcol
                    
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                    else:
-                        if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-            for ramrow, hidcol in directions:
-                moverow, movecol = level[0], level[1]
-                
-                while True:
-                    moverow += ramrow
-                    movecol += hidcol 
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
@@ -512,25 +466,6 @@ def pickmove(level, whoseturn):
 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-        #rook took longest only because i had no idea what i was doing
-        elif piece == '♖':
-            print("possible moves")
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
-
-            for ramrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += ramrow 
-                    movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                    else:
-                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-
         elif piece == '♘':
             print("possible moves")
             
@@ -541,47 +476,29 @@ def pickmove(level, whoseturn):
                 xaxe = level[1] + cherry[1]
                 # Check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
-                        if not checkSpaceClear(yaxe, xaxe):  # capture
-                            if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
-                        else: allowedMoves.append([yaxe, xaxe]) # go empty square
-                            
+                    if not checkSpaceClear(yaxe, xaxe):  # capture
+                        if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
+                    else: allowedMoves.append([yaxe, xaxe]) # go empty square
+                        
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-        elif piece == '♗':
+        elif piece in ['♕', '♖', '♗']:
             print("possible moves")
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-            for ramrow, hidcol in directions:
+            if piece == '♕': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
+            elif piece == '♖': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
+            else: directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+            
+            for rawrow, hidcol in directions:
                 moverow, movecol = level[0], level[1] 
                 while True:
-                    moverow += ramrow
+                    moverow += rawrow
                     movecol += hidcol
-                   
-                    if not (0 <= moverow <=7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
-                        if checkPieceWhiteSymbol(moverow, movecol):
-                            allowedCaptures.append([moverow, movecol])
+                        if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                         break  # Stop moving in this direction if we hit a piece
-
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-        
-        elif piece == '♕':
-            print("possible moves")
-
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)] 
-            for direction in directions:
-                for rawrow, hidcol in direction:
-                    moverow, movecol = level[0], level[1] 
-                    while True:
-                        moverow += rawrow
-                        movecol += hidcol
-                    
-                        if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                        if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
-                        else:
-                            if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                            break  # Stop moving in this direction if we hit a piece
                 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         

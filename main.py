@@ -8,7 +8,7 @@ from checkmate import thefinalfunction, thefinalfunctionblack
 '''
 
 fillboard()
-fillSpot(5,5,"♛")
+fillSpot(5,5,"♖")
 # fillSpot(5,1,"♙")
 # fillSpot(1,5,"♙")
 # fillSpot(2,2,"♚")
