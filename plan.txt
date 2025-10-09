@@ -1,11 +1,11 @@
 uuhhhh
 START OF PROJECT IDK TEH DATE LIKE 7-30-24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 have a board
-teh board gets edited because its an array
+the board gets edited because its an array
 
-each thing can be demited in teh array
+each thing can be demited in the array
 
-i think i should  it in teh text box or whatever
+i think i should  it in the text box or whatever
 
 order of turns
 -pickpeice
@@ -38,7 +38,7 @@ if true = checkmate
 8/17/24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 OK FUTRUE CALEB WE HAVE A PROBELM:
 THAT NEW FUNCTION YOU WROET TO SAVE TIME IS MISSSING TWO THINGS, CLEAR OPEN MVOES
-AND ADDING TEH CAPTURED MOVES TO THE THING AFTER CLEARING AND DHOWING OPEN MOVESTHIS IS WHAT UOU GET WHEN YOU START WITH pawn
+AND ADDING the CAPTURED MOVES TO THE THING AFTER CLEARING AND DHOWING OPEN MOVESTHIS IS WHAT UOU GET WHEN YOU START WITH pawn
 
 SOLUTION: ADD THE SHOW USER MOVES IN AND ADD IN TEH CATURES LIST, SHOUKLD BE ESASY FIX FOR YOU
 
@@ -52,9 +52,9 @@ what
 star log 2024
 
 ok wokring on chekmat 
-Its gonna replace all teh spots where king is with like O or somthing
-then if a peice can take it it will and put one of it tehre, maybe switch up teh order
-so that it will take teh inside on firts so it doe snot block things. or just go with it
+Its gonna replace all the spots where king is with like O or somthing
+then if a peice can take it it will and put one of it there, maybe switch up teh order
+so that it will take the inside on firts so it doe snot block things. or just go with it
 screw it we ball
 idk how im gonna test other peices moves.
 
@@ -80,7 +80,7 @@ i think
 9/22/2024 we at 3553 total lines ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ok ideas for optimizing bishop:
-- i could put all teh move values into a list of four and edit each of thos indivaly, then reste each on after 
+- i could put all the move values into a list of four and edit each of thos indivaly, then reste each on after 
 
 9/26/2024 we at 5k lines counting all the chess AI stuff ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -150,8 +150,8 @@ anywayss i plan to stream the code itself for fixing chess better AI.py on liek 
 9/16/25 -----------------------------------------------------------------------------------------------------------------
 
 have been adding proper documentation for all functions starting at teh functions . py 
-and have discovered that teh chekchek and chekchek2 functions ar eteh same but one
-shows teh board and one doesnt. so im setting a defualt varibel in teh first on so that 
+and have discovered that the chekchek and chekchek2 functions ar eteh same but one
+shows the board and one doesnt. so im setting a defualt varibel in teh first on so that 
 its defults shows it, but if false it does not.
 
 ok i removed chekchek2 but im keeping teh function for a bit incase i notice any problems

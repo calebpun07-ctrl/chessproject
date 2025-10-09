@@ -21,7 +21,7 @@ BLACK = "\033[30m"
 RED = "\033[31m"
 RESET = "\033[0m"
 USE_COLOR = True
-#this function starts teh game (VERY USEFUL DO NOT DELETE)
+#this function starts the game (VERY USEFUL DO NOT DELETE)
 def startGame():
     """
     This function does nothing at all. literaly. 
@@ -341,8 +341,7 @@ def pickpiece(turnnum):
 def pickmove(level, whoseturn):
     """
     Final function for main "functions". Takes user input of peice and its location, along with the turn number, 
-    and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are teh peice moving and the last two are where the peice goes.
-    """
+    and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are the peice moving and the last two are where the peice goes. """
     vanillawafer = level
     #checks for trun, then picks avalible spots for user to choose
     allowedMoves = []
@@ -503,7 +502,6 @@ def pickmove(level, whoseturn):
                 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
-        #king and knight took shortest amount of time to code (not counting queen)
         elif piece == '♔':
             print("possible moves")
 
@@ -565,27 +563,11 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
 
     if whoseturn == 1: # white turn
         if piece == '♟':
-
             if level[1] -1 != -1: #diagnal to left
                 if checkPieceSymbol(level[0]-1,level[1]-1) == "♔": return True
             elif level[1] +1 != 8: #diagnal to right
                 if checkPieceSymbol(level[0]-1,level[1]+1) == "♔": return True
             else: return False
-
-        elif piece == '♜':
-       
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
-            for row, col in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += row
-                    movecol += col
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
-                    if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔": return True
-                        break  
-            return False
 
         elif piece == '♞':     
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)] 
@@ -598,36 +580,10 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                             if checkPieceSymbol(yaxe, xaxe)== "♔": return True
             return False
 
-        elif piece == '♝':
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-            
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔": return True
-                        break  # Stop moving in this direction if we hit a piece
-            return False
-
-        elif piece == '♛':
-        
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-            
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♔": return True
-                        break  # Stop moving in this direction if we hit a piece
-
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
+        elif piece in ['♛', '♜', '♝']:
+            if piece == '♛': directions = [(-1, -1), (-1, 1), (1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1)]
+            elif piece == '♜': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+            else: directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
 
             for row, col in directions:
                 moverow, movecol = level[0], level[1] 
@@ -661,21 +617,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 if checkPieceSymbol(level[0]+1,level[1]+1) == "♚": return True
             return False
 
-        #rook took longest only because i had no idea what i was doing                WARNING YOU ARE EDITING TEH PICKKIGN NOT PICK MOVE
-        elif piece == '♖':
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
-            for row, col in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += row
-                    movecol += col
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #cut if out of 
-                    if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚": return True
-                        break  # make sur ethy cant teleprot
-            return False
-
         elif piece == '♘':
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
             for cherry in nightnight:
@@ -687,36 +628,10 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                             if checkPieceSymbol(yaxe, xaxe)== "♚": return True
             return False
 
-        elif piece == '♗':
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-            
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚": return True
-                        break  # Stop moving in this direction if we hit a piece
-            return False
-        
-        elif piece == '♕':
-            #literlly just added rook and bishop
-            directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-            
-            for rawrow, hidcol in directions:
-                moverow, movecol = level[0], level[1] 
-                while True:
-                    moverow += rawrow
-                    movecol += hidcol
-                   
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
-                    if checkSpaceClear(moverow, movecol) == False:
-                        if checkPieceSymbol(moverow, movecol) == "♚": return True
-                        break  # Stop moving in this direction if we hit a piece
-
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
+        elif piece in ['♕', '♖', '♗']:
+            if piece == '♕': directions = [(-1, -1), (-1, 1), (1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1)]
+            elif piece == '♖': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+            else: directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
 
             for row, col in directions:
                 moverow, movecol = level[0], level[1] 
@@ -729,7 +644,7 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         if checkPieceSymbol(moverow, movecol) == "♚": return True
                         break  # make sur ethy cant teleprot
             return False
-        
+
         elif piece == '♔':
             kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
             for cherry in kingking:

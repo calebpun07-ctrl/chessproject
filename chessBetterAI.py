@@ -75,7 +75,7 @@ def AdvancedAImakemoveBlack1(): # this the new one and we are working on making 
                     nocaptures = False #this means that there is a capture to do
             
             if nocaptures: #this is when there are no captures
-                #then do teh normal check for all moves
+                #then do the normal check for all moves
                 
                 while movefound == False:
                     randomPeaice = random.choice(find_black_pieces())
@@ -191,7 +191,7 @@ def AdvancedAImakemoveWhite():
                     nocaptures = False #this means that there is a capture to do
             
             if nocaptures: #this is when there are no captures
-                #then do teh normal check for all moves
+                #then do the normal check for all moves
                 
                 while movefound == False:
                     randomPeaice = random.choice(find_white_pieces())
@@ -733,7 +733,7 @@ def pickmoveWhiteCaptures(level):
         scc = False
         n=1
         toDaUp = level[0]+n
-        while toDaUp != 8 and scc == False: #toda up is the boandarys of the thing, scc make ssure that tehre is a piece.
+        while toDaUp != 8 and scc == False: #toda up is the boandarys of the thing, scc make ssure that there is a piece.
             if checkSpaceClear(toDaUp,level[1]) == False: #making sure rooks dont hit walls
                 if checkPieceBlackSymbol(toDaUp,level[1]):
                     allowedCaptures.append([toDaUp,level[1], piece])

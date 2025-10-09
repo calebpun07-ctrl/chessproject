@@ -20,7 +20,7 @@ PY FILES
  -functions.py
   MOST basic functions exist in this file, eg, building blocks are here
  -simplestuff.py
-  begins to combine functions from teh functions.py file into runable code
+  begins to combine functions from the functions.py file into runable code
  -chessAI.py
   basic bot. its not ai its random
  -chessBetterAI.py
@@ -54,12 +54,12 @@ excamle: the X would be located at 4,4
 3 ▞ ▞ ▞   ▞ ▞ ▞ ▞
 4 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
 5 ▞ ▞ X ▞ ▞ ▞ ▞ ▞         #ok so it no longer looks like this, i orginally
-6 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         had it like this with ▞ as teh tiles, but now it is alternating 
+6 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         had it like this with ▞ as the tiles, but now it is alternating 
 7 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         black and white spaces
 8 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
   1 2 3 4 5 6 7 8
 
-however, in teh code, teh X would be located at 3,3 because the genius who made coding was like
+however, in the code, the X would be located at 3,3 because the genius who made coding was like
 "we should make all list start with 0"
 so be wary of that
 some functions (I think most of them) take the Real set of cords, like 0,0 to 7,7
@@ -98,7 +98,7 @@ that didnt work but if you can make it work that you go ahead and do it ( i thin
 another place for optmatzin gis the bishop and rook you could (update 10/7/24, they were optmized, saved over 300+ lines of code)
 
 uh in the pickmoveking function there are a bunch of wanrings becaus ei acdeintly did a bunch fo work in it 
-for pickmove and that was bad so that why teh wanrings ar ethere to warn anyone taht does that
+for pickmove and that was bad so that why the wanrings ar ethere to warn anyone taht does that
 
 ok this is important:
 
@@ -116,9 +116,9 @@ playlist for this (these are the only songs that youc an listen too if you work 
 ok more stuff for AI!
 
 the value brick is returning is in the format of :[7, 1, '♞', 6, 1]
-- 7 and 1 are the real cords of teh starting point of the peice 
+- 7 and 1 are the real cords of the starting point of the peice 
 - then the peice 
-- then 6 adn 1 are the spots it moves to on the board you see, so teh fakce cords 
+- then 6 adn 1 are the spots it moves to on the board you see, so the fakce cords 
 
 ok since the AI's are sentient, theuy must have names:
 
@@ -138,9 +138,9 @@ whoa this lokos cool
 
 oh yeah the archive.txt folder. That has a bunch of old code I wanted to save. 
 Its liek a better vreison that the oldknight and king folder. 
-use that one and see teh rules for staonge at the bottom of the -
+use that one and see the rules for staonge at the bottom of the -
 
-checkmate takes one of the "ai" programs and just runs though all of that and gets all teh moves
+checkmate takes one of the "ai" programs and just runs though all of that and gets all the moves
 chekcs each one to see if it gets you out of check and then WILL return a list of the possible moves 
 and wait until the user makes that move
 

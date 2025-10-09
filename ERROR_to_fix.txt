@@ -16,7 +16,7 @@ black wanted to make this move but it resulted in check
 
 black king is in check from that pawn, but it can take said pawn, however for some reson that results in check.
 
-ok so im a dumabs the bishop is there teh problem we ned to fick is just in the pickmoveblackai function and just ad a thing for getting teh kind out of sitiations. its already don in the white one.
+ok so im a dumabs the bishop is there the problem we ned to fick is just in the pickmoveblackai function and just ad a thing for getting the kind out of sitiations. its already don in the white one.
 
 
 big test message
