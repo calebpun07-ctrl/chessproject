@@ -66,24 +66,29 @@ def fillboard():
     board[0][4] = '♔'  
     board[7][4] = '♚' 
 
-def showBoard():
-    """Auto 'clears' the board, then prints the chars in the board and dims every other char to make checker pattern"""
+def showBoard(colored_peices = []):
+    """Auto 'clears' the board, then prints the chars in the board and dims every other char to make checker patter. colored peices will be in red"""
     print("\033[2J\033[H", end="\n")
-    
+    print(colored_peices)
     global board
     x = False
     n = 1
+    row_counter = -1
+    
     for row in board:
+        row_counter+=1
+        col_counter = -1
         line = []
         if n%2 == 0: x = True
         else: x = False
         for col in row:
+            col_counter +=1
             if col=="█" or col=="▞":
                 if x: line.append(dim(col)) 
                 else: line.append(col)
                 x = not x
             else:
-                if x: line.append(col)
+                if [row_counter,col_counter] in colored_peices: line.append(red(col))
                 else: line.append(col)
                 x = not x
         print("       ",n,' '.join(str(piece) for piece in line)) # display peices and y axis
@@ -263,7 +268,7 @@ def showOpenMoves(allowedMoves: list, captures = []):
     I would like to add showing capture in RED"""
     for pinapple in allowedMoves:
         fillSpot(pinapple[0]+1,pinapple[1]+1, "X",False)
-    showBoard()
+    showBoard(captures)
     for applepin in allowedMoves:
         clearSpot(applepin[0],applepin[1])
 
@@ -287,7 +292,7 @@ def return_user_move(allowedMoves, allowedCaptures, VW, turn):
     """To be run after code has checked all the spots a peice can move. Will showopenmoves, then get move from user, and complete the check for check, and the return the list of [x,y,peaice,x,y]"""
     moves = allowedMoves
     vanillawafer = VW
-    showOpenMoves(moves)
+    showOpenMoves(moves, allowedCaptures)
     moves.extend(allowedCaptures)
     vanillawafer.extend(getusermovesforpickmove(moves))
     if chekchek(vanillawafer, turn):
@@ -594,8 +599,7 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 # is move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # capture
-                            if checkPieceSymbol(yaxe, xaxe)== "♔":
-                                return True
+                            if checkPieceSymbol(yaxe, xaxe)== "♔": return True
             return False
 
         elif piece == '♝':
@@ -639,7 +643,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                     if checkSpaceClear(moverow, movecol) == False:
                         if checkPieceSymbol(moverow, movecol) == "♔": return True
                         break  # make sur ethy cant teleprot
-
             return False
 
         elif piece == '♚':
@@ -664,7 +667,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
 
         #rook took longest only because i had no idea what i was doing                WARNING YOU ARE EDITING TEH PICKKIGN NOT PICK MOVE
         elif piece == '♖':
-
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
             for row, col in directions:
                 moverow, movecol = level[0], level[1] 
@@ -743,7 +745,7 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                             if (checkPieceSymbol(yaxe, xaxe)== "♚"): return True
             return False
         else:
-            print("why did you have to pick a white peice, try again")
+            print("Somethings wrong with pickmoveKing")
             return False
     else: print(GEM +' line 1816')
 

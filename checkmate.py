@@ -600,3 +600,5 @@ def pickmoveBlack(level): #UNFINSIHED
             
     else:
         print('GEM')
+
+
