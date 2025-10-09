@@ -69,30 +69,26 @@ def fillboard():
 def showBoard(colored_peices = []):
     """Auto 'clears' the board, then prints the chars in the board and dims every other char to make checker patter. colored peices will be in red"""
     print("\033[2J\033[H", end="\n")
-    print(colored_peices)
     global board
     x = False
-    n = 1
     row_counter = -1
-    
+    print("          1 2 3 4 5 6 7 8") #display top row x axis
     for row in board:
         row_counter+=1
         col_counter = -1
         line = []
-        if n%2 == 0: x = True
+        if (row_counter+1)%2 == 0: x = True
         else: x = False
         for col in row:
             col_counter +=1
             if col=="█" or col=="▞":
                 if x: line.append(dim(col)) 
                 else: line.append(col)
-                x = not x
             else:
                 if [row_counter,col_counter] in colored_peices: line.append(red(col))
                 else: line.append(col)
-                x = not x
-        print("       ",n,' '.join(str(piece) for piece in line)) # display peices and y axis
-        n+=1
+            x = not x
+        print(f"        {row_counter+1} {' '.join(str(piece) for piece in line)}") # display peices and y axis
     print("          1 2 3 4 5 6 7 8\n") #display x axis
 
 def validate_input(user_prompt, data_type='int', range=(float("-inf"), float("inf"))):
@@ -281,8 +277,8 @@ def getusermovesforpickmove(allowedMoves) ->list: #saved like 200 lines of code 
     while moveToll == False: #loop to check if users move was vaild
         showBoard()
         print('either code is broken or that wasnt a vaild move bro. either way, not cool')
-        moveToCordsY = int(input('What y level for yours: '))
-        moveToCordsX = int(input('What x level for yours: '))
+        moveToCordsY = validate_input('What y level for yours: ')
+        moveToCordsX = validate_input('What x level for yours: ')
         moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
     moveToCords = [moveToCordsY, moveToCordsX]
     
@@ -423,16 +419,16 @@ def pickmove(level, whoseturn):
             showOpenMoves(allowedMoves)
             allowedMoves.extend(allowedCaptures)
 
-            moveToCordsY = int(input('What y level for yours: '))
-            moveToCordsX = int(input('What x level for yours: '))
+            moveToCordsY = validate_input('What y level for yours: ')
+            moveToCordsX = validate_input('What x level for yours: ')
 
             userMove.append([moveToCordsY-1,moveToCordsX-1])
             
             moveToll = checkUserMoveAllowed(allowedMoves,userMove)
             while moveToll == False:
                 print('either code is broken or that wasnt a vaild move bro. either way, not cool')
-                moveToCordsY = int(input('What y level for yours: '))
-                moveToCordsX = int(input('What x level for yours: '))
+                moveToCordsY = validate_input('What y level for yours: ')
+                moveToCordsX = validate_input('What x level for yours: ')
                 userMove[0]=[moveToCordsY,moveToCordsX]
                 moveToll = checkUserMoveAllowed(allowedMoves,userMove)
 
@@ -523,8 +519,8 @@ def pickmove(level, whoseturn):
 
             showOpenMoves(allowedMoves)
             
-            moveToCordsY = int(input('What y level for yours: '))
-            moveToCordsX = int(input('What x level for yours: '))
+            moveToCordsY = validate_input('What x level for yours: ')
+            moveToCordsX = validate_input('What x level for yours: ')
 
             userMove.append([moveToCordsY-1,moveToCordsX-1])
 
@@ -533,8 +529,8 @@ def pickmove(level, whoseturn):
             moveToll = checkUserMoveAllowed(allowedMoves,userMove)
             while moveToll == False:
                 print('either code is broken or that wasnt a vaild move bro. either way, not cool')
-                moveToCordsY = int(input('What y level for yours: '))
-                moveToCordsX = int(input('What x level for yours: '))
+                moveToCordsY = validate_input('What x level for yours: ')
+                moveToCordsX = validate_input('What x level for yours: ')
                 userMove[0]=[moveToCordsY,moveToCordsX]
                 moveToll = checkUserMoveAllowed(allowedMoves,userMove)
 

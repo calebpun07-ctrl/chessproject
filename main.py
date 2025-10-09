@@ -14,7 +14,6 @@ fillSpot(4,6,"♜")
 # fillSpot(2,2,"♚")
 # fillSpot(2,3,"♔")
 
-# showBoard([[1,1]])
 # playTheGameButAdvanced2AI()
 # playTheGameBut2AI()
 # TheFinalFunction(1)
