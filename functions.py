@@ -3,8 +3,9 @@ anyone who sees this be warned
 this can be confusing at some times. unfortunatly, a stupid highschooler began writing this, 
 and many varible names are bad varible names. I am afriad to change them
 i started this on a roadtrip in washinton on very windy roads.
-good luck if you wish to optimize it
+good luck if you wish to optimize it, things can be better
 This file is also just the code for playing chess. this has nothing to do with the bot(ai)
+however many functions are used throughout the folder from this fucntions py.
 
 after like two years, changed to using █ with color.
 """
@@ -44,7 +45,7 @@ def clearboard():
     rows, cols = 8, 8
     board = [["█"for _ in range(cols)] for _ in range(rows)]
 
-def fillboard():
+def fillboard(): #wait shoudl just changed to a list.
     """Fills the board 2d array with White and Black pieaces"""
     for col in range(cols):
         board[1][col] = '♙'  #White
@@ -66,7 +67,7 @@ def fillboard():
     board[0][4] = '♔'  
     board[7][4] = '♚' 
 
-def showBoard(colored_peices = []):
+def showBoard(marked_peices = []):
     """Auto 'clears' the board, then prints the chars in the board and dims every other char to make checker patter. colored peices will be in red"""
     print("\033[2J\033[H", end="\n")
     global board
@@ -77,17 +78,19 @@ def showBoard(colored_peices = []):
         row_counter+=1
         col_counter = -1
         line = []
+
         if (row_counter+1)%2 == 0: x = True
         else: x = False
+
         for col in row:
             col_counter +=1
             if col=="█" or col=="▞":
                 if x: line.append(dim(col)) 
                 else: line.append(col)
             else:
-                if [row_counter,col_counter] in colored_peices: line.append(red(col))
+                if [row_counter,col_counter] in marked_peices: line.append(red(col))
                 else: line.append(col)
-            x = not x
+            x = not x #flip x
         print(f"        {row_counter+1} {' '.join(str(piece) for piece in line)}") # display peices and y axis
     print("          1 2 3 4 5 6 7 8\n") #display x axis
 
@@ -242,13 +245,11 @@ def find_white_pieces() -> list:
     return white_pieces_positions
 
 def findPeice(peice):
-    """Taking the str of a peice, will return the cords of nearest one, starting from the top left down"""
-    rat = peice
+    """Taking the str of a peice, will return the cords of nearest one, starting from the top left down. real cords, returns false if char not found"""
     for y in range(8):
         for x in range(8):
-            if board[y][x] == rat:
-                honey = [y,x]
-                return honey      
+            if board[y][x] == peice: return [y,x] 
+            else: return False     
 
 def clearSpot(y,x):
     """Sets spot at y,x to a blank space"""
@@ -290,18 +291,20 @@ def return_user_move(allowedMoves, allowedCaptures, VW, turn):
     vanillawafer = VW
     showOpenMoves(moves, allowedCaptures)
     moves.extend(allowedCaptures)
+    if moves == []:
+        print("Peice has no moves")
+        return False
+    print("Possible Moves")
     vanillawafer.extend(getusermovesforpickmove(moves))
     if chekchek(vanillawafer, turn):
         return False
     return vanillawafer
 
-def pickpiece(turnnum): 
-    """
-    Code to get what piece the user wants to move
+def pickpiece(turnnum, failure_message = False): 
+    """Code to get what piece the user wants to move
 
     Returns a list with the cordinates of the users piece and the piece itself.
-    [y,x,piece] (also realcords)
-    """
+    [y,x,piece] (also realcords)"""
     if turnnum == 1:
         j= white_pieces
         player = 'White'
@@ -310,6 +313,7 @@ def pickpiece(turnnum):
         player = 'Black'
     
     while True: # it will alwas run this once
+        if failure_message: print(f"That peice has no moves or not a {player} peice.")
         print(f"Pick a {player} peice you would like to use")
         ylevel = validate_input("y cord first:", 'int', (1,8))
         xlevel = validate_input("x cord now:", 'int', (1,8))
@@ -351,7 +355,6 @@ def pickmove(level, whoseturn):
         
     if whoseturn == 1: # white turn
         if piece == '♟':
-            print("possible moves")
             # this is for the pawn forward two moves
             if checkSpaceClear(level[0]-1,level[1]): 
                 allowedMoves.append([level[0]-1,level[1]])
@@ -367,7 +370,7 @@ def pickmove(level, whoseturn):
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♞':
-            print("possible moves")
+            
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
             
             for cherry in nightnight:
@@ -382,7 +385,7 @@ def pickmove(level, whoseturn):
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece in ['♛', '♜', '♝']: #combined queen, rook and bishop
-            print("possible moves")
+            
             if piece == '♛': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
             elif piece == '♜': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
             else: directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
@@ -402,7 +405,7 @@ def pickmove(level, whoseturn):
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
      
         elif piece == '♚':
-            print("possible moves")
+            
             kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
             
             for cherry in kingking:
@@ -452,7 +455,7 @@ def pickmove(level, whoseturn):
             
     elif whoseturn == 2: # blacks turn
         if piece == '♙':
-            print("possible moves")
+            
             # this is for the pawn forward two moves
             if checkSpaceClear(level[0]+1,level[1]): 
                 allowedMoves.append([level[0]+1, level[1]])
@@ -467,7 +470,7 @@ def pickmove(level, whoseturn):
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece == '♘':
-            print("possible moves")
+            
             
             nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
 
@@ -483,7 +486,7 @@ def pickmove(level, whoseturn):
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece in ['♕', '♖', '♗']:
-            print("possible moves")
+            
             if piece == '♕': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
             elif piece == '♖': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] 
             else: directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
@@ -503,7 +506,7 @@ def pickmove(level, whoseturn):
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
         elif piece == '♔':
-            print("possible moves")
+            
 
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
             for cord in directions:

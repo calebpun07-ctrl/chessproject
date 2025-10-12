@@ -19,15 +19,15 @@ PY FILES
  - **main.py** 
     * runner file, all commands run from here for testing or actual purpose 
  - **functions.py**
-    * MOST basic functions exist in this file, eg, building blocks are here. most have appropriate descriptions
+    * MOST basic functions exist in this file, eg, building blocks are here. most shouldhave appropriate descriptions
  - **simplestuff.py**
     * begins to combine functions from the functions.py and other bot files into runable code
  - **chessAI.py**
     * basic bot. its not ai its random. contains functions to get moves for white and black
  - **chessBetterAI.py**
-    * slightly better bot.
+    * slightly better bot, should capture more?
  - **checkmate.py**
-    * holds checkmate code.
+    * holds most of checkmate code. i think it works
  - **textfilebeasueimdumb.py**
     * file that i used to test bits of code (like when you forget what len() does)
 

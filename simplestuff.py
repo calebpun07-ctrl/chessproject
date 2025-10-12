@@ -24,7 +24,6 @@ def playTheGame():
             print("you are in check please get out of check or no")
             # n +=1
             continue
-
         spot = movemove2(n)
         movemove(spot)
         n +=1
@@ -94,9 +93,8 @@ def movemove(spot: list):
 
 def movemove2(n):
     spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
-    while spot == False:
-        spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
-    
+    while (spot == False):
+        spot = pickmove(pickpiece((n%2)+1, True),(n%2)+1)
     return spot
 
 def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgeint AI

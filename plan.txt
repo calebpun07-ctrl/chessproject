@@ -172,3 +172,10 @@ made some stuff move effectent.
 
 ok so IDEA: can make queen, bischop and rook code in functions all in one loop, and all that matters is
 the directions list, and whether or not 
+
+10/9/25 -----------------------------------------------------------------------------------------------------------------
+
+I have impeletnted that in functions now, have cut the lines in that file down to 660. 
+works: coudl also do somethign similar with pawn and kinght but im too lazy to do that
+also have made it so that when it is showing the user what moves they want to make it 
+shows the peices that are captureable in red. nifty little thing
