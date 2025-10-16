@@ -179,3 +179,10 @@ I have impeletnted that in functions now, have cut the lines in that file down t
 works: coudl also do somethign similar with pawn and kinght but im too lazy to do that
 also have made it so that when it is showing the user what moves they want to make it 
 shows the peices that are captureable in red. nifty little thing
+
+10/16/25 -----------------------------------------------------------------------------------------------------------------
+
+have removed castling code in in the king, and now plan
+to change up how it works. I will have new thign that keeps track 
+of all teh moves that are made in teh whole game, thats how i will do
+castle and en passant and whatnot. probally with ave to do in the simplestuff file

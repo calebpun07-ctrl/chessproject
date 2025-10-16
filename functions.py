@@ -6,8 +6,6 @@ i started this on a roadtrip in washinton on very windy roads.
 good luck if you wish to optimize it, things can be better
 This file is also just the code for playing chess. this has nothing to do with the bot(ai)
 however many functions are used throughout the folder from this fucntions py.
-
-after like two years, changed to using █ with color.
 """
 # Define board size
 rows, cols = 8, 8
@@ -94,7 +92,7 @@ def showBoard(marked_peices = []):
         print(f"        {row_counter+1} {' '.join(str(piece) for piece in line)}") # display peices and y axis
     print("          1 2 3 4 5 6 7 8\n") #display x axis
 
-def validate_input(user_prompt, data_type='int', range=(float("-inf"), float("inf"))):
+def validate_input(user_prompt, data_type=int, range=(float("-inf"), float("inf"))):
     """
     Validates a users input. 
         user_prompt: The question/input that gets repeated
@@ -105,7 +103,7 @@ def validate_input(user_prompt, data_type='int', range=(float("-inf"), float("in
     """
     while True:
         input_unchecked = input(user_prompt).strip()
-        if (data_type == 'int'):
+        if (data_type == int):
             if input_unchecked.isdigit():
                 input_unchecked = int(input_unchecked)
                 if range[0] <= input_unchecked <= range[1]: return int(input_unchecked)
@@ -271,15 +269,15 @@ def showOpenMoves(allowedMoves: list, captures = []):
 
 def getusermovesforpickmove(allowedMoves) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
     """Takes a list of allowed moves and keeps asking until you give a varible withing allowed moves. Used within pickmove(). returns a list with the [y,x] varibles"""
-    moveToCordsY = validate_input('What y level for yours: ', 'int')
-    moveToCordsX = validate_input('What x level for yours: ', 'int')
+    moveToCordsY = validate_input('What y level for yours: ', int, (1,8))
+    moveToCordsX = validate_input('What x level for yours: ', int, (1,8))
 
     moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
     while moveToll == False: #loop to check if users move was vaild
         showBoard()
         print('either code is broken or that wasnt a vaild move bro. either way, not cool')
-        moveToCordsY = validate_input('What y level for yours: ')
-        moveToCordsX = validate_input('What x level for yours: ')
+        moveToCordsY = validate_input('What y level for yours: ', int, (1,8))
+        moveToCordsX = validate_input('What x level for yours: ', int, (1,8))
         moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
     moveToCords = [moveToCordsY, moveToCordsX]
     
@@ -294,17 +292,16 @@ def return_user_move(allowedMoves, allowedCaptures, VW, turn):
     if moves == []:
         print("Peice has no moves")
         return False
-    print("Possible Moves")
+    print("Possible Moves ^")
     vanillawafer.extend(getusermovesforpickmove(moves))
-    if chekchek(vanillawafer, turn):
-        return False
+    if chekchek(vanillawafer, turn): return False
+    
     return vanillawafer
 
-def pickpiece(turnnum, failure_message = False): 
+def pickpiece(turnnum): 
     """Code to get what piece the user wants to move
 
-    Returns a list with the cordinates of the users piece and the piece itself.
-    [y,x,piece] (also realcords)"""
+    Returns a list with the cordinates of the users piece and the piece itself. [y,x,piece] (also realcords)"""
     if turnnum == 1:
         j= white_pieces
         player = 'White'
@@ -313,10 +310,9 @@ def pickpiece(turnnum, failure_message = False):
         player = 'Black'
     
     while True: # it will alwas run this once
-        if failure_message: print(f"That peice has no moves or not a {player} peice.")
         print(f"Pick a {player} peice you would like to use")
-        ylevel = validate_input("y cord first:", 'int', (1,8))
-        xlevel = validate_input("x cord now:", 'int', (1,8))
+        ylevel = validate_input("y cord first:", int, (1,8))
+        xlevel = validate_input("x cord now:", int, (1,8))
 
         level = [ylevel -1,xlevel -1] #adds the real cords to list
         piece = checkPieceSymbol(ylevel -1,xlevel -1) 
@@ -335,8 +331,7 @@ def pickpiece(turnnum, failure_message = False):
                 showBoard()
                 print("starting over... make better chocies")
                 continue
-            elif isCorrect == 'y':
-                break
+            elif isCorrect == 'y': break
 
     level.append(piece)
     print(level)
@@ -347,10 +342,8 @@ def pickmove(level, whoseturn):
     Final function for main "functions". Takes user input of peice and its location, along with the turn number, 
     and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are the peice moving and the last two are where the peice goes. """
     vanillawafer = level
-    #checks for trun, then picks avalible spots for user to choose
     allowedMoves = []
     allowedCaptures = []
-    userMove = []
     piece = level[2] 
         
     if whoseturn == 1: # white turn
@@ -407,7 +400,6 @@ def pickmove(level, whoseturn):
         elif piece == '♚':
             
             kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
-            
             for cherry in kingking:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
@@ -415,39 +407,9 @@ def pickmove(level, whoseturn):
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
                             if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
-                        else:  #move to an emtpy square
-                            allowedMoves.append([yaxe, xaxe])
+                        else: allowedMoves.append([yaxe, xaxe])
             
-            showOpenMoves(allowedMoves)
-            allowedMoves.extend(allowedCaptures)
-
-            moveToCordsY = validate_input('What y level for yours: ')
-            moveToCordsX = validate_input('What x level for yours: ')
-
-            userMove.append([moveToCordsY-1,moveToCordsX-1])
-            
-            moveToll = checkUserMoveAllowed(allowedMoves,userMove)
-            while moveToll == False:
-                print('either code is broken or that wasnt a vaild move bro. either way, not cool')
-                moveToCordsY = validate_input('What y level for yours: ')
-                moveToCordsX = validate_input('What x level for yours: ')
-                userMove[0]=[moveToCordsY,moveToCordsX]
-                moveToll = checkUserMoveAllowed(allowedMoves,userMove)
-
-            if userMove[0] == [level[0], level[1]-2]:
-                fillSpot(8,4, '♜')
-                clearSpot(7,0)
-            
-            if userMove[0] == [level[0], level[1]+2]:
-                fillSpot(8,6, '♜')
-                clearSpot(7,7)
-
-            vanillawafer.append(moveToCordsY)
-            vanillawafer.append(moveToCordsX)
-            
-            if chekchek(vanillawafer,1): return False
-
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
             
         else:
             print("ok now you broke the game, you picked a black peice, try again")
@@ -455,7 +417,6 @@ def pickmove(level, whoseturn):
             
     elif whoseturn == 2: # blacks turn
         if piece == '♙':
-            
             # this is for the pawn forward two moves
             if checkSpaceClear(level[0]+1,level[1]): 
                 allowedMoves.append([level[0]+1, level[1]])
@@ -471,10 +432,9 @@ def pickmove(level, whoseturn):
 
         elif piece == '♘':
             
-            
-            nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
+            directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
 
-            for cherry in nightnight:
+            for cherry in directions:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
                 # Check if the move is within the bounds of the board
@@ -496,18 +456,16 @@ def pickmove(level, whoseturn):
                 while True:
                     moverow += rawrow
                     movecol += hidcol
-                
-                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                    if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  #exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
+                        break  #stop moving in this direction if we hit a piece
                 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
         elif piece == '♔':
             
-
             directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
             for cord in directions:
                 yaxe = level[0] + cord[0]
@@ -518,35 +476,7 @@ def pickmove(level, whoseturn):
                         if checkPieceWhiteSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                     else: allowedMoves.append([yaxe, xaxe]) # go empty square
 
-            showOpenMoves(allowedMoves)
-            
-            moveToCordsY = validate_input('What x level for yours: ')
-            moveToCordsX = validate_input('What x level for yours: ')
-
-            userMove.append([moveToCordsY-1,moveToCordsX-1])
-
-            allowedMoves.extend(allowedCaptures) #add in those captures
-
-            moveToll = checkUserMoveAllowed(allowedMoves,userMove)
-            while moveToll == False:
-                print('either code is broken or that wasnt a vaild move bro. either way, not cool')
-                moveToCordsY = validate_input('What x level for yours: ')
-                moveToCordsX = validate_input('What x level for yours: ')
-                userMove[0]=[moveToCordsY,moveToCordsX]
-                moveToll = checkUserMoveAllowed(allowedMoves,userMove)
-
-            if userMove[0] == [level[0], level[1]+2]:
-                fillSpot(1,6, '♖')
-                clearSpot(1,7)
-
-            if userMove[0] == [level[0], level[1]-2]:
-                fillSpot(1,4,"♖")
-                clearSpot(0,0)
-
-            vanillawafer.append(moveToCordsY)
-            vanillawafer.append(moveToCordsX)
-            
-            return vanillawafer
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
         else:
             print("why did you have to pick a white peice, try again")

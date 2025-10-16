@@ -94,7 +94,7 @@ def movemove(spot: list):
 def movemove2(n):
     spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
     while (spot == False):
-        spot = pickmove(pickpiece((n%2)+1, True),(n%2)+1)
+        spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
     return spot
 
 def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgeint AI
