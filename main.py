@@ -10,6 +10,8 @@ from checkmate import thefinalfunction, thefinalfunctionblack
 fillboard()
 fillSpot(5,5,"♔")
 fillSpot(4,6,"♖")
+clearSpot(7,5)
+clearSpot(7,6)
 # fillSpot(1,5,"♙")
 # fillSpot(2,2,"♚")
 # fillSpot(2,3,"♔")

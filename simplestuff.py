@@ -4,6 +4,15 @@ from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
 from checkmate import thefinalfunction, thefinalfunctionblack
 
 valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '♜', '♙', '♟'}
+rook_king_tracker = {
+    '♔-04': False, 
+    '♚-74': False,
+    '♖-00': False, 
+    '♜-70': False,
+    '♖-07': False, 
+    '♜-77': False,
+}
+
 
 def playTheGame():
     # fillboard()
@@ -24,8 +33,11 @@ def playTheGame():
             print("you are in check please get out of check or no")
             # n +=1
             continue
-        spot = movemove2(n)
+        spot = movemove2(n, rook_king_tracker)
+        print(spot)
         movemove(spot)
+        if f"{spot[2]}-{spot[0]}{spot[1]}" in rook_king_tracker: # checks to see if the peice is the one being moved
+            rook_king_tracker[f"{spot[2]}-{spot[0]}{spot[1]}"] = True # if it is, then sets it to true so we know its moved
         n +=1
 
 def playTheGameButEASY():
@@ -91,10 +103,10 @@ def movemove(spot: list):
     clearSpot(spot[0], spot[1])
     fillSpot(spot[3],spot[4],spot[2])
 
-def movemove2(n):
-    spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
+def movemove2(n, rkTracker = None):
+    spot = pickmove(pickpiece((n%2)+1),(n%2)+1, rkTracker)
     while (spot == False):
-        spot = pickmove(pickpiece((n%2)+1),(n%2)+1)
+        spot = pickmove(pickpiece((n%2)+1),(n%2)+1, rkTracker)
     return spot
 
 def movemove3(n): #thsi is for teh one sided AI, updated with slightly intelgeint AI

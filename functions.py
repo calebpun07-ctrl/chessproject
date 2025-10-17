@@ -95,12 +95,11 @@ def showBoard(marked_peices = []):
 def validate_input(user_prompt, data_type=int, range=(float("-inf"), float("inf"))):
     """
     Validates a users input. 
-        user_prompt: The question/input that gets repeated
+        user_prompt: The question/input that gets repeated 
         data_type: Whatever data type need to be validated. default is set to int.
-        range: 
-            for int, is the values that can be input can be within
-            for str, is what the value is allowed to be (ex: yes, no)
-    """
+    range: 
+    >for int, is the values that can be input can be within
+    >for str, is what the value is allowed to be (ex: yes, no)"""
     while True:
         input_unchecked = input(user_prompt).strip()
         if (data_type == int):
@@ -267,7 +266,7 @@ def showOpenMoves(allowedMoves: list, captures = []):
     for applepin in allowedMoves:
         clearSpot(applepin[0],applepin[1])
 
-def getusermovesforpickmove(allowedMoves) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
+def getusermovesforpickmove(allowedMoves, castle) ->list: #saved like 200 lines of code - nope im back it does not work - it works now
     """Takes a list of allowed moves and keeps asking until you give a varible withing allowed moves. Used within pickmove(). returns a list with the [y,x] varibles"""
     moveToCordsY = validate_input('What y level for yours: ', int, (1,8))
     moveToCordsX = validate_input('What x level for yours: ', int, (1,8))
@@ -280,10 +279,11 @@ def getusermovesforpickmove(allowedMoves) ->list: #saved like 200 lines of code 
         moveToCordsX = validate_input('What x level for yours: ', int, (1,8))
         moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
     moveToCords = [moveToCordsY, moveToCordsX]
-    
+    if moveToCords == castle:
+        print("WHEEE")
     return moveToCords
 
-def return_user_move(allowedMoves, allowedCaptures, VW, turn):
+def return_user_move(allowedMoves, allowedCaptures, VW, turn, castle = None):
     """To be run after code has checked all the spots a peice can move. Will showopenmoves, then get move from user, and complete the check for check, and the return the list of [x,y,peaice,x,y]"""
     moves = allowedMoves
     vanillawafer = VW
@@ -293,7 +293,7 @@ def return_user_move(allowedMoves, allowedCaptures, VW, turn):
         print("Peice has no moves")
         return False
     print("Possible Moves ^")
-    vanillawafer.extend(getusermovesforpickmove(moves))
+    vanillawafer.extend(getusermovesforpickmove(moves, castle))
     if chekchek(vanillawafer, turn): return False
     
     return vanillawafer
@@ -337,7 +337,7 @@ def pickpiece(turnnum):
     print(level)
     return level
 
-def pickmove(level, whoseturn):
+def pickmove(level, whoseturn, rkTracker = None):
     """
     Final function for main "functions". Takes user input of peice and its location, along with the turn number, 
     and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are the peice moving and the last two are where the peice goes. """
@@ -345,7 +345,7 @@ def pickmove(level, whoseturn):
     allowedMoves = []
     allowedCaptures = []
     piece = level[2] 
-        
+    castle_possible = None
     if whoseturn == 1: # white turn
         if piece == '♟':
             # this is for the pawn forward two moves
@@ -399,7 +399,7 @@ def pickmove(level, whoseturn):
      
         elif piece == '♚':
             
-            kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
+            kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0), (0, 0)]
             for cherry in kingking:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
@@ -408,8 +408,15 @@ def pickmove(level, whoseturn):
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
                             if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                         else: allowedMoves.append([yaxe, xaxe])
-            
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
+            #new Castle Code
+            if (rkTracker != None) and (not rkTracker['♚-74']):
+                if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♜-70"]:
+                    allowedMoves.append([yaxe, xaxe-3])
+                    castle_possible = [yaxe, xaxe-3]
+                if checkSpaceClear(yaxe, xaxe+1) and checkSpaceClear(yaxe, xaxe+2) and not rkTracker["♜-77"]:
+                    allowedMoves.append([yaxe, xaxe+2])
+                    castle_possible = [yaxe, xaxe+2]
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
             
         else:
             print("ok now you broke the game, you picked a black peice, try again")
