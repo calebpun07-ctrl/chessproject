@@ -190,3 +190,10 @@ castle and en passant and whatnot. probally with ave to do in the simplestuff fi
 10/17/25 -----------------------------------------------------------------------------------------------------------------
 
 make console to input commands for main.py where i can run them directly
+
+10/18/25 -----------------------------------------------------------------------------------------------------------------
+
+finished making teh castleing code, works much better, now 
+am ready to combine knight, pawn and king, start 615, see if we cut that down
+
+ok completed: now at 591

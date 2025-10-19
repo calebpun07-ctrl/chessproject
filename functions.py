@@ -365,21 +365,6 @@ def pickmove(level, whoseturn, rkTracker = None):
             
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
-        elif piece == '♞':
-            
-            nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
-            
-            for cherry in nightnight:
-                yaxe = level[0] + cherry[0]
-                xaxe = level[1] + cherry[1]
-                #check if the move is within the bounds of the board
-                if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
-                        if not checkSpaceClear(yaxe, xaxe):  # Possible capture
-                            if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
-                        else: allowedMoves.append([yaxe, xaxe]) #move to an emtpy square
-                            
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-
         elif piece in ['♛', '♜', '♝']: #combined queen, rook and bishop
             
             if piece == '♛': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
@@ -400,10 +385,12 @@ def pickmove(level, whoseturn, rkTracker = None):
 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
      
-        elif piece == '♚':
+        elif piece in ['♚', '♞']:
             
-            kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0), (0, 0)]
-            for cherry in kingking:
+            if piece == '♚': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0), (0, 0)]
+            if piece == '♞': directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
+
+            for cherry in directions:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
                 #check if the move is within the bounds of the board
@@ -412,15 +399,16 @@ def pickmove(level, whoseturn, rkTracker = None):
                             if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                         else: allowedMoves.append([yaxe, xaxe])
             #new Castle Code
-            if (rkTracker != None) and (not rkTracker['♚-74']):
+            if (rkTracker != None) and (not rkTracker['♚-74']) and piece == '♚':
                 if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♜-70"]:
                     allowedMoves.append([yaxe, xaxe-3])
                     castle_possible = True
                 if checkSpaceClear(yaxe, xaxe+1) and checkSpaceClear(yaxe, xaxe+2) and not rkTracker["♜-77"]:
                     allowedMoves.append([yaxe, xaxe+2])
                     castle_possible = True
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
-            
+                return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
+
         else:
             print("ok now you broke the game, you picked a black peice, try again")
             return False
@@ -438,21 +426,6 @@ def pickmove(level, whoseturn, rkTracker = None):
             if level[1] +1 != 8: #diagnal to right
                 if checkPieceWhiteSymbol(level[0]+1,level[1]+1): allowedCaptures.append([level[0]+1, level[1]+1])
 
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-
-        elif piece == '♘':
-            
-            directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
-
-            for cherry in directions:
-                yaxe = level[0] + cherry[0]
-                xaxe = level[1] + cherry[1]
-                # Check if the move is within the bounds of the board
-                if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
-                    if not checkSpaceClear(yaxe, xaxe):  # capture
-                        if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
-                    else: allowedMoves.append([yaxe, xaxe]) # go empty square
-                        
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece in ['♕', '♖', '♗']:
@@ -474,29 +447,32 @@ def pickmove(level, whoseturn, rkTracker = None):
                 
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
         
-        elif piece == '♔':
+        elif piece in ['♘', '♔', '♙']:
             
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1), (0,0)]
-            for cord in directions:
-                yaxe = level[0] + cord[0]
-                xaxe = level[1] + cord[1]
+            if piece == '♘': directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
+            elif piece == '♔': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1), (0,0)]
+            
+            for cherry in directions:
+                yaxe = level[0] + cherry[0]
+                xaxe = level[1] + cherry[1]
                 # Check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
                     if not checkSpaceClear(yaxe, xaxe):  # capture
                         if checkPieceWhiteSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                     else: allowedMoves.append([yaxe, xaxe]) # go empty square
 
-            if (rkTracker != None) and (not rkTracker['♔-04']):
-                print(checkSpaceClear(yaxe, xaxe-1), checkSpaceClear(yaxe, xaxe-2), checkSpaceClear(yaxe, xaxe-3), not rkTracker["♖-00"])
-                if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♖-00"]:
+            if (rkTracker != None) and (not rkTracker['♚-74']) and piece == '♔': #Castle codew
+                if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♜-70"]:
                     allowedMoves.append([yaxe, xaxe-3])
                     castle_possible = True
-                if checkSpaceClear(yaxe, xaxe+1) and checkSpaceClear(yaxe, xaxe+2) and not rkTracker["♖-07"]:
+                if checkSpaceClear(yaxe, xaxe+1) and checkSpaceClear(yaxe, xaxe+2) and not rkTracker["♜-77"]:
                     allowedMoves.append([yaxe, xaxe+2])
                     castle_possible = True
+                return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
             
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
-           
+
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
+
         else:
             print("why did you have to pick a white peice, try again")
             return False
