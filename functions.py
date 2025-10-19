@@ -497,17 +497,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 if checkPieceSymbol(level[0]-1,level[1]+1) == "♔": return True
             else: return False
 
-        elif piece == '♞':     
-            nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)] 
-            for cherry in nightnight:
-                yaxe = level[0] + cherry[0]
-                xaxe = level[1] + cherry[1]
-                # is move is within the bounds of the board
-                if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
-                        if not checkSpaceClear(yaxe, xaxe):  # capture
-                            if checkPieceSymbol(yaxe, xaxe)== "♔": return True
-            return False
-
         elif piece in ['♛', '♜', '♝']:
             if piece == '♛': directions = [(-1, -1), (-1, 1), (1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1)]
             elif piece == '♜': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
@@ -525,10 +514,11 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         break  # make sur ethy cant teleprot
             return False
 
-        elif piece == '♚':
-            kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
+        elif piece in ['♚', '♞']:
+            if piece == '♚': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
+            elif piece == '♞': directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)] 
             
-            for cherry in kingking:
+            for cherry in directions:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
                 #check if the move is within the bounds of the board
@@ -543,17 +533,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                 if checkPieceSymbol(level[0]+1,level[1]-1) == "♚": return True
             if level[1] +1 != 8: #diagnal to right
                 if checkPieceSymbol(level[0]+1,level[1]+1) == "♚": return True
-            return False
-
-        elif piece == '♘':
-            nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
-            for cherry in nightnight:
-                yaxe = level[0] + cherry[0]
-                xaxe = level[1] + cherry[1]
-                # Check if the move is within the bounds of the board
-                if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
-                        if not checkSpaceClear(yaxe, xaxe):  # capture
-                            if checkPieceSymbol(yaxe, xaxe)== "♚": return True
             return False
 
         elif piece in ['♕', '♖', '♗']:
@@ -573,9 +552,11 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         break  # make sur ethy cant teleprot
             return False
 
-        elif piece == '♔':
-            kingking = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
-            for cherry in kingking:
+        elif piece in ['♔', '♘']:
+            if piece == '♔': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
+            elif piece == '♘': directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
+            
+            for cherry in directions:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
                 #check if the move is within the bounds of the board
