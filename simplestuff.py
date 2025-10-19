@@ -14,10 +14,10 @@ rook_king_tracker = {
 }
 
 
-def playTheGame():
+def playTheGame(turn = 0):
     # fillboard()
     showBoard()
-    n = 0
+    n = turn
     while True:
         if check4chek((n%2)+1) == False: # this one is a function that for now gets you automaticly out of check
             finland = thefinalfunction()
@@ -98,8 +98,24 @@ def movemove(spot: list):
     """
     Using the list spot, clears the spot where the peice was
     and fills it at the place its going too. uses list format of:
-    [7, 1, '♞', 6, 1]
+    [7, 1, '♞', 6, 1] or [7, 1, '♞', 6, 1, True/False]
     """
+    if False in spot or True in spot:
+        if "♚" in spot: 
+            if spot[5] == False: 
+                fillSpot(spot[3],spot[4]-1, '♜', True)
+                clearSpot(7, 7)
+            elif spot[5] == True: 
+                fillSpot(spot[3],spot[4]+1, '♜', True)
+                clearSpot(7,0)
+        elif "♔" in spot: 
+            if spot[5] == False: #Right
+                fillSpot(spot[3],spot[4]-1, '♖', True)
+                clearSpot(0,7)
+            elif spot[5] == True: #Left
+                fillSpot(spot[3],spot[4]+1, '♖', True)
+                clearSpot(0,0)
+
     clearSpot(spot[0], spot[1])
     fillSpot(spot[3],spot[4],spot[2])
 

@@ -186,3 +186,7 @@ have removed castling code in in the king, and now plan
 to change up how it works. I will have new thign that keeps track 
 of all teh moves that are made in teh whole game, thats how i will do
 castle and en passant and whatnot. probally with ave to do in the simplestuff file
+
+10/17/25 -----------------------------------------------------------------------------------------------------------------
+
+make console to input commands for main.py where i can run them directly

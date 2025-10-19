@@ -29,3 +29,4 @@ remove the code and turn into a function from picmove that gets the input from t
 
 things are broken: checkmate, put queen at 5,5 and and take kings pawn to see error
 
+make console to input commands for main.py where i can run them directly

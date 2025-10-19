@@ -279,8 +279,11 @@ def getusermovesforpickmove(allowedMoves, castle) ->list: #saved like 200 lines 
         moveToCordsX = validate_input('What x level for yours: ', int, (1,8))
         moveToll = checkUserMoveAllowed(allowedMoves,[moveToCordsY-1,moveToCordsX-1])
     moveToCords = [moveToCordsY, moveToCordsX]
-    if moveToCords == castle:
-        print("WHEEE")
+    if True == castle: #gets from retrun_user_move, and gets from pickmove, is true if player can castle
+        if moveToCords == [1,2]: moveToCords.append(True)
+        elif moveToCords == [1,7]: moveToCords.append(False)
+        elif moveToCords == [8,2]: moveToCords.append(True)
+        elif moveToCords == [8,7]: moveToCords.append(False)
     return moveToCords
 
 def return_user_move(allowedMoves, allowedCaptures, VW, turn, castle = None):
@@ -412,10 +415,10 @@ def pickmove(level, whoseturn, rkTracker = None):
             if (rkTracker != None) and (not rkTracker['♚-74']):
                 if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♜-70"]:
                     allowedMoves.append([yaxe, xaxe-3])
-                    castle_possible = [yaxe, xaxe-3]
+                    castle_possible = True
                 if checkSpaceClear(yaxe, xaxe+1) and checkSpaceClear(yaxe, xaxe+2) and not rkTracker["♜-77"]:
                     allowedMoves.append([yaxe, xaxe+2])
-                    castle_possible = [yaxe, xaxe+2]
+                    castle_possible = True
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
             
         else:
@@ -473,7 +476,7 @@ def pickmove(level, whoseturn, rkTracker = None):
         
         elif piece == '♔':
             
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+            directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1), (0,0)]
             for cord in directions:
                 yaxe = level[0] + cord[0]
                 xaxe = level[1] + cord[1]
@@ -483,8 +486,17 @@ def pickmove(level, whoseturn, rkTracker = None):
                         if checkPieceWhiteSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                     else: allowedMoves.append([yaxe, xaxe]) # go empty square
 
-            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
-        
+            if (rkTracker != None) and (not rkTracker['♔-04']):
+                print(checkSpaceClear(yaxe, xaxe-1), checkSpaceClear(yaxe, xaxe-2), checkSpaceClear(yaxe, xaxe-3), not rkTracker["♖-00"])
+                if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♖-00"]:
+                    allowedMoves.append([yaxe, xaxe-3])
+                    castle_possible = True
+                if checkSpaceClear(yaxe, xaxe+1) and checkSpaceClear(yaxe, xaxe+2) and not rkTracker["♖-07"]:
+                    allowedMoves.append([yaxe, xaxe+2])
+                    castle_possible = True
+            
+            return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn, castle_possible)
+           
         else:
             print("why did you have to pick a white peice, try again")
             return False
