@@ -196,4 +196,9 @@ make console to input commands for main.py where i can run them directly
 finished making teh castleing code, works much better, now 
 am ready to combine knight, pawn and king, start 615, see if we cut that down
 
-ok completed: now at 591
+ok completed: now at 591, and did teh same for pickmove king and got us down 
+too 572 lines
+
+10/19/25 -----------------------------------------------------------------------------------------------------------------
+
+ok i think i just need to completely redo all of checkmate

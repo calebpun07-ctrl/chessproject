@@ -18,7 +18,6 @@ white_pieces = {'♚', '♛', '♝', '♞', '♜', '♟'}
 black_pieces = {'♔', '♕', '♗', '♘', '♖', '♙'}
 BLACK = "\033[30m"
 RED = "\033[31m"
-RESET = "\033[0m"
 USE_COLOR = True
 #this function starts the game (VERY USEFUL DO NOT DELETE)
 def startGame():
@@ -32,11 +31,11 @@ def startGame():
 
 def dim(s): 
     """adds black to a blank space"""
-    return (BLACK + s + RESET) if USE_COLOR else s # i never knew you could do colors in teh terminal like this
+    return (BLACK + s + "\033[0m") if USE_COLOR else s # i never knew you could do colors in teh terminal like this
 
 def red(peice):
     """adds red to peice to show capture"""
-    return (RED + peice + RESET) if USE_COLOR else peice
+    return (RED + peice + "\033[0m") if USE_COLOR else peice
 
 def clearboard():
     global board
@@ -188,11 +187,7 @@ def check4chek(whoseturn: int) -> bool:
         return True
 
 def chekchek(nosebleed, turn: int, showboard = True) ->bool: #this function takes the move of teh user and makes teh move
-    """
-    this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check
-    if showboard is true, then itll show the baord and print teh you cailed ot get out
-    of check. if it is set to not then it wont
-    """
+    """ this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check if showboard is true, then itll show the baord and print teh you cailed ot get out of check. if it is set to not then it wont """
     spot = nosebleed 
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
@@ -207,19 +202,6 @@ def chekchek(nosebleed, turn: int, showboard = True) ->bool: #this function take
         if showboard:
             showBoard()
             print("You failed to get out of check, try again")
-        return True
-
-def TheFinalFunction(whoseturn:int) ->bool:
-    """Uses pickmoveKing."""
-    #checkmate function
-    if whoseturn == 1:
-        for sugar in find_black_pieces():
-            if pickmoveKing(sugar, 2): return False
-        return True
-
-    if whoseturn == 2:
-        for choclate in find_white_pieces():
-            if pickmoveKing(choclate, 1): return False
         return True
 
 def find_black_pieces():
@@ -258,8 +240,7 @@ def fillSpot(y,x, piece, show=True): #piece must be a real peice not some lame n
     if show:showBoard()
 
 def showOpenMoves(allowedMoves: list, captures = []):
-    """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function. 
-    I would like to add showing capture in RED"""
+    """Takes a list of cordiantes and fills each cord with a X. then it clears them. This is so that a X never stays on teh board outside fo this function. I would like to add showing capture in RED"""
     for pinapple in allowedMoves:
         fillSpot(pinapple[0]+1,pinapple[1]+1, "X",False)
     showBoard(captures)
@@ -341,9 +322,7 @@ def pickpiece(turnnum):
     return level
 
 def pickmove(level, whoseturn, rkTracker = None):
-    """
-    Final function for main "functions". Takes user input of peice and its location, along with the turn number, 
-    and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are the peice moving and the last two are where the peice goes. """
+    """ Final function for main "functions". Takes user input of peice and its location, along with the turn number, and returns varible vanillawafer, in format [y,x,piece,y,x] (or maybe flipped), where the first two are the peice moving and the last two are where the peice goes. """
     vanillawafer = level
     allowedMoves = []
     allowedCaptures = []
@@ -485,15 +464,14 @@ STAY AWAY FROM THIS ONE
 if you touch it it will break like the last time
 STAY AWAY FROM THIS ONE 
 """
-def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
+def pickmoveKing(level, whoseturn): #GET AWAY FROM THSI ONE
     #checks for trun, then picks avalible spots for user to choose
     piece = level[2]
-
     if whoseturn == 1: # white turn
         if piece == '♟':
             if level[1] -1 != -1: #diagnal to left
                 if checkPieceSymbol(level[0]-1,level[1]-1) == "♔": return True
-            elif level[1] +1 != 8: #diagnal to right
+            if level[1] +1 != 8: #diagnal to right
                 if checkPieceSymbol(level[0]-1,level[1]+1) == "♔": return True
             else: return False
 
@@ -517,7 +495,8 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
         elif piece in ['♚', '♞']:
             if piece == '♚': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
             elif piece == '♞': directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)] 
-            
+            elif piece == '♟': directions = [(0, -1), (0, 1)]
+
             for cherry in directions:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
@@ -555,7 +534,8 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
         elif piece in ['♔', '♘']:
             if piece == '♔': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0)]
             elif piece == '♘': directions = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
-            
+            elif piece == '♙': directions = [(0, 1), (0, -1)]
+
             for cherry in directions:
                 yaxe = level[0] + cherry[0]
                 xaxe = level[1] + cherry[1]
@@ -564,9 +544,6 @@ def pickmoveKing(level, whoseturn): #GET AWAUY FROM THSI ONE
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
                             if (checkPieceSymbol(yaxe, xaxe)== "♚"): return True
             return False
-        else:
-            print("Somethings wrong with pickmoveKing")
-            return False
+        
     else: print(GEM +' line 1816')
-
 #fin

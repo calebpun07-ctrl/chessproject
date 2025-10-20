@@ -27,8 +27,7 @@ def thefinalfunction():
             brick.append(move[1]+1) # makes a [x,y, peice, fake x, fake y,]
             checkval = chekchek(brick, 1, False)
             
-            if checkval != True:
-                #this should return a value that gets you out of check
+            if checkval != True: #this should return a value that gets you out of check
                 print(f"You are in check, not checkmate. Here is how you can get out {brick}")
                 return brick
 
@@ -600,5 +599,3 @@ def pickmoveBlack(level): #UNFINSIHED
             
     else:
         print('GEM')
-
-

@@ -4,15 +4,7 @@ from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
 from checkmate import thefinalfunction, thefinalfunctionblack
 
 valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '♜', '♙', '♟'}
-rook_king_tracker = {
-    '♔-04': False, 
-    '♚-74': False,
-    '♖-00': False, 
-    '♜-70': False,
-    '♖-07': False, 
-    '♜-77': False,
-}
-
+rook_king_tracker = {'♔-04': False, '♚-74': False, '♖-00': False, '♜-70': False, '♖-07': False, '♜-77': False, }
 
 def playTheGame(turn = 0):
     # fillboard()
@@ -29,9 +21,9 @@ def playTheGame(turn = 0):
                 while vaildmoveinputed != True:
                     input("go")
                     #make loop to go theough and get user input until there input is one of the ways to get out of check.
-            # movemove(finland)#remove once user input mad eor mad euse rinput finladn
+            # movemove(finland) #remove once user input mad eor mad euse rinput finladn
             print("you are in check please get out of check or no")
-            # n +=1
+            n +=1
             continue
         spot = movemove2(n, rook_king_tracker)
         print(spot)
