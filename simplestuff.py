@@ -11,26 +11,16 @@ def playTheGame(turn = 0):
     showBoard()
     n = turn
     while True:
-        if check4chek((n%2)+1) == False: # this one is a function that for now gets you automaticly out of check
-            finland = thefinalfunction()
-            if finland == False:
-                print("game over.")
-                break
-            elif finland == True:
-                vaildmoveinputed = False
-                while vaildmoveinputed != True:
-                    input("go")
-                    #make loop to go theough and get user input until there input is one of the ways to get out of check.
-            # movemove(finland) #remove once user input mad eor mad euse rinput finladn
-            print("you are in check please get out of check or no")
-            n +=1
-            continue
         spot = movemove2(n, rook_king_tracker)
-        print(spot)
-        movemove(spot)
+        # print(spot)
+        if movemove(spot, n):
+            continue #this means user is in check. will continue through loop without increasing turn
+        else:
+            n+=1 #increment code
+        #rook code
         if f"{spot[2]}-{spot[0]}{spot[1]}" in rook_king_tracker: # checks to see if the peice is the one being moved
             rook_king_tracker[f"{spot[2]}-{spot[0]}{spot[1]}"] = True # if it is, then sets it to true so we know its moved
-        n +=1
+        
 
 def playTheGameButEASY():
     """
@@ -86,13 +76,13 @@ def clearBoardStart():
         movemove(spot)
         turnNumber +=1
 
-def movemove(spot: list):
+def movemove(spot: list, turn = 1):
     """
     Using the list spot, clears the spot where the peice was
     and fills it at the place its going too. uses list format of:
     [7, 1, '♞', 6, 1] or [7, 1, '♞', 6, 1, True/False]
     """
-    if False in spot or True in spot:
+    if len(spot) == 6:
         if "♚" in spot: 
             if spot[5] == False: 
                 fillSpot(spot[3],spot[4]-1, '♜', True)
@@ -107,9 +97,7 @@ def movemove(spot: list):
             elif spot[5] == True: #Left
                 fillSpot(spot[3],spot[4]+1, '♖', True)
                 clearSpot(0,0)
-
-    clearSpot(spot[0], spot[1])
-    fillSpot(spot[3],spot[4],spot[2])
+    return chekchek(spot, (turn%2)+1)
 
 def movemove2(n, rkTracker = None):
     spot = pickmove(pickpiece((n%2)+1),(n%2)+1, rkTracker)

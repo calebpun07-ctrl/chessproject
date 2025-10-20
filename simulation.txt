@@ -9,3 +9,12 @@ CHECK TESTER
 # fillSpot(8,7,"♖")
 # fillSpot(2,5,"♜")
 # fillSpot(1,4, "♔")
+
+
+# clearSpot(7,1)
+# clearSpot(7,2)
+# clearSpot(7,3)
+# clearSpot(7,4)
+# clearSpot(7,5)
+# clearSpot(7,6)
+# clearSpot(7,7)

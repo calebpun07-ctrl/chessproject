@@ -2,34 +2,21 @@ from functions import chekchek,checkPieceBlackSymbol,checkPieceWhiteSymbol, chec
 
 def thefinalfunction():
     ourpeices = find_white_pieces()
-
+    listOfPossibleMove = []
     for peice in ourpeices: #runs through every single white piece
-        movefound = False
-        while movefound == False:
+        thing = pickmoveWhite(peice)
+        if thing != False:
+            listOfPossibleMove = thing
 
-            #ok the goal of pickmoveAI has changed. it will now return all the possible moves of the selected peice
-            thing = pickmoveWhite(peice)
-            
-            if thing != False:
-                listOfPossibleMove = thing
-                movefound == True
-                break
-                
-            elif thing == False:
-                continue
-
-        #building bricks
-        #needs to be starting cords, peice ending cords
-        longAbsVarbilename = []
         for move in listOfPossibleMove: 
             brick = [peice[0],peice[1],peice[2]] 
-            brick.append(move[0]+1) 
-            brick.append(move[1]+1) # makes a [x,y, peice, fake x, fake y,]
-            checkval = chekchek(brick, 1, False)
+            brick.extend([move[0]+1, move[1]+1]) # makes a [x,y, peice, fake x, fake y,]
+            checkval = chekchek(brick, 1, True)
             
             if checkval != True: #this should return a value that gets you out of check
+                showBoard()
                 print(f"You are in check, not checkmate. Here is how you can get out {brick}")
-                return brick
+                return True
 
     print("GAME OVER, WHITE LOSES BY CHECKMATE")
     return False

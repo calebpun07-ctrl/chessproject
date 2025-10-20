@@ -186,22 +186,23 @@ def check4chek(whoseturn: int) -> bool:
             if pickmoveKing(choclate, 1): return False
         return True
 
-def chekchek(nosebleed, turn: int, showboard = True) ->bool: #this function takes the move of teh user and makes teh move
+def chekchek(move_to_make, turn: int, showboard = True) ->bool: #this function takes the move of teh user and makes teh move
     """ this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check if showboard is true, then itll show the baord and print teh you cailed ot get out of check. if it is set to not then it wont """
-    spot = nosebleed 
+    spot = move_to_make 
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)
     clearSpot(spot[0], spot[1])
     fillSpot(spot[3],spot[4],spot[2], False) #puts peice in place
     thing = check4chek(turn) #checks if its in check
+    if showboard:
+        showBoard()
     if thing: return False #its not in check
     elif thing == False: # its in check
         #replace the peicace that it was in 
-        fillSpot(spot[0]+1,spot[1]+1,holder, False)
-        fillSpot(spot[3],spot[4],holder2, False)
-        if showboard:
-            showBoard()
-            print("You failed to get out of check, try again")
+        fillSpot(spot[0]+1,spot[1]+1,holder)
+        fillSpot(spot[3],spot[4],holder2)
+        
+        print("You failed to get out of check, try again")
         return True
 
 def find_black_pieces():

@@ -7,9 +7,9 @@ from checkmate import thefinalfunction, thefinalfunctionblack
 ♚ ♛ ♝ ♞ ♜ ♟ white
 '''
 
-fillboard()
-fillSpot(5,5,"♔")
-fillSpot(4,6,"♖")
+# fillboard()
+# fillSpot(5,5,"♔")
+# fillSpot(4,6,"♖")
 # clearSpot(7,1)
 # clearSpot(7,2)
 # clearSpot(7,3)
@@ -19,9 +19,18 @@ fillSpot(4,6,"♖")
 # fillSpot(2,2,"♚")
 # fillSpot(2,3,"♔")
 
+fillSpot(4,4,"♗")
+fillSpot(2,2, '♚')
+fillSpot(1,1,"♖")
+fillSpot(1,8,"♖")
+fillSpot(8,7,"♖")
+fillSpot(2,5,"♜")
+fillSpot(1,4, "♔")
+
+
 # playTheGameButAdvanced2AI()
 # playTheGameBut2AI()
-# TheFinalFunction(1)
+# thefinalfunction()
 # playTheGameButAdvanced2AI()
 playTheGame()
 
