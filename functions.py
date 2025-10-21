@@ -116,11 +116,14 @@ def validate_input(user_prompt, data_type=int, range=(float("-inf"), float("inf"
                 continue
             return input_unchecked
 
-def checkPiece(x: int,y: int):
-    """
-    Takes x and y values and then returns the string NAME of the peice, or if its a blank space returns 0 and if
-    its a error returns 1. Used to check NAME!
-    """
+        elif data_type == "peice":
+            if input_unchecked not in valid_pieces:
+                print("Not a valid peice. Try again")
+                continue
+            return input_unchecked
+
+def checkPiece(y: int, x: int):
+    """Takes x and y values and then returns the string NAME of the peice, or if its a blank space returns 0 and if its a error returns 1. Used to check NAME! """
 
     piece = board[x][y]
 
@@ -235,8 +238,10 @@ def clearSpot(y,x):
     """Sets spot at y,x to a blank space"""
     board[y][x] = "█"
 
-def fillSpot(y,x, piece, show=True): #piece must be a real peice not some lame name
+def fillSpot(y,x, piece=None, show=True): #piece must be a real peice not some lame name
     """fills spot, takes fake cords. then shows the board. Defaultly shows the board, if show is set to false it will not"""
+    if piece == None:
+        piece = validate_input("Enter a piece: ", "peice")
     board[y-1][x-1] = piece
     if show:showBoard()
 

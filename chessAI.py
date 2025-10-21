@@ -122,42 +122,7 @@ def pickmoveAI(level):
             return False
 
         return allowedMoves
-    #rook took longest only because i had no idea what i was doing
-    elif piece == '♖':
-        #varbles
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
-
-        for rawrow, hidcol in directions:
-            moverow, movecol = level[0], level[1]
-            scc = False
-
-            while not scc:
-                moverow += rawrow
-                movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
-                else:
-                    if checkPieceBlackSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
-                    scc = True  # Stop moving in this direction if we hit a piece
-            
-        for x in allowedCaptures:
-            allowedMoves.append(x)
-
-        #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
-
-        if allowedMoves == []:
-            return False
-
-        return allowedMoves
-
+    
     elif piece == '♘':
         
         nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
@@ -185,91 +150,25 @@ def pickmoveAI(level):
 
         return allowedMoves
 
-    elif piece == '♗':
-
-        directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-        for rawrow, hidcol in directions:
-            moverow, movecol = level[0], level[1]
-            orca = False
-
-            while not orca:
-                moverow += rawrow
-                
-                movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
-                else:
-                    if checkPieceWhiteSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
-                    orca = True  # Stop moving in this direction if we hit a piece
-
-
-        for x in allowedCaptures:
-            allowedMoves.append(x)
+    elif piece in ['♕','♗', '♖']:
         
-        #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
-            
-        if allowedMoves == []:
-            return False
-
-        return allowedMoves
-    
-    elif piece == '♕':
-        
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
+        if piece =='♕': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
+        elif piece == '♗': directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)] 
+        elif piece == '♖': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
         for rawrow, hidcol in directions:
             moverow, movecol = level[0], level[1]
             scc = False
-
             while not scc:
                 moverow += rawrow
-                
                 movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
+                if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                 else:
-                    if checkPieceWhiteSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
+                    if checkPieceWhiteSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                     scc = True  # Stop moving in this direction if we hit a piece
 
-        directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-        for ramrow, hidcol in directions:
-            moverow, movecol = level[0], level[1]
-            orca = False
-
-            while not orca:
-                moverow += ramrow
-                
-                movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
-                else:
-                    if checkPieceWhiteSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
-                    orca = True  # Stop moving in this direction if we hit a piece
-
-        for x in allowedCaptures:
-            allowedMoves.append(x)
+        for x in allowedCaptures: allowedMoves.append(x)
         
         #CODE TO MAKE AI SEMIINTELGINT
         if allowedCaptures != []:
@@ -391,39 +290,6 @@ def pickmoveWhite(level):
 
         return allowedMoves
 
-    elif piece == '♜':
-    
-        #varbles
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
-
-        for rawrow, hidcol in directions:
-            moverow, movecol = level[0], level[1]
-            scc = False
-
-            while not scc:
-                moverow += rawrow
-                movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
-                else:
-                    if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                    scc = True  
-
-        for x in allowedCaptures:
-            allowedMoves.append(x)
-
-        #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
-
-        if allowedMoves == []:
-            return False
-
-        return allowedMoves
-
     elif piece == '♞':
 
         nightnight = [(-2, 1), (-2, -1), (2, 1), (2, -1),(-1, 2), (-1, -2), (1, 2), (1, -2)]
@@ -450,46 +316,12 @@ def pickmoveWhite(level):
 
         return allowedMoves
 
-    elif piece == '♝':
-        directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-        for ramrow, hidcol in directions:
-            moverow, movecol = level[0], level[1]
-            orca = False
-
-            while not orca:
-                moverow += ramrow
-                
-                movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
-                else:
-                    if checkPieceBlackSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
-                    orca = True  # Stop moving in this direction if we hit a piece
-
-        for x in allowedCaptures:
-            allowedMoves.append(x)
-
-        #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
-
-        if allowedMoves == []:
-            return False
-
-        return allowedMoves
-
-    elif piece == '♛':
+    elif piece in ['♛', '♝', '♜']:
         
         #literlly just added rook and bishop
-        
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
+        if piece == '♛': directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]  
+        elif piece == '♝': directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
+        elif piece == '♜': directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
 
         for rawrow, hidcol in directions:
             moverow, movecol = level[0], level[1]
@@ -497,50 +329,19 @@ def pickmoveWhite(level):
 
             while not scc:
                 moverow += rawrow
-                
                 movecol += hidcol
                 
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
+                if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
+                if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                 else:
-                    if checkPieceBlackSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
+                    if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
                     scc = True  # Stop moving in this direction if we hit a piece
 
-        directions = [(-1, -1), (-1, 1), (1, -1), (1, 1)]  
-
-        for ramrow, hidcol in directions:
-            moverow, movecol = level[0], level[1]
-            orca = False
-
-            while not orca:
-                moverow += ramrow
-                
-                movecol += hidcol
-                
-                if not (0 <= moverow <= 7 and 0 <= movecol <= 7):
-                    break  # Exit if out of bounds
-
-                if checkSpaceClear(moverow, movecol):
-                    allowedMoves.append([moverow, movecol])
-
-                else:
-                    if checkPieceBlackSymbol(moverow, movecol):
-                        allowedCaptures.append([moverow, movecol])
-                    orca = True  # Stop moving in this direction if we hit a piece
-
-        for x in allowedCaptures:
-            allowedMoves.append(x)
+        for x in allowedCaptures: allowedMoves.append(x)
 
         #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
-        if allowedMoves == []:
-            return False
+        if allowedCaptures != []: allowedMoves = allowedCaptures
+        if allowedMoves == []: return False
         return allowedMoves
 
     elif piece == '♚':
@@ -575,18 +376,14 @@ def pickmoveWhite(level):
                     allowedCaptures.append([level[0]+1, level[1]])
 
             if level[1]-1 != -1:
-                if checkSpaceClear(level[0]+1, level[1]-1):
-                    allowedMoves.append([level[0]+1, level[1]-1])
+                if checkSpaceClear(level[0]+1, level[1]-1): allowedMoves.append([level[0]+1, level[1]-1])
                 else:
-                    if checkPieceBlackSymbol(level[0]+1, level[1]-1):
-                        allowedCaptures.append([level[0]+1, level[1]-1])
+                    if checkPieceBlackSymbol(level[0]+1, level[1]-1): allowedCaptures.append([level[0]+1, level[1]-1])
 
             if level[1]+1 != 8:
-                if checkSpaceClear(level[0]+1, level[1]+1):
-                    allowedMoves.append([level[0]+1, level[1]+1])
+                if checkSpaceClear(level[0]+1, level[1]+1): allowedMoves.append([level[0]+1, level[1]+1])
                 else:
-                    if checkPieceBlackSymbol(level[0]+1, level[1]+1):
-                        allowedCaptures.append([level[0]+1, level[1]+1])
+                    if checkPieceBlackSymbol(level[0]+1, level[1]+1): allowedCaptures.append([level[0]+1, level[1]+1])
         
         if level[1]-1 != -1:
             if checkSpaceClear(level[0], level[1]-1):

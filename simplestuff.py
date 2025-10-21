@@ -1,4 +1,4 @@
-from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek
+from functions import showBoard, clearSpot, fillSpot, fillboard, pickmove, pickpiece, check4chek, chekchek, validate_input, checkPiece
 from chessAI import AImakemoveBlack, AImakemoveWhite
 from chessBetterAI import AdvancedAImakemoveBlack, AdvancedAImakemoveWhite
 from checkmate import thefinalfunction, thefinalfunctionblack
@@ -19,7 +19,6 @@ def playTheGame(turn = 0):
         if f"{spot[2]}-{spot[0]}{spot[1]}" in rook_king_tracker: # checks to see if the peice is the one being moved
             rook_king_tracker[f"{spot[2]}-{spot[0]}{spot[1]}"] = True # if it is, then sets it to true so we know its moved
         
-
 def playTheGameButEASY():
     """
     This version of the game only runs for about 20 moves, does not check for check, simply gets the move and makes it. Does fill the board
@@ -50,7 +49,7 @@ def playTheGameBut2AI():
     after each move, if it is y, then it ends the loop. Otherwise just keep hitting enter
     """
 
-    fillboard()
+    # fillboard()
     turn_number = 2
     termitate = None
     while termitate != "y":
@@ -227,21 +226,25 @@ def testerSetup():
         else:
             print('somthing happened.')
 
-
 def emulate_console():
-    commands = {
+    game_commands = {
             'playgame': playTheGame, #game commands
             'playVSbot': playTheGameButAI,
             'botVSbot': playTheGameBut2AI,
             'clearStart': clearBoardStart,
+    }
+    control_commands = {
 #editing voard
-            # 'clearSpot': clearSpot(input("Y: "), input("X: ")),
-            # 'fillSpot': fillSpot(input("Y: "), input("X: "), input("peice"))
+            'clearSpot': clearSpot,
+            'fillSpot': fillSpot,
+            'checkPeice': checkPiece,
         }
     while True:
         command = input("Enter a command: ")
-        if command == "help": print(commands)
-        if command in commands:
-            commands[command]()
-        
+        if command == "help": print(game_commands)
+        if command in game_commands:
+            game_commands[command]()
+        elif command in control_commands:
+            showBoard()
+            control_commands[command](validate_input("Y: "), validate_input("X: "))
         
