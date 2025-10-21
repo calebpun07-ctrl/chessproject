@@ -1,5 +1,5 @@
 from functions import red, dim, clearboard, check4chek, checkPiece,fillSpot, checkSpaceClear, clearSpot, fillboard, find_white_pieces, pickpiece, showBoard, startGame , pickmove, findPeice
-from simplestuff import playTheGameButAdvanced2AI, clearBoardStart, movemove,playTheGameBut2AI, movemove2, playTheGame, testerSetup, playTheGameButEASY, playTheGameButAI
+from simplestuff import emulate_console,playTheGameButAdvanced2AI, clearBoardStart, movemove,playTheGameBut2AI, movemove2, playTheGame, testerSetup, playTheGameButEASY, playTheGameButAI
 from checkmate import thefinalfunction, thefinalfunctionblack
 
 '''
@@ -19,19 +19,10 @@ from checkmate import thefinalfunction, thefinalfunctionblack
 # fillSpot(2,2,"♚")
 # fillSpot(2,3,"♔")
 
-fillSpot(4,4,"♗")
-fillSpot(2,2, '♚')
-fillSpot(1,1,"♖")
-fillSpot(1,8,"♖")
-fillSpot(8,7,"♖")
-fillSpot(2,5,"♜")
-fillSpot(1,4, "♔")
-
-
 # playTheGameButAdvanced2AI()
 # playTheGameBut2AI()
 # thefinalfunction()
 # playTheGameButAdvanced2AI()
-playTheGame()
+# playTheGame()
 
-
+emulate_console()

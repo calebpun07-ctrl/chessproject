@@ -185,9 +185,9 @@ def check4chek(whoseturn: int) -> bool:
         for choclate in posofallwhite:
             if pickmoveKing(choclate, 1): return False
         return True
-
+ 
 def chekchek(move_to_make, turn: int, showboard = True) ->bool: #this function takes the move of teh user and makes teh move
-    """ this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check if showboard is true, then itll show the baord and print teh you cailed ot get out of check. if it is set to not then it wont """
+    """ this function takes the move of the user and makes said move. if the move results in check and returns True to stop pick move, and tells user that they failed to get out of check if showboard is true, then itll show the baord and print teh you cailed ot get out of check. if it is set to not then it wont. This is now incorporated into movemove in simple. """
     spot = move_to_make 
     holder = checkPieceSymbol(spot[0], spot[1])
     holder2 = checkPieceSymbol(spot[3]-1, spot[4]-1)

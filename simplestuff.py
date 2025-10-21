@@ -7,12 +7,10 @@ valid_pieces = {'♔', '♚', '♕', '♛', '♗', '♝', '♘', '♞', '♖', '
 rook_king_tracker = {'♔-04': False, '♚-74': False, '♖-00': False, '♜-70': False, '♖-07': False, '♜-77': False, }
 
 def playTheGame(turn = 0):
-    # fillboard()
     showBoard()
     n = turn
     while True:
         spot = movemove2(n, rook_king_tracker)
-        # print(spot)
         if movemove(spot, n):
             continue #this means user is in check. will continue through loop without increasing turn
         else:
@@ -228,3 +226,22 @@ def testerSetup():
             print('ok\nready to add more')
         else:
             print('somthing happened.')
+
+
+def emulate_console():
+    commands = {
+            'playgame': playTheGame, #game commands
+            'playVSbot': playTheGameButAI,
+            'botVSbot': playTheGameBut2AI,
+            'clearStart': clearBoardStart,
+#editing voard
+            # 'clearSpot': clearSpot(input("Y: "), input("X: ")),
+            # 'fillSpot': fillSpot(input("Y: "), input("X: "), input("peice"))
+        }
+    while True:
+        command = input("Enter a command: ")
+        if command == "help": print(commands)
+        if command in commands:
+            commands[command]()
+        
+        
