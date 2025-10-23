@@ -8,16 +8,16 @@ from checkmate import thefinalfunction, thefinalfunctionblack
 '''
 
 # fillboard()
-fillSpot(5,5,"♕")
-fillSpot(4,6,"♖")
+# fillSpot(5,5,"♚")
+# fillSpot(4,6,"♖")
 # clearSpot(7,1)
 # clearSpot(7,2)
 # clearSpot(7,3)
 # clearSpot(7,5)
 # clearSpot(7,6)
-fillSpot(1,5,"♗")
-fillSpot(2,2,"♝")
-fillSpot(2,3,"♛")
+# fillSpot(1,5,"♗")
+# fillSpot(2,2,"♔")
+# fillSpot(2,3,"♛")
 
 # playTheGameButAdvanced2AI()
 playTheGameBut2AI()

@@ -4,7 +4,6 @@ from functions import checkSpaceClear,checkPieceSymbol,checkPieceBlackSymbol,che
 # should get every possible move then return a random one
 listOfPossibleMove = []
 
-
 def AImakemoveBlack():
     A = False
     ourpeices = find_black_pieces()
@@ -182,51 +181,18 @@ def pickmoveAI(level):
     #king and knight took shortest amount of time to code (not counting queen)
     elif piece == '♔':
 
-        if level[0]-1 != -1:
+        if piece == '♔': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0), (0, 0)]
             
-            if checkSpaceClear(level[0]-1, level[1]):
-                allowedMoves.append([level[0]-1, level[1]])
-            else:
-                if checkPieceWhiteSymbol(level[0]-1, level[1]):
-                    allowedCaptures.append([level[0]-1, level[1]])
+        for cherry in directions:
+            yaxe = level[0] + cherry[0]
+            xaxe = level[1] + cherry[1]
+            #check if the move is within the bounds of the board
+            if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
+                    if not checkSpaceClear(yaxe, xaxe):  # Possible capture
+                        if checkPieceWhiteSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
+                    else: allowedMoves.append([yaxe, xaxe])
 
-            if level[1]-1 != -1:
-                if checkSpaceClear(level[0]-1, level[1]-1):
-                    allowedMoves.append([level[0]-1, level[1]-1])
-                else:
-                    if checkPieceWhiteSymbol(level[0]-1, level[1]-1):
-                        allowedCaptures.append([level[0]-1, level[1]-1])
-
-            if level[1]+1 != 8:
-                if checkSpaceClear(level[0]-1, level[1]+1):
-                    allowedMoves.append([level[0]-1, level[1]+1])
-                else:
-                    if checkPieceWhiteSymbol(level[0]-1, level[1]+1):
-                        allowedCaptures.append([level[0]-1, level[1]+1])
-
-        if level[0]+1 != 8:
-            
-            if checkSpaceClear(level[0]+1, level[1]):
-                allowedMoves.append([level[0]+1, level[1]])
-            else:
-                if checkPieceWhiteSymbol(level[0]+1, level[1]):
-                    allowedCaptures.append([level[0]+1, level[1]])
-
-            if level[1]-1 != -1:
-                if checkSpaceClear(level[0]+1, level[1]-1):
-                    allowedMoves.append([level[0]+1, level[1]-1])
-                else:
-                    if checkPieceWhiteSymbol(level[0]+1, level[1]-1):
-                        allowedCaptures.append([level[0]+1, level[1]-1])
-
-            if level[1]+1 != 8:
-                if checkSpaceClear(level[0]+1, level[1]+1):
-                    allowedMoves.append([level[0]+1, level[1]+1])
-                else:
-                    if checkPieceWhiteSymbol(level[0]+1, level[1]+1):
-                        allowedCaptures.append([level[0]+1, level[1]+1])
-        
-        if level[1]-1 != -1:
+        if level[1]-1 != -1: #castling
             if checkSpaceClear(level[0], level[1]-1):
                 allowedMoves.append([level[0], level[1]-1])
                 if level[1]-2 != -1 and checkSpaceClear(level[0], level[1]-3) and checkSpaceClear(level[0], level[1]-2) and checkPieceSymbol(0,0) == "♖":
@@ -310,7 +276,6 @@ def pickmoveWhite(level):
 
         #CODE TO MAKE AI SEMIINTELGINT
         if allowedCaptures != []: allowedMoves = allowedCaptures
-
         if allowedMoves == []:
             return False
 
@@ -345,45 +310,17 @@ def pickmoveWhite(level):
         return allowedMoves
 
     elif piece == '♚':
-        if level[0]-1 != -1:
+
+        if piece == '♚': directions = [(-1, 1), (-1, -1), (1, 1), (1, -1),(0, -1), (0, 1), (-1, 0), (1, 0), (0, 0)]
             
-            if checkSpaceClear(level[0]-1, level[1]):
-                allowedMoves.append([level[0]-1, level[1]])
-            else:
-                if checkPieceBlackSymbol(level[0]-1, level[1]):
-                    allowedCaptures.append([level[0]-1, level[1]])
-
-            if level[1]-1 != -1:
-                if checkSpaceClear(level[0]-1, level[1]-1):
-                    allowedMoves.append([level[0]-1, level[1]-1])
-                else:
-                    if checkPieceBlackSymbol(level[0]-1, level[1]-1):
-                        allowedCaptures.append([level[0]-1, level[1]-1])
-
-            if level[1]+1 != 8:
-                if checkSpaceClear(level[0]-1, level[1]+1):
-                    allowedMoves.append([level[0]-1, level[1]+1])
-                else:
-                    if checkPieceBlackSymbol(level[0]-1, level[1]+1):
-                        allowedCaptures.append([level[0]-1, level[1]+1])
-
-        if level[0]+1 != 8:
-            
-            if checkSpaceClear(level[0]+1, level[1]):
-                allowedMoves.append([level[0]+1, level[1]])
-            else:
-                if checkPieceBlackSymbol(level[0]+1, level[1]):
-                    allowedCaptures.append([level[0]+1, level[1]])
-
-            if level[1]-1 != -1:
-                if checkSpaceClear(level[0]+1, level[1]-1): allowedMoves.append([level[0]+1, level[1]-1])
-                else:
-                    if checkPieceBlackSymbol(level[0]+1, level[1]-1): allowedCaptures.append([level[0]+1, level[1]-1])
-
-            if level[1]+1 != 8:
-                if checkSpaceClear(level[0]+1, level[1]+1): allowedMoves.append([level[0]+1, level[1]+1])
-                else:
-                    if checkPieceBlackSymbol(level[0]+1, level[1]+1): allowedCaptures.append([level[0]+1, level[1]+1])
+        for cherry in directions:
+            yaxe = level[0] + cherry[0]
+            xaxe = level[1] + cherry[1]
+            #check if the move is within the bounds of the board
+            if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
+                    if not checkSpaceClear(yaxe, xaxe):  # Possible capture
+                        if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
+                    else: allowedMoves.append([yaxe, xaxe])
         
         if level[1]-1 != -1:
             if checkSpaceClear(level[0], level[1]-1):
@@ -406,11 +343,9 @@ def pickmoveWhite(level):
             allowedMoves.append(x)
 
         #CODE TO MAKE AI SEMIINTELGINT
-        if allowedCaptures != []:
-            allowedMoves = allowedCaptures
+        if allowedCaptures != []: allowedMoves = allowedCaptures
 
-        if allowedMoves == []:
-            return False
+        if allowedMoves == []: return False
 
         return allowedMoves
             

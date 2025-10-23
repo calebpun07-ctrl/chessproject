@@ -383,8 +383,9 @@ def pickmove(level, whoseturn, rkTracker = None):
                         if not checkSpaceClear(yaxe, xaxe):  # Possible capture
                             if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                         else: allowedMoves.append([yaxe, xaxe])
+
             #new Castle Code
-            if (rkTracker != None) and (not rkTracker['♚-74']) and piece == '♚':
+            if (rkTracker != None) and (not rkTracker['♚-74']) and (piece == '♚'):
                 if checkSpaceClear(yaxe, xaxe-1) and checkSpaceClear(yaxe, xaxe-2) and checkSpaceClear(yaxe, xaxe-3) and not rkTracker["♜-70"]:
                     allowedMoves.append([yaxe, xaxe-3])
                     castle_possible = True
