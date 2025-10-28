@@ -21,10 +21,7 @@ RED = "\033[31m"
 USE_COLOR = True
 #this function starts the game (VERY USEFUL DO NOT DELETE)
 def startGame():
-    """
-    This function does nothing at all. literaly. 
-    DO NOT DELETE
-    """
+    """This function does nothing at all. literaly. DO NOT DELETE"""
     print("the game has begun\nit is whites turn")
     global turn
     turn = 1 #if you remove this the progarm break liek the coconut image
@@ -126,7 +123,6 @@ def checkPiece(y: int, x: int):
     """Takes x and y values and then returns the string NAME of the peice, or if its a blank space returns 0 and if its a error returns 1. Used to check NAME! """
 
     piece = board[x][y]
-
     if piece == '♔' or piece == '♚':return "king"
     elif piece == '♕' or piece == '♛':return "queen" #j
     elif piece == '♗' or piece == '♝':return "bishop"
@@ -134,39 +130,28 @@ def checkPiece(y: int, x: int):
     elif piece == '♖' or piece == '♜':return "rook"
     elif piece == '♙' or piece == '♟':return "pawn"
     elif piece == "█": return 0
-    else:
-        print("uh oh caleb sucks a coding (this error message is brought to you by the checkPiece function and clabes lack of skill)")
-        return 1
+    else:return 1
 
 def checkPieceSymbol(x: int,y: int):
-    """
-    Takes cords (x and y), and returns the peice that is at those cords. if a blank space returns the blank space. Error returns a 1. more important function to check the piece of the peice
-    """
-
+    """Takes cords (x and y), and returns the peice that is at those cords. if a blank space returns the blank space. Error returns a 1. more important function to check the piece of the peice"""
     piece = board[x][y]
     if piece in valid_pieces: return piece
     elif piece == "█": return "█"
-    else:
-        print("uh oh caleb sucks a coding line 90")
-        return 1
+    else:return 1
 
 def checkPieceWhiteSymbol(x: int,y: int) -> bool:
-    """returns true if its a white piece, false if not or error"""
-    piece = board[x][y]
-
-    if piece in white_pieces: return True
+    """returns true if its a white piece, false if not or error""" 
+    if board[x][y] in white_pieces: return True
     else: return False
 
 def checkPieceBlackSymbol(x: int,y: int) -> bool:
-    """returns true if its a black piece, false if not or error"""
-    piece = board[x][y]
-    if piece in black_pieces: return True
+    """returns true if its a black piece, false if not or error""" 
+    if board[x][y] in black_pieces: return True
     else: return False
 
 def checkSpaceClear(x: int,y: int):
-    """if the spots clear it returns true, if anything else it treturns false    """
-    space = checkPieceSymbol(x,y)
-    if space == "█": return True
+    """if the spots clear it returns true, if anything else it treturns false""" 
+    if checkPieceSymbol(x,y) == "█": return True
     else: return False
 
 def checkUserMoveAllowed(listofallowed: list, usermove: list) -> bool:
@@ -348,6 +333,7 @@ def pickmove(level, whoseturn, rkTracker = None):
             if level[1] +1 != 8: #diagnal to right
                 if checkPieceBlackSymbol(level[0]-1,level[1]+1): allowedCaptures.append([level[0], level[1]+2])
             
+            
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
 
         elif piece in ['♛', '♜', '♝']: #combined queen, rook and bishop
@@ -361,13 +347,11 @@ def pickmove(level, whoseturn, rkTracker = None):
                 while True:
                     moverow += rawrow
                     movecol += hidcol
-                   
                     if not (0 <= moverow <= 7 and 0 <= movecol <= 7): break  # Exit if out of bounds
                     if checkSpaceClear(moverow, movecol): allowedMoves.append([moverow, movecol])
                     else:
                         if checkPieceBlackSymbol(moverow, movecol): allowedCaptures.append([moverow, movecol])
-                        break  # Stop moving in this direction if we hit a piece
-
+                        break  
             return return_user_move(allowedMoves, allowedCaptures, vanillawafer, whoseturn)
      
         elif piece in ['♚', '♞']:
@@ -380,7 +364,7 @@ def pickmove(level, whoseturn, rkTracker = None):
                 xaxe = level[1] + cherry[1]
                 #check if the move is within the bounds of the board
                 if 0 <= yaxe <= 7 and 0 <= xaxe <= 7:
-                        if not checkSpaceClear(yaxe, xaxe):  # Possible capture
+                        if not checkSpaceClear(yaxe, xaxe):  #possible capture
                             if checkPieceBlackSymbol(yaxe, xaxe): allowedCaptures.append([yaxe, xaxe])
                         else: allowedMoves.append([yaxe, xaxe])
 

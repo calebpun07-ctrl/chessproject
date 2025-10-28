@@ -226,6 +226,20 @@ def testerSetup():
         else:
             print('somthing happened.')
 
+def total_file_lines(filename):
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+    return len(lines) +1
+
+def get_line_length(bare_chess_get = False):
+    if bare_chess_get: list_of_filenames = ['checkmate.py', 'functions.py', 'simplestuff.py']
+    else:list_of_filenames = ['checkmate.py', 'chessAI.py', 'chessBetterAI.py', 'functions.py', 'simplestuff.py']
+    total =0
+    for file_name in list_of_filenames:
+        total += total_file_lines(file_name)
+    return total
+
+
 def emulate_console():
     game_commands = {
             'playgame': playTheGame, #game commands

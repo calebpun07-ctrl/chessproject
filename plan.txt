@@ -47,7 +47,6 @@ GOOD LUCK LOSER I HATE YOU
 dude its 8/19/24 and i have no idea what he is talking about
 what
 
-
 8/28/24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 star log 2024
 
@@ -77,7 +76,9 @@ i think
 
 9/21/2024 help ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-9/22/2024 we at 3553 total lines ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9/22/2024 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+we at 3553 total lines 
 
 ok ideas for optimizing bishop:
 - i could put all the move values into a list of four and edit each of thos indivaly, then reste each on after 
@@ -202,3 +203,15 @@ too 572 lines
 10/19/25 -----------------------------------------------------------------------------------------------------------------
 
 ok i think i just need to completely redo all of checkmate
+
+10/28/25 lines: 2802 -----------------------------------------------------------------------------------------------------------------
+
+my genius is frighting. idea for making chess bot actually learn
+play many bot games, and saves all the mvoes from a game into a folder
+will bunch of csv of all the moves. (lines style would be: turn_num, peice, startxy, endxy, capture_peice (defualt blank))
+then write a program that looks to see what the first move
+was in each of the files was and see what teh outcome of teh game was.
+then adds taht to good moves and then if at a time teh turn number of of teh csv if it can make a 
+"good move" then does.
+
+or also give priotiy to captures with peices having points.
