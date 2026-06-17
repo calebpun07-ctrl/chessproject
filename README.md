@@ -1,4 +1,4 @@
-This project was started on a roadtrip across washinton state with no serice in the back of a RV. It is bad.<br>
+This project was started on a roadtrip across washinton state with no serice in the back of a RV in July of 2024. It is quite bad.<br>
 All the code is meant to run in the terminal and there is is no GUI. All the peices are ASCII type things.<br>
 
 TXT FILES:  
@@ -13,7 +13,7 @@ TXT FILES:
   - **oldNightandKing.txt**
     * old code, outdated
   - **archive.txt**
-    * archive of old, outdated code, that is ineffecint or bad
+    * archive of old, outdated code, that is inefficient or bad
 
 PY FILES
  - **main.py** 
@@ -35,7 +35,7 @@ the coconut file is there because those who know
 
 VARIBLE NAMES:
 
-Many varible names are completely nonsensical and have no meaning at all (Some I asked my girlfreind to name). I am very afriad to make any mass changes to varibles for fear of breaking the code. Apolgizes.
+Many varible names are completely nonsensical and have no meaning at all (Some I asked my girlfreind to name). I am very afriad to make any mass changes to varibles for fear of breaking the code. Apolgizes. I am slowly and steadliy improving this project like a pet animal that I love too much to put down.
 
 commenting on this file is spotty, its few adn far between often. A LOT OF SPAGETTI CODE
-LIKE MORE THAN IN A ITALLIAN RESTURANT IN THE MIDDLE OF VENICE
+LIKE MORE THAN IN A ITALLIAN RESTURANT IN THE MIDDLE OF VENICE. more bad jokes like that too follow.
