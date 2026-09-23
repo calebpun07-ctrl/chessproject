@@ -3,7 +3,7 @@ This project was started on a roadtrip across Washington state with no service i
 All the code is meant to run in the terminal and there is is no GUI. All the pieces are ASCII type things.<br>
 =======
 This project was started on a roadtrip across washinton state with no serice in the back of a RV in July of 2024. It is quite bad.<br>
-All the code is meant to run in the terminal and there is is no GUI. All the peices are ASCII type things.<br>
+All the code is meant to run in the terminal and there is is no GUI. All the pieces are ASCII type things.<br>
 >>>>>>> 9eb43211e77266313be2b5e80316a1732c91cef5
 
 TXT FILES:  
