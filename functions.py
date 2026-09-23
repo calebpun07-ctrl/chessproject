@@ -21,10 +21,10 @@ RED = "\033[31m"
 USE_COLOR = True
 #this function starts the game (VERY USEFUL DO NOT DELETE)
 def startGame():
-    """This function does nothing at all. literaly. DO NOT DELETE"""
+    """This function does nothing at all. literally. DO NOT DELETE"""
     print("the game has begun\nit is whites turn")
     global turn
-    turn = 1 #if you remove this the progarm break liek the coconut image
+    turn = 1 #if you remove this the program break
 
 def dim(s): 
     """adds black to a blank space"""
@@ -186,7 +186,7 @@ def chekchek(move_to_make, turn: int, showboard = True) ->bool: #this function t
         showBoard()
     if thing: return False #its not in check
     elif thing == False: # its in check
-        #replace the peicace that it was in 
+        #replace the piece that it was in 
         fillSpot(spot[0]+1,spot[1]+1,holder)
         fillSpot(spot[3],spot[4],holder2)
         

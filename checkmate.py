@@ -10,7 +10,7 @@ def thefinalfunction():
 
         for move in listOfPossibleMove: 
             brick = [peice[0],peice[1],peice[2]] 
-            brick.extend([move[0]+1, move[1]+1]) # makes a [x,y, peice, fake x, fake y,]
+            brick.extend([move[0]+1, move[1]+1]) # makes a [x,y, piece, fake x, fake y,]
             checkval = chekchek(brick, 1, True)
             
             if checkval != True: #this should return a value that gets you out of check
@@ -90,7 +90,7 @@ def pickmoveWhite(level):
         for x in allowedCaptures:
             allowedMoves.append(x)
 
-        #CODE TO MAKE AI SEMIINTELGINT
+        #CODE TO MAKE AI SEMI-INTELLIGENT
         if allowedCaptures != []:
             allowedMoves = allowedCaptures
 

@@ -46,14 +46,14 @@ so
 you wanted to learn how this works
 well it sucks so get ready
 
-The board is composed of a 2d array. long story short, its a cordinate system
-Whenever a cordinate is mentioned in the text editor, it SHOULD be the one based on the visual system
-excamle: the X would be located at 4,4
+The board is composed of a 2d array. long story short, its a coordinate system
+Whenever a coordinate is mentioned in the text editor, it SHOULD be the one based on the visual system
+example: the X would be located at 4,4
 1 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
 2 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
 3 ▞ ▞ ▞   ▞ ▞ ▞ ▞
 4 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
-5 ▞ ▞ X ▞ ▞ ▞ ▞ ▞         #ok so it no longer looks like this, i orginally
+5 ▞ ▞ X ▞ ▞ ▞ ▞ ▞         #ok so it no longer looks like this, i originally
 6 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         had it like this with ▞ as the tiles, but now it is alternating 
 7 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞         black and white spaces
 8 ▞ ▞ ▞ ▞ ▞ ▞ ▞ ▞
@@ -77,11 +77,11 @@ realcords:
 uuhhhh
 what else
 
-oh i used the theme "Tommorow Night Blue" in vscode so
+oh i used the theme "Tomorrow Night Blue" in vscode so
 like
-use that beacuse tommorwo niht blue is the best
+use that because tomorrow night blue is the best
 
-▞ < this represents a empty space. if you find a better represntive of a blank space that would be great.
+▞ < this represents a empty space. if you find a better repressive of a blank space that would be great.
 
 or that or think that I should spent time coding it so that it alternates (i wont) please tell me
 
@@ -137,11 +137,11 @@ whoa this lokos cool
 ▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞▞
 
 oh yeah the archive.txt folder. That has a bunch of old code I wanted to save. 
-Its liek a better vreison that the oldknight and king folder. 
+Its like a better version that the oldknight and king folder. 
 use that one and see the rules for staonge at the bottom of the -
 
 checkmate takes one of the "ai" programs and just runs though all of that and gets all the moves
-chekcs each one to see if it gets you out of check and then WILL return a list of the possible moves 
+checks each one to see if it gets you out of check and then WILL return a list of the possible moves 
 and wait until the user makes that move
 
 dude i dont remeber ANYTHING - 08/29/25
